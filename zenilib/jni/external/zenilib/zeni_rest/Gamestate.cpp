@@ -135,14 +135,10 @@ namespace Zeni {
       return;
     }
 
-    Window &wr = get_Window();
-    bool gain;
-    if(event.event == SDL_WINDOWEVENT_ENTER && wr.has_focus() || event.event == SDL_WINDOWEVENT_FOCUS_GAINED)
-      gain = true;
-    else if(event.event == SDL_WINDOWEVENT_HIDDEN || event.event == SDL_WINDOWEVENT_MINIMIZED || event.event == SDL_WINDOWEVENT_LEAVE || event.event == SDL_WINDOWEVENT_FOCUS_LOST)
-      gain = false;
-    else
+    if(event.event != SDL_WINDOWEVENT_FOCUS_GAINED && event.event != SDL_WINDOWEVENT_FOCUS_LOST)
       return;
+
+    const bool gain = event.event == SDL_WINDOWEVENT_FOCUS_GAINED;
 #else
   void Gamestate_Base::on_active(const SDL_ActiveEvent &event) {
     if(!(event.state & SDL_APPINPUTFOCUS))
@@ -152,6 +148,7 @@ namespace Zeni {
 #endif
 
     static Window::Mouse_State mouse_state = Window::MOUSE_NORMAL;
+    Window &wr = get_Window();
 
     if(gain) {
       wr.set_mouse_state(mouse_state);

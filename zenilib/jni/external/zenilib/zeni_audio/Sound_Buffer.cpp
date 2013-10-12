@@ -140,19 +140,15 @@ namespace Zeni {
 
     /*** Load the Audio File ***/
 
-    long bytes = 0;
-    ogg_int64_t remaining = pcm_size;
-    if(pcm_size > std::numeric_limits<size_t>::max())
-      throw Sound_Buffer_Init_Failure();
-    std::vector<char> buffer(static_cast<size_t>(pcm_size));
+    int bytes = 0;
+    int buffer_size = int(pcm_size);
+    std::vector<char> buffer( static_cast<size_t>(buffer_size) );
     for(char *begin = &buffer[0], *end = begin + pcm_size;
         begin != end;
-        begin += bytes, remaining -= bytes)
-    {
-      int read_size = remaining > std::numeric_limits<int>::max() ? std::numeric_limits<int>::max() : int(remaining);
-      bytes = ov_read(&oggFile, begin, read_size, 0, 2, 1, 0);
+        begin += bytes, buffer_size -= bytes) {
+      bytes = int(ov_read(&oggFile, begin, buffer_size, 0, 2, 1, 0));
 
-      if(bytes < 0) {
+      if(!bytes) {
         ov_clear(&oggFile);
         throw Sound_Buffer_Init_Failure();
       }
