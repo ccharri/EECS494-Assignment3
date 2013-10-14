@@ -24,19 +24,20 @@ public:
 
 	Zeni::Point3f getPosition() const {return position;};
 
-	float getSpeed() const {return speed;};
+	//float getSpeed() const {return speed;};
 
-	float getMaxHealth() const {return health_max;};
-	float getCurrentHealth() const {return health_current;};
+	//float getMaxHealth() const {return health_max;};
+	//float getCurrentHealth() const {return health_current;};
 
-	bool isAlive() const {return is_alive;};
+	//bool isAlive() const {return is_alive;};
 
 	virtual Zeni::Model* getModel() = 0;
+	const Zeni::Collision::Capsule& getCollider() const {return collision_capsule;};
 
 	float getKeyframe() const {return keyframe;};
 	void setKeyframe(float keyframe_) {keyframe = keyframe_;};
 
-	virtual void onDamage(float damage);
+	//virtual void onDamage(float damage);
 
 private:
 	Zeni::Point3f position;
@@ -47,15 +48,15 @@ private:
 
 	float keyframe;
 
-	float speed;
+	//float speed;
 
-	float health_max;
-	float health_current;
-	bool is_alive;
+	//float health_max;
+	//float health_current;
+	//bool is_alive;
 
-	Zeni::Point3f destination;
+	//Zeni::Point3f destination;
 
-	void stop_Moving();
+	//void stop_Moving();
 };
 
 #endif
