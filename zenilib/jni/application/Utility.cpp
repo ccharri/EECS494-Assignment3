@@ -19,9 +19,12 @@ Game_Object* closestObjectMatching(const Zeni::Point3f& pos_, const std::vector<
 	float lowestDistance = FLT_MAX;
 
 	for_each(objects_.begin(), objects_.end(), [&](Game_Object* object) {
-		if(matchfunc(object) && (Vector3f(object->getPosition() - pos_).magnitude() < lowestDistance))
+		float distance;
+
+		if(matchfunc(object) && ((distance = Vector3f(object->getPosition() - pos_).magnitude()) < lowestDistance))
 		{
 			contender = object;
+			lowestDistance = distance;
 		}
 	});
 
