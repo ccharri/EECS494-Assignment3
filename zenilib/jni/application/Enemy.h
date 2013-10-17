@@ -9,11 +9,14 @@
 class Enemy : public Game_Object
 {
 public:
-	Enemy(Zeni::Point3f location_);
+	Enemy(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion facing_, float speed_, float health_max_);
 
 	~Enemy() = 0;
 
 	virtual void on_logic(float time_step);
+
+	void setDestination(std::vector<Zeni::Point3f>::const_iterator destination_) {destination = destination_;};
+	void setEnd(std::vector<Zeni::Point3f>::const_iterator end_) {end = end_;};
 
 	float getSpeed() const {return speed;};
 	bool isMoving() const {return moving;};
@@ -46,7 +49,7 @@ private:
 
 	float health_max;
 	float health_current;
-	bool is_alive;
+	bool alive;
 
 	std::vector<Zeni::Point3f>::const_iterator destination;
 	std::vector<Zeni::Point3f>::const_iterator end;

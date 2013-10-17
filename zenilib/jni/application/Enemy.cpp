@@ -3,6 +3,11 @@
 using namespace Zeni;
 using namespace std;
 
+Enemy::Enemy(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion facing, float speed_, float health_max_) : Game_Object(location_), speed(speed_), health_max(health_max_), health_current(health_max), moving(true), alive(true)
+{
+
+}
+
 bool Enemy::collide(const Collision::Capsule* collider_)
 {
 	return collider_->intersects(collision_capsule);
@@ -50,6 +55,7 @@ void Enemy::on_logic(float time_step)
 
 void Enemy::doMovement() {
 	if(!moving) return;
+	if(!alive) return;
 
 	if(Vector3f((*destination) - getPosition()).magnitude() <= getSpeed()) {
 		setPosition(*destination);
@@ -63,4 +69,12 @@ void Enemy::doMovement() {
 void Enemy::stopMoving() 
 {
 	moving = false;
+}
+
+void Enemy::onDamage(float damage)
+{
+	if((health_current -= damage) <= 0)
+	{
+		alive = false;
+	}
 }
