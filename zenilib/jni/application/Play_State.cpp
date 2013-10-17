@@ -7,25 +7,17 @@ void Play_State::on_push() {
 void Play_State::on_key(const SDL_KeyboardEvent &event) {
   switch(event.keysym.sym) {
     case SDLK_w:
-      m_controls.forward = event.type == SDL_KEYDOWN;
-      break;
-
+      movement_controls.forward = event.type == SDL_KEYDOWN; break;
     case SDLK_a:
-      m_controls.left = event.type == SDL_KEYDOWN;
-      break;
-
+      movement_controls.left = event.type == SDL_KEYDOWN; break;
     case SDLK_s:
-      m_controls.back = event.type == SDL_KEYDOWN;
-      break;
-
+      movement_controls.back = event.type == SDL_KEYDOWN; break;
     case SDLK_d:
-      m_controls.right = event.type == SDL_KEYDOWN;
-      break;
-
+      movement_controls.right = event.type == SDL_KEYDOWN; break;
     case SDLK_SPACE:
       if(event.type == SDL_KEYDOWN) {
-        m_player.jump();
-        m_moved = true;
+        player.jump();
+        player_moved = true;
       }
       break;
 
@@ -36,8 +28,8 @@ void Play_State::on_key(const SDL_KeyboardEvent &event) {
 }
 
 void Play_State::on_mouse_motion(const SDL_MouseMotionEvent &event) {
-  m_player.adjust_pitch(event.yrel / 500.0f);
-  m_player.turn_left_xy(-event.xrel / 500.0f);
+  player.adjust_pitch(event.yrel / 500.0f);
+  player.turn_left_xy(-event.xrel / 500.0f);
 }
 
 void Play_State::perform_logic() {
@@ -65,9 +57,7 @@ void Play_State::perform_logic() {
     processing_time = 0.1f;
 
   /** Physics processing loop**/
-  for(float time_step = 0.05f;
-      processing_time > 0.0f;
-      processing_time -= time_step)
+  for(float time_step = 0.05f; processing_time > 0.0f; processing_time -= time_step)
   {
     if(time_step > processing_time)
       time_step = processing_time;
@@ -95,28 +85,3 @@ void Play_State::render() {
 
   //render call for level
 }
-
-/* MIGHT BE USEFUL FOR PHYSICS? PLAYER MOVEMENT?
-void Play_State::partial_step(const float &time_step, const Vector3f &velocity) {
-  m_player.set_velocity(velocity);
-  const Point3f backup_position = m_player.get_camera().position;
-
-  m_player.step(time_step);
-
-  // If collision with the crate has occurred, roll things back
-  if(m_crate.get_body().intersects(m_player.get_body())) {
-    if(m_moved)
-    {
-      // Play a sound if possible
-      m_crate.collide();
-      m_moved = false;
-    }
-
-    m_player.set_position(backup_position);
-
-    // Bookkeeping for jumping controls
-    if(velocity.k < 0.0f)
-      m_player.set_on_ground(true);
-  }
-}
-*/

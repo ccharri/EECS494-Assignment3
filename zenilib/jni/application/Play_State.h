@@ -3,6 +3,7 @@
 
 #include "zenilib.h"
 #include "Player.h"
+#include "Game_Level.h"
 
 class Play_State : public Zeni::Gamestate_Base {
     struct Controls {
@@ -12,24 +13,29 @@ class Play_State : public Zeni::Gamestate_Base {
       bool left;
       bool back;
       bool right;
-    } m_controls;
+    } movement_controls;
 
   public:
     Play_State();
 
     void on_push();
+		void on_pop();
     void on_key(const SDL_KeyboardEvent &event);
     void on_mouse_motion(const SDL_MouseMotionEvent &event);
 
     void perform_logic();
 
     void render();
-		void partial_step();
 
   private:
+		Zeni::Camera god_view;
+		bool god_view_on;
 
 		Player player;
     bool player_moved;
+
+		Game_Level current_level;
+
 		Zeni::Time_HQ time_passed;
 };
 
