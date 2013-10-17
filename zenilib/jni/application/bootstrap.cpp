@@ -6,6 +6,8 @@
 
 #include <zenilib.h>
 
+#include "Play_State.h"
+
 #if defined(_DEBUG) && defined(_WINDOWS)
 #define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #define new DEBUG_NEW
@@ -13,34 +15,34 @@
 
 using namespace std;
 using namespace Zeni;
-
-class Play_State : public Gamestate_Base {
-  Play_State(const Play_State &);
-  Play_State operator=(const Play_State &);
-
-public:
-  Play_State() {
-    set_pausable(true);
-  }
-
-private:
-  void on_push() {
-    get_Window().set_mouse_state(Window::MOUSE_HIDDEN);
-  }
-
-  void on_pop() {
-    get_Controllers().reset_vibration_all();
-  }
-
-  void on_cover() {
-    get_Controllers().reset_vibration_all();
-  }
-
-  void on_controller_button(const SDL_ControllerButtonEvent &event) {
-    if(event.button == SDL_CONTROLLER_BUTTON_BACK && event.state == SDL_PRESSED)
-      get_Game().push_Popup_Menu_State();
-  }
-};
+//
+//class Play_State : public Gamestate_Base {
+//  Play_State(const Play_State &);
+//  Play_State operator=(const Play_State &);
+//
+//public:
+//  Play_State() {
+//    set_pausable(true);
+//  }
+//
+//private:
+//  void on_push() {
+//    get_Window().set_mouse_state(Window::MOUSE_HIDDEN);
+//  }
+//
+//  void on_pop() {
+//    get_Controllers().reset_vibration_all();
+//  }
+//
+//  void on_cover() {
+//    get_Controllers().reset_vibration_all();
+//  }
+//
+//  void on_controller_button(const SDL_ControllerButtonEvent &event) {
+//    if(event.button == SDL_CONTROLLER_BUTTON_BACK && event.state == SDL_PRESSED)
+//      get_Game().push_Popup_Menu_State();
+//  }
+//};
 
 class Instructions_State : public Widget_Gamestate {
   Instructions_State(const Instructions_State &);

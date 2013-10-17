@@ -13,7 +13,7 @@ public:
 
 	~Enemy() = 0;
 
-	virtual void on_logic(float time_step);
+	virtual void on_logic(float time_step) override;
 
 	void setDestination(std::vector<Zeni::Point3f>::const_iterator destination_) {destination = destination_;};
 	void setEnd(std::vector<Zeni::Point3f>::const_iterator end_) {end = end_;};
@@ -24,7 +24,7 @@ public:
 	float getMaxHealth() const {return health_max;};
 	float getCurrentHealth() const {return health_current;};
 
-	bool isAlive() const {return is_alive;};
+	bool isAlive() const {return alive;};
 
 	bool collide(const Collision::Capsule* collider_);
 	bool collide(const Collision::Infinite_Cylinder* collider_);

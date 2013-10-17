@@ -1,5 +1,7 @@
 #include "Play_State.h"
 
+#include "Player.h"
+
 PlayState::PlayState()
 {
 	god_view_on = false;

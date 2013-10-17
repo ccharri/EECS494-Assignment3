@@ -6,19 +6,25 @@
 #include <vector>
 #include <zenilib.h>
 
+#include "Model_Wrapper.h"
+
 class Player : public Game_Object
 {
 public:
 	Player(Zeni::Point3f location_);
 
-	~Player() = 0;
+	~Player();
 
-	void on_logic(float time_step);
-	Zeni::Camera get_camera() const;
+	virtual Zeni::Model* getModel() override {return model.getModel();};
+
+	void on_logic(float time_step) override;
+	Zeni::Camera get_camera() const {return view;};
 
 private:
 	Zeni::Collision::Capsule collision_capsule;
 	Zeni::Camera view;
+
+	static Model_Wrapper model;
 
 	float speed;
 	bool moving;
