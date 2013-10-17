@@ -22,7 +22,7 @@ public:
 	Player* getPlayer() const {return player;};
 	void setPlayer(Player* player_) {player = player_;};
 
-	static Game_Level* getCurrentLevel();
+	static Game_Level* getCurrentLevel() {return currentLevel;};
 	static void setCurrentLevel(Game_Level* level_) {currentLevel = level_;};
 
 private:
