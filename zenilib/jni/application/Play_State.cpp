@@ -1,8 +1,18 @@
 #include "Play_State.h"
 
+PlayState::PlayState()
+{
+	god_view_on = false;
+
+}
+
 void Play_State::on_push() {
     Zeni::get_Window().set_mouse_state(Zeni::Window::MOUSE_RELATIVE);
- }
+}
+
+void Play_State::on_pop() {
+
+}
 
 void Play_State::on_key(const SDL_KeyboardEvent &event) {
   switch(event.keysym.sym) {
@@ -31,6 +41,7 @@ void Play_State::on_mouse_motion(const SDL_MouseMotionEvent &event) {
   player.adjust_pitch(event.yrel / 500.0f);
   player.turn_left_xy(-event.xrel / 500.0f);
 }
+
 
 void Play_State::perform_logic() {
   const Zeni::Time_HQ current_time = Zeni::get_Timer_HQ().get_time();
@@ -73,15 +84,19 @@ void Play_State::perform_logic() {
     /** Keep player above ground; Bookkeeping for jumping controls **/
     const Zeni::Point3f &position = player.get_camera().position;
     if(position.z < 50.0f) {
-      player.set_position(Zeni::Point3f(position.x, position.y, 50.0f));
-      player.set_on_ground(true);
+      player.setPosition(Zeni::Point3f(position.x, position.y, 50.0f));
+      //player.set_on_ground(true);
     }
   }
 }
 
 void Play_State::render() {
+	//set up camera
   Zeni::Video &vr = Zeni::get_Video();
-  vr.set_3d(player.get_camera());
+	if(god_view_on)
+		vr.set_3d(god_view);
+	else
+		vr.set_3d(player.get_camera());
 
   //render call for level
 }
