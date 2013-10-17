@@ -16,6 +16,7 @@ public:
 
 	virtual void on_logic(float time_step);
 
+	Game_Object* getClosestEnemy(const Zeni::Point3f&);
 	std::vector<Game_Object*>& getEnemies() {return enemies;};
 	void removeEnemy(Game_Object* enemy);
 
