@@ -17,20 +17,19 @@ public:
 		
 	}
 
-	virtual void on_logic(float time_step) override;
+	void on_logic(float time_step) override;
 
 	virtual Zeni::Model* getModel() override /*{return model.getModel();}*/;
 
 
-	float getNextSegmentZ(){return segments.size()*50} const;
-	// returns the would-be Z of a new segment
-	// TODO: Replace 50 with segment height constant
+	float getNextSectionZ(){return segments.size()*50} const;
+	//DOES: Returns the would-be height of the next tower section. 
+	//TODO: Replace 50 with segment height constant
 	
-	void pushWeapon(Weapon* weapon_);
-	void pushSegment(Tower_Section* segment_) {segments.push_back(segment_);};
-	
-	const vector<Tower_Section>& getSegments() const {return segments;};
+	void pushSection(Tower_Section*);
+	// DOES: Takes the segment and changes its position to the top of the Tower_Base.
 
+	const vector<Tower_Section>& getSegments() const {return segments;};
 	virtual ~Tower_Base();
 
 private:

@@ -9,9 +9,8 @@
 class Player : public Game_Object
 {
 public:
-	Player(Zeni::Point3f location_);
-
-	~Player() = 0;
+	Player(Zeni::Point3f location_, Zeni::Quaternion facing_);
+	~Player();
 
 	void on_logic(float time_step);
 	Zeni::Camera get_camera() const;
