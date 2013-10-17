@@ -1,13 +1,8 @@
 #include "Play_State.h"
 
-<<<<<<< HEAD
 #include "Player.h"
 
-PlayState::PlayState()
-{
-=======
-Play_State::Play_State(){
->>>>>>> ae4bcf9d496052d9b1a056e605d8ac39dc3cea83
+Play_State::Play_State() {
 	god_view_on = false;
 
 }

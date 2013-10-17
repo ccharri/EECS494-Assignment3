@@ -8,42 +8,42 @@ Enemy::Enemy(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion fac
 
 }
 
-bool Enemy::collide(const Collision::Capsule* collider_)
+bool Enemy::collide(const Collision::Capsule* collider_) const
 {
 	return collider_->intersects(collision_capsule);
 }
 
-bool Enemy::collide(const Collision::Infinite_Cylinder* collider_)
+bool Enemy::collide(const Collision::Infinite_Cylinder* collider_) const
 {
 	return collider_->intersects(collision_capsule);
 }
 
-bool Enemy::collide(const Collision::Line* collider_)
+bool Enemy::collide(const Collision::Line* collider_) const
 {
 	return collider_->intersects(collision_capsule);
 }
 
-bool Enemy::collide(const Collision::Line_Segment* collider_)
+bool Enemy::collide(const Collision::Line_Segment* collider_) const
 {
 	return collider_->intersects(collision_capsule);
 }
 
-bool Enemy::collide(const Collision::Parallelepiped* collider_)
+bool Enemy::collide(const Collision::Parallelepiped* collider_) const
 {
 	return collider_->intersects(collision_capsule);
 }
 
-bool Enemy::collide(const Collision::Plane* collider_)
+bool Enemy::collide(const Collision::Plane* collider_) const
 {
 	return collider_->intersects(collision_capsule);
 }
 
-bool Enemy::collide(const Collision::Ray* collider_)
+bool Enemy::collide(const Collision::Ray* collider_) const
 {
 	return collider_->intersects(collision_capsule);
 }
 
-bool Enemy::collide(const Collision::Sphere* collider_)
+bool Enemy::collide(const Collision::Sphere* collider_) const
 {
 	return collider_->intersects(collision_capsule);
 }

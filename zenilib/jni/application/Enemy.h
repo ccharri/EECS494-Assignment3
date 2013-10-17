@@ -26,14 +26,14 @@ public:
 
 	bool isAlive() const {return alive;};
 
-	bool collide(const Collision::Capsule* collider_);
-	bool collide(const Collision::Infinite_Cylinder* collider_);
-	bool collide(const Collision::Line* collider_);
-	bool collide(const Collision::Line_Segment* collider_);
-	bool collide(const Collision::Parallelepiped* collider_);
-	bool collide(const Collision::Plane* collider_);
-	bool collide(const Collision::Ray* collider_);
-	bool collide(const Collision::Sphere* collider_);
+	bool collide(const Zeni::Collision::Capsule* collider_) const;
+	bool collide(const Zeni::Collision::Infinite_Cylinder* collider_) const;
+	bool collide(const Zeni::Collision::Line* collider_) const;
+	bool collide(const Zeni::Collision::Line_Segment* collider_) const;
+	bool collide(const Zeni::Collision::Parallelepiped* collider_) const;
+	bool collide(const Zeni::Collision::Plane* collider_) const;
+	bool collide(const Zeni::Collision::Ray* collider_) const;
+	bool collide(const Zeni::Collision::Sphere* collider_) const;
 
 	const Zeni::Collision::Capsule& getCollider() const {return collision_capsule;};
 

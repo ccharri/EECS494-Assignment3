@@ -22,18 +22,18 @@ public:
 	virtual Zeni::Model* getModel() override /*{return model.getModel();}*/;
 
 
-	float getNextSectionZ(){return segments.size()*50} const;
+	float getNextSectionZ() const {return segments.size()*50.f;};
 	//DOES: Returns the would-be height of the next tower section. 
 	//TODO: Replace 50 with segment height constant
 	
-	void pushSection(Tower_Section*);
+	void pushSection(Tower_Section* section_);
 	// DOES: Takes the segment and changes its position to the top of the Tower_Base.
 
-	const vector<Tower_Section>& getSegments() const {return segments;};
+	const std::vector<Tower_Section*>& getSegments() const {return segments;};
 	virtual ~Tower_Base();
 
 private:
-	vector<Tower_Section*> segments;
+	std::vector<Tower_Section*> segments;
 
 	//static Model_Wrapper model = Model_Wrapper(/* Insert model file location here */);
 }
