@@ -5,25 +5,28 @@
 
 #include <vector>
 
-class Tower_Base{
+#include "Game_Object.h"
+
+class Tower_Section;
+
+class Tower_Base : public Game_Object{
 public:
-	Tower_Base(const Zeni::Point3f &position_)
+	Tower_Base(const Zeni::Point3f &position_) : Game_Object(position_)
 	{
 		
 	}
 
-	virtual void render() const;
-	
-	float getNextSegmentZ();
-	void pushSegment();
+	virtual void on_logic(float time_step) override;
 
-	virtual ~Tower_Base() = 0
+	virtual Zeni::Model* getModel() override;
+
+	float getNextSegmentZ();
+	void pushSegment(Tower_Section* segment_) {segments.push_back(segment_);};
+	const vector<Tower_Section>& getSegments() {return segments;};
+
+	virtual ~Tower_Base();
 
 private:
-	Zeni::Point3f position;
-	Zeni::Vector3f size;
-	Zeni::Quaternion facing;
-
 	vector<Tower_Section*> segments;
 }
 
