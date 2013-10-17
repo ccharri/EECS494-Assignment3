@@ -21,8 +21,14 @@ public:
 
 	virtual Zeni::Model* getModel() override /*{return model.getModel();}*/;
 
-	float getNextSegmentZ() const;
+
+	float getNextSegmentZ(){return segments.size()*50} const;
+	// returns the would-be Z of a new segment
+	// TODO: Replace 50 with segment height constant
+	
+	void pushWeapon(Weapon* weapon_);
 	void pushSegment(Tower_Section* segment_) {segments.push_back(segment_);};
+	
 	const vector<Tower_Section>& getSegments() const {return segments;};
 
 	virtual ~Tower_Base();

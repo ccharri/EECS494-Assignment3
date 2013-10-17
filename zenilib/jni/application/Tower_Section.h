@@ -15,8 +15,8 @@ public:
 
 	virtual void on_logic(float time_step) override;
 
-	Tower_Weapon* getWeapon() {return weapon;};
-	void setWeapon(Tower_Weapon* weapon_) {weapon = weapon_};
+	Tower_Weapon* getWeapon() {return weapon;}
+	void setWeapon(Tower_Weapon* weapon_) {weapon = weapon_;}
 
 private:
 	Tower_Weapon* weapon;
