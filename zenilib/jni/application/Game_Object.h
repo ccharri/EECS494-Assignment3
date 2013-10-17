@@ -23,40 +23,26 @@ public:
 	virtual bool collide(const Zeni::Collision::Sphere* collider_) {return false;};
 
 	Zeni::Point3f getPosition() const {return position;};
+	Zeni::Vector3f getSize() const {return size;};
+	Zeni::Quaternion getFacing() const {return facing;};
 
-	//float getSpeed() const {return speed;};
-
-	//float getMaxHealth() const {return health_max;};
-	//float getCurrentHealth() const {return health_current;};
-
-	//bool isAlive() const {return is_alive;};
+	void setPosition(Zeni::Point3f position_) {position = position_;};
+	void setSize(Zeni::Vector3f size_) {size = size_;};
+	void setFacing(Zeni::Quaternion facing_) {facing = facing_;};
 
 	virtual Zeni::Model* getModel() = 0;
-	//const Zeni::Collision::Capsule& getCollider() const {return collision_capsule;};
 
 	float getKeyframe() const {return keyframe;};
 	void setKeyframe(float keyframe_) {keyframe = keyframe_;};
-
-	//virtual void onDamage(float damage);
+	
+	virtual bool isTargetable() const {return false;};
 
 private:
 	Zeni::Point3f position;
 	Zeni::Vector3f size;
 	Zeni::Quaternion facing;
 
-	//Zeni::Collision::Capsule collision_capsule;
-
 	float keyframe;
-
-	//float speed;
-
-	//float health_max;
-	//float health_current;
-	//bool is_alive;
-
-	//Zeni::Point3f destination;
-
-	//void stop_Moving();
 };
 
 #endif

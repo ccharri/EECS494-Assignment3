@@ -34,3 +34,4 @@ void Game_Object::render()
 //		is_alive = false;
 //	}
 //}
+

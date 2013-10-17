@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "Game_Object.h"
+#include "Model_Wrapper.h"
 
 class Tower_Section;
 
@@ -18,16 +19,18 @@ public:
 
 	virtual void on_logic(float time_step) override;
 
-	virtual Zeni::Model* getModel() override;
+	virtual Zeni::Model* getModel() override /*{return model.getModel();}*/;
 
-	float getNextSegmentZ();
+	float getNextSegmentZ() const;
 	void pushSegment(Tower_Section* segment_) {segments.push_back(segment_);};
-	const vector<Tower_Section>& getSegments() {return segments;};
+	const vector<Tower_Section>& getSegments() const {return segments;};
 
 	virtual ~Tower_Base();
 
 private:
 	vector<Tower_Section*> segments;
+
+	//static Model_Wrapper model = Model_Wrapper(/* Insert model file location here */);
 }
 
 #endif
