@@ -1,4 +1,5 @@
 #include "Rock.h"
+
 #include "Constants.h"
 
 Model_Wrapper Rock::model("models/spike_ball.3ds");

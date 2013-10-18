@@ -1,12 +1,17 @@
 #include "Enemy.h"
 
+#include "Game_Level.h"
+#include "Utility.h"
+
 using namespace Zeni;
 using namespace std;
 
-Enemy::Enemy(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion facing, float speed_, float health_max_) : Game_Object(location_), speed(speed_), health_max(health_max_), health_current(health_max), moving(true), alive(true)
+Enemy::Enemy(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion facing, float speed_, float health_max_) : Game_Object(location_), speed(speed_), health_max(health_max_), health_current(health_max), moving(true), alive(true), pathIndex(0), path(nullptr)
 {
-
+	path = &Game_Level::getCurrentLevel()->getPath();
 }
+
+Enemy::~Enemy() {};
 
 bool Enemy::collide(const Collision::Capsule* collider_) const
 {
@@ -50,23 +55,26 @@ bool Enemy::collide(const Collision::Sphere* collider_) const
 
 void Enemy::on_logic(float time_step) 
 {
-	doMovement();
+	doMovement(time_step);
 }
 
-void Enemy::doMovement() {
+void Enemy::doMovement(float time_step) {
 	if(!moving) return;
 	if(!alive) return;
 
-	if(Vector3f((*destination) - getPosition()).magnitude() <= getSpeed()) {
-		setPosition(*destination);
-		if(++destination == end) stopMoving();
+	if(pathIndex == path->size()) return;
+
+	if(Vector3f((*path)[pathIndex] - getPosition()).magnitude() <= (getSpeed() * time_step)) {
+		setPosition((*path)[pathIndex]);
+		if(++pathIndex >= path->size()) stopMoving();
 	}
 	else {
 		//It's either this
-		setFacing(Quaternion::Vector3f_to_Vector3f(*destination, getPosition()));
+		//setFacing(Quaternion::Vector3f_to_Vector3f((*path)[pathIndex], getPosition()));
 		//Or this
 		//setFacing(Quaternion::Vector3f_to_Vector3f(Vector3f((*destination) - getPosition()), Quaternion);
-		setPosition(Vector3f((*destination) - getPosition()).normalized() * getSpeed());
+		setFacing(createQuaternionBetweenTwoPoints((*path)[pathIndex], getPosition()));
+		setPosition(getPosition() + Vector3f((*path)[pathIndex] - getPosition()).normalized() * (getSpeed() * time_step));
 	}
 }
 

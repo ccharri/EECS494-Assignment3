@@ -38,7 +38,7 @@ void Game_Level::render()
 
 void Game_Level::on_logic(float time_step)
 {
-	player->on_logic(time_step);
+	//player->on_logic(time_step);
 	for_each(enemies.begin(), enemies.end(), [&](Game_Object* object_) {object_->on_logic(time_step);});
 	for_each(towerBases.begin(), towerBases.end(), [&](Tower_Base* base_) {base_->on_logic(time_step);});
 }

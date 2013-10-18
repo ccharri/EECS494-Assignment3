@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Game_Level.h"
 #include "Level1.h"
+#include "Enemy_Box.h"
 
 using namespace Zeni;
 using namespace std;
@@ -10,9 +11,13 @@ using namespace std;
 Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = true;
-	god_view = Camera(Point3f(-20, 0, 20), Quaternion());
+	god_view = Camera(Point3f(-60, 0, 20), Quaternion());
+
+	worldLight = Light();
 
 	Game_Level::setCurrentLevel(new Level_One());
+
+	Game_Level::getCurrentLevel()->getEnemies().push_back(new Enemy_Box(Point3f(), Vector3f(), Quaternion(), 10., 100.));
 }
 
 void Play_State::on_push() {
@@ -64,6 +69,8 @@ void Play_State::perform_logic() {
   {
     if(time_step > processing_time)
       time_step = processing_time;
+
+	Game_Level::getCurrentLevel()->on_logic(time_step);
   }
 }
 

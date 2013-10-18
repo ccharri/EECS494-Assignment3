@@ -1,12 +1,17 @@
 #include "Rock_Dropper.h"
-#include "Utility.h"
-#include "Game_Level.h"
+
 #include "Tower_Section.h"
+#include "Rock.h"
 
 Rock_Dropper::Rock_Dropper(Tower_Section* owner_, float cooldown_) : Tower_Weapon(owner_, cooldown_)
 {
 	DAMAGE_PER_Z_VEL = 3;
 	LAUNCH_VEL = 100;
+}
+
+Rock_Dropper::~Rock_Dropper() 
+{
+
 }
 
 bool Rock_Dropper::canFire(Game_Object* object)

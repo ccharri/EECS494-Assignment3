@@ -13,7 +13,7 @@ public:
 
 	void on_logic(float time_step);
 	void render() {model.getModel()->render();}
-	Zeni::Model* getModel() {return model.getModel();}
+	Zeni::Model* getModel() override {return model.getModel();}
 	
 private:
 	Zeni::Vector3f size;

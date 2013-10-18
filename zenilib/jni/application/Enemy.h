@@ -15,8 +15,7 @@ public:
 
 	virtual void on_logic(float time_step) override;
 
-	void setDestination(std::vector<Zeni::Point3f>::const_iterator destination_) {destination = destination_;};
-	void setEnd(std::vector<Zeni::Point3f>::const_iterator end_) {end = end_;};
+	void setPath(std::vector<Zeni::Point3f>* path_) {path = path_;};
 
 	float getSpeed() const {return speed;};
 	bool isMoving() const {return moving;};
@@ -51,10 +50,10 @@ private:
 	float health_current;
 	bool alive;
 
-	std::vector<Zeni::Point3f>::const_iterator destination;
-	std::vector<Zeni::Point3f>::const_iterator end;
+	int pathIndex;
+	std::vector<Zeni::Point3f>* path;
 
-	void doMovement();
+	void doMovement(float time_step);
 	void stopMoving();
 };
 

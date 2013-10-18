@@ -22,6 +22,8 @@ public:
 
 	std::vector<Tower_Base*>& getBases() {return towerBases;};
 
+	std::vector<Zeni::Point3f>& getPath() {return enemy_path;};
+
 	Player* getPlayer() const {return player;};
 	void setPlayer(Player* player_) {player = player_;};
 
