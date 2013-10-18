@@ -17,8 +17,8 @@ float parabolicFallTime(float target_z_initial, float target_z_vel, float launch
 	// no non-complex roots
 	if(b*b - 4*a*c < 0)
 		return -1;
-	float t1 = (-b + (b*b - 4*a*c))/(2*a);
-	float t2 = (-b - (b*b - 4*a*c))/(2*a);
+	float t1 = (-b + sqrt(b*b - 4*a*c))/(2*a);
+	float t2 = (-b - sqrt(b*b - 4*a*c))/(2*a);
 	//NOTE: Assuming a remains negative, no more than one of these can be positive.
 	return max(t1, t2);
 }
