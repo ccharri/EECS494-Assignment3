@@ -62,6 +62,10 @@ void Play_State::on_key(const SDL_KeyboardEvent &event) {
   }
 }
 
+void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event) {
+	god_view.position += god_view.get_forward().normalized() * event.y;
+}
+
 void Play_State::on_mouse_motion(const SDL_MouseMotionEvent &event) {
   //TODO: Maybe add some crate code back into here from Crate_State.cpp
 }

@@ -7,6 +7,6 @@ Physics_Object::Physics_Object(const Zeni::Point3f& position_, const Zeni::Vecto
 }
 
 void Physics_Object::on_logic(float time_step){
-	setPosition(getPosition() + vel * time_step);
 	vel += acc * time_step;
+	setPosition(getPosition() + vel * time_step);
 }
