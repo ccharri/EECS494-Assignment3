@@ -5,6 +5,7 @@
 
 class Game_Object;
 class Player;
+class Tower_Base;
 
 class Game_Level {
 public:
@@ -18,6 +19,8 @@ public:
 
 	std::vector<Game_Object*>& getEnemies() {return enemies;};
 	void removeEnemy(Game_Object* enemy);
+
+	std::vector<Tower_Base*>& getBases() {return towerBases;};
 
 	Player* getPlayer() const {return player;};
 	void setPlayer(Player* player_) {player = player_;};
@@ -35,6 +38,8 @@ private:
 	std::vector<Zeni::Point3f> enemy_path;
 
 	std::vector<Game_Object*> enemies;
+
+	std::vector<Tower_Base*> towerBases;
 };
 
 #endif

@@ -11,7 +11,7 @@
 class Player : public Game_Object
 {
 public:
-	Player(Zeni::Point3f location_, Zeni::Quaternion facing_);
+	Player(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion facing_);
 	~Player();
 
 	virtual Zeni::Model* getModel() override {return model.getModel();};

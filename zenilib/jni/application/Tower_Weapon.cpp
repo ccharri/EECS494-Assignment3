@@ -1,5 +1,7 @@
 #include "Tower_Weapon.h"
 
+#include <functional>
+
 #include "Utility.h"
 #include "Game_Level.h"
 #include "Game_Object.h"
@@ -7,6 +9,18 @@
 
 using namespace Zeni;
 using namespace std;
+
+class FunctorHelper{
+public:
+	FunctorHelper(Tower_Weapon* weapon_) : weapon(weapon_) {};
+
+	bool operator()(Game_Object* object_) {
+		return weapon->canFire(object_);
+	}
+
+private:
+	Tower_Weapon* weapon;
+};
 
 Tower_Weapon::Tower_Weapon(Tower_Section* owner_, float cooldown_) : owner(owner_), target(nullptr), cooldown(cooldown_), last_fired_time(0)
 {
@@ -24,8 +38,8 @@ void Tower_Weapon::on_logic(float time_step)
 
 	//If no target, find new target
 	if(!target){
-		//Find closest target that this can fire upon
-		target = closestObjectMatching(owner->getPosition(), Game_Level::getCurrentLevel()->getEnemies(), &this->canFire);
+		FunctorHelper helper(this);
+		target = closestObjectMatching(owner->getPosition(), Game_Level::getCurrentLevel()->getEnemies(), helper);
 	}
 
 	//Nothing to fire upon
@@ -35,11 +49,15 @@ void Tower_Weapon::on_logic(float time_step)
 	{
 		//Fire
 		fire();
-		last_fired_time = fireTimer.seconds();
 	}
 }
 
-bool Tower_Weapon::canFire(Game_Object* object) const
+void Tower_Weapon::fire()
+{
+	last_fired_time = fireTimer.seconds();
+}
+
+bool Tower_Weapon::canFire(Game_Object* object)
 {
 	return object->isTargetable();
 }

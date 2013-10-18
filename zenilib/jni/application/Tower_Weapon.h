@@ -19,7 +19,7 @@ public:
 	Game_Object* getTarget() const {return target;};
 	void setTarget(Game_Object* target_) {target = target_;};
 
-	virtual bool canFire(Game_Object* object) const;
+	virtual bool canFire(Game_Object* object);
 
 	virtual void on_logic(float time_step);
 

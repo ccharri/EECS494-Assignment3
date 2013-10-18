@@ -21,3 +21,8 @@ void Game_Object::render()
 	model->set_translate(position);
 	model->render();
 }
+
+void Game_Object::on_logic(float time_step)
+{
+
+}

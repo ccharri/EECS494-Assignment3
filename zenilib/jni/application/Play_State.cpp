@@ -5,7 +5,7 @@
 using namespace Zeni;
 using namespace std;
 
-Play_State::Play_State() : player(Player(Point3f(), Quaternion())) 
+Play_State::Play_State() : player(Player(Point3f(), Vector3f(), Quaternion())) 
 {
 	god_view_on = false;
 }
