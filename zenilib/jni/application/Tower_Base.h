@@ -36,6 +36,6 @@ private:
 	std::vector<Tower_Section*> segments;
 
 	//static Model_Wrapper model = Model_Wrapper(/* Insert model file location here */);
-}
+};
 
 #endif

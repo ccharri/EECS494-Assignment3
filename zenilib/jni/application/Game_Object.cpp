@@ -21,17 +21,3 @@ void Game_Object::render()
 	model->set_translate(position);
 	model->render();
 }
-
-//void Game_Object::onDamage(float damage)
-//{
-//	if(!is_alive) return;
-//
-//	health_current -= damage;
-//
-//	if(health_current <= 0)
-//	{
-//		health_current = 0;
-//		is_alive = false;
-//	}
-//}
-

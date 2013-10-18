@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "Game_Object.h"
+
 using namespace Zeni;
 using namespace std;
 

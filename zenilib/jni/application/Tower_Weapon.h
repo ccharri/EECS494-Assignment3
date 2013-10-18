@@ -35,4 +35,4 @@ private:
 	float last_fired_time;
 };
 
-#endif __game__Tower_Weapon_h__
+#endif

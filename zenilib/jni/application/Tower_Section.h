@@ -23,4 +23,4 @@ private:
 	Tower_Weapon* weapon;
 };
 
-#endif __game__Tower_Section_h__
+#endif
