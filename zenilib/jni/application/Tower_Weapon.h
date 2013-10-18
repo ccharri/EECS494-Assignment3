@@ -27,6 +27,7 @@ public:
 	virtual bool canFire(Game_Object* object);
 
 	virtual void on_logic(float time_step);
+	virtual void render();
 
 	virtual void fire();
 

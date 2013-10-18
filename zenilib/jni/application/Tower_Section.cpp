@@ -17,21 +17,10 @@ Tower_Section::~Tower_Section()
 }
 
 void Tower_Section::render() {
-	auto projectiles = weapon->getProjectiles();
-
-	for_each(projectiles.begin(), projectiles.end(), [&](Game_Object* object_)
-	{
-		object_->render();
-	});
+	weapon->render();
 }
 
 void Tower_Section::on_logic(float time_step)
 {
 	weapon->on_logic(time_step);
-
-	//Weapon projectiles
-	auto projectiles = weapon->getProjectiles();
-	for_each(projectiles.begin(), projectiles.end(), [&](Game_Object* object_) {
-			object_->on_logic(time_step);
-	});
 }

@@ -41,6 +41,10 @@ void Tower_Weapon::removeProjectile(Game_Object* projectile_)
 
 void Tower_Weapon::on_logic(float time_step)
 {
+	for_each(projectiles.begin(), projectiles.end(), [&](Game_Object* object_) {
+		object_->on_logic(time_step);
+	});
+
 	//If target cannot be fired upon
 	if(target && !canFire(target))
 	{
@@ -62,6 +66,16 @@ void Tower_Weapon::on_logic(float time_step)
 		//Fire
 		fire();
 	}
+}
+
+void Tower_Weapon::render()
+{
+	//Render self
+
+
+	for_each(projectiles.begin(), projectiles.end(), [&](Game_Object* object_) {
+		object_->render();
+	});
 }
 
 void Tower_Weapon::fire()
