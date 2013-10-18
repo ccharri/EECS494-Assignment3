@@ -14,7 +14,7 @@ public:
 	Player(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion facing_);
 	~Player();
 
-	virtual Zeni::Model* getModel() override {return model.getModel();};
+	//virtual Zeni::Model* getModel() override {return model.getModel();};
 
 	void on_logic(float time_step) override;
 	Zeni::Camera get_camera() const {return view;};
@@ -23,7 +23,7 @@ private:
 	Zeni::Collision::Capsule collision_capsule;
 	Zeni::Camera view;
 
-	static Model_Wrapper model;
+	//static Model_Wrapper model;
 
 	float speed;
 	bool moving;

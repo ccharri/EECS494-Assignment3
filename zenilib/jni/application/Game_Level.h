@@ -25,13 +25,13 @@ public:
 	Player* getPlayer() const {return player;};
 	void setPlayer(Player* player_) {player = player_;};
 
+	virtual Zeni::Model* getModel() = 0;
+
 	static Game_Level* getCurrentLevel() {return currentLevel;};
 	static void setCurrentLevel(Game_Level* level_) {currentLevel = level_;};
 
 private:
 	static Game_Level* currentLevel;
-
-	Zeni::Model* terrain;
 
 	Player* player;
 

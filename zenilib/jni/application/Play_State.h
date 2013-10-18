@@ -31,7 +31,7 @@ class Play_State : public Zeni::Gamestate_Base {
 		Zeni::Camera god_view;
 		bool god_view_on;
 
-		Player player;
+		//Player player;
 		 bool player_moved;
 
 		Zeni::Time_HQ time_passed;

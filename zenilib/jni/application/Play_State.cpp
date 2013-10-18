@@ -5,7 +5,7 @@
 using namespace Zeni;
 using namespace std;
 
-Play_State::Play_State() : player(Player(Point3f(), Vector3f(), Quaternion())) 
+Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = false;
 }
@@ -67,8 +67,8 @@ void Play_State::render() {
   Zeni::Video &vr = Zeni::get_Video();
 	if(god_view_on)
 		vr.set_3d(god_view);
-	else
-		vr.set_3d(player.get_camera());
+	//else
+	//	vr.set_3d(player.get_camera());
 
   //render call for level
 }
