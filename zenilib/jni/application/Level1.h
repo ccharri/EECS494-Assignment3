@@ -19,6 +19,6 @@ private:
 	static Model_Wrapper model;
 };
 
-Model_Wrapper Level_One::model = Model_Wrapper("models/Level1.3DS");
+Model_Wrapper Level_One::model = Model_Wrapper("models/crate.3DS");
 
 #endif
