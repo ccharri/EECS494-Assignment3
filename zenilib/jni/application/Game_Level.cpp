@@ -11,6 +11,11 @@ using namespace std;
 
 Game_Level* Game_Level::currentLevel = nullptr;
 
+Game_Level::Game_Level()
+{
+
+}
+
 Game_Level::~Game_Level() {
 	for_each(enemies.begin(), enemies.end(), [&](Game_Object* object){
 		delete object;
@@ -26,7 +31,7 @@ void Game_Level::removeEnemy(Game_Object* enemy){
 void Game_Level::render()
 {
 	getModel()->render();
-	player->render();
+	//player->render();
 	for_each(enemies.begin(), enemies.end(), [](Game_Object* object_) {object_->render();});
 	for_each(towerBases.begin(), towerBases.end(), [](Tower_Base* base_) {base_->render();});
 }

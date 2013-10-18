@@ -28,7 +28,7 @@ public:
 	virtual Zeni::Model* getModel() = 0;
 
 	static Game_Level* getCurrentLevel() {return currentLevel;};
-	static void setCurrentLevel(Game_Level* level_) {currentLevel = level_;};
+	static void setCurrentLevel(Game_Level* level_) {if(currentLevel) delete currentLevel; currentLevel = level_;};
 
 private:
 	static Game_Level* currentLevel;

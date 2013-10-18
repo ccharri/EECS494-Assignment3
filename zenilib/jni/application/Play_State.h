@@ -3,7 +3,6 @@
 
 #include "zenilib.h"
 #include "Player.h"
-#include "Game_Level.h"
 
 class Play_State : public Zeni::Gamestate_Base {
     struct Controls {

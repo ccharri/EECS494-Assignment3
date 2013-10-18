@@ -1,13 +1,18 @@
 #include "Play_State.h"
 
 #include "Player.h"
+#include "Game_Level.h"
+#include "Level1.h"
 
 using namespace Zeni;
 using namespace std;
 
 Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
-	god_view_on = false;
+	god_view_on = true;
+	god_view = Camera(Point3f(-20, 0, 20), Quaternion::Vector3f_to_Vector3f(Vector3f(0,0,0), Vector3f(-20, 0, 20)));
+
+	Game_Level::setCurrentLevel(new Level_One());
 }
 
 void Play_State::on_push() {
@@ -71,4 +76,5 @@ void Play_State::render() {
 	//	vr.set_3d(player.get_camera());
 
   //render call for level
+	Game_Level::getCurrentLevel()->render();
 }
