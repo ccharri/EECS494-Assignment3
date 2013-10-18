@@ -3,7 +3,8 @@
 
 #include <zenilib.h>
 
-class Game_Object {
+class Game_Object 
+{
 public:
 	Game_Object(Zeni::Point3f position_ = Zeni::Point3f(), Zeni::Vector3f size_ = Zeni::Vector3f(), Zeni::Quaternion facing_ = Zeni::Quaternion());
 

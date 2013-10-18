@@ -1,5 +1,5 @@
 #ifndef __game__Tower_Weapon_h__
-#define  __game__Tower_Weapon_h__
+#define __game__Tower_Weapon_h__
 
 #include <zenilib.h>
 
@@ -9,7 +9,7 @@ class Tower_Section;
 class Tower_Weapon
 {
 public:
-	Tower_Weapon();
+	Tower_Weapon(Tower_Section* owner_, float cooldown_);
 
 	virtual ~Tower_Weapon() = 0;
 
@@ -29,6 +29,8 @@ private:
 	Tower_Section* owner;
 
 	Game_Object* target;
+
+	Zeni::Chronometer<Zeni::Time> fireTimer;
 	float cooldown;
 	float last_fired_time;
 };

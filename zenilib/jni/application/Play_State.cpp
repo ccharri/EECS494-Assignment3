@@ -2,9 +2,12 @@
 
 #include "Player.h"
 
-Play_State::Play_State() {
-	god_view_on = false;
+using namespace Zeni;
+using namespace std;
 
+Play_State::Play_State() : player(Player(Point3f(), Quaternion())) 
+{
+	god_view_on = false;
 }
 
 void Play_State::on_push() {

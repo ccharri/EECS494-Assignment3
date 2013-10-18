@@ -62,6 +62,10 @@ void Enemy::doMovement() {
 		if(++destination == end) stopMoving();
 	}
 	else {
+		//It's either this
+		setFacing(Quaternion::Vector3f_to_Vector3f(*destination, getPosition()));
+		//Or this
+		//setFacing(Quaternion::Vector3f_to_Vector3f(Vector3f((*destination) - getPosition()), Quaternion);
 		setPosition(Vector3f((*destination) - getPosition()).normalized() * getSpeed());
 	}
 }
