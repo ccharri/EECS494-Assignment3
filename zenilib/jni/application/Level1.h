@@ -2,6 +2,7 @@
 #define __game__Level_One_h__
 
 #include <zenilib.h>
+#include <iostream>
 
 #include "Game_Level.h"
 #include "Model_Wrapper.h"
@@ -15,6 +16,7 @@ public:
 		path.push_back(Zeni::Point3f( 50, 50,0));
 		path.push_back(Zeni::Point3f( 50,-50,0));
 		path.push_back(Zeni::Point3f(-50,-50,0));
+		std::cout << "level 1 constructor" << std::endl;
 	};
 
 	~Level_One() {};

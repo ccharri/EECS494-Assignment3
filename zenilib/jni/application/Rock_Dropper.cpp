@@ -1,7 +1,11 @@
 #include "Rock_Dropper.h"
 
+#include <stdio.h>
 #include "Tower_Section.h"
 #include "Rock.h"
+
+using namespace std;
+using namespace Zeni;
 
 Rock_Dropper::Rock_Dropper(Tower_Section* owner_, float cooldown_) : Tower_Weapon(owner_, cooldown_)
 {
@@ -22,8 +26,8 @@ bool Rock_Dropper::canFire(Game_Object* object)
 
 void Rock_Dropper::fire()
 {
-	std::cout << "GOD DAMN" << std::endl;
-	Zeni::Vector3f vel = Zeni::Vector3f(getTarget()->getPosition() - getSection()->getPosition()).normalized() /*get direction vector*/ * 10 /* initial force*/;
+	cout << "GOD DAMN" << endl;
+	Vector3f vel = Vector3f(getTarget()->getPosition() - getSection()->getPosition()).normalized() /*get direction vector*/ * 10 /* initial force*/;
 	Rock *r = new Rock(getSection()->getPosition(), vel);
 	addProjectile(r);
 
