@@ -10,7 +10,7 @@ using namespace std;
 Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = true;
-	god_view = Camera(Point3f(-20, 0, 20), Quaternion::Vector3f_to_Vector3f(Vector3f(0,0,0), Vector3f(-20, 0, 20)));
+	god_view = Camera(Point3f(-20, 0, 20), Quaternion());
 
 	Game_Level::setCurrentLevel(new Level_One());
 }

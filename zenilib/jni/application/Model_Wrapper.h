@@ -18,7 +18,7 @@ public:
 	};
 
 private:
-	const Zeni::String& fileName;
+	Zeni::String fileName;
 	Zeni::Model* model;
 	int useCount;
 };
