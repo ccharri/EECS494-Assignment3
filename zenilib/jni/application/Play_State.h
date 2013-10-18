@@ -24,6 +24,8 @@ class Play_State : public Zeni::Gamestate_Base {
 
     void perform_logic();
 
+	void performMovement(float time_step);
+
     void render();
 
   private:

@@ -82,8 +82,34 @@ void Play_State::perform_logic() {
     if(time_step > processing_time)
       time_step = processing_time;
 
+	performMovement(time_step);
+
 	Game_Level::getCurrentLevel()->on_logic(time_step);
   }
+}
+
+void Play_State::performMovement(float time_step)
+{
+	float speed = 20.f;
+	float distance = speed * time_step;
+
+	if(movement_controls.forward) {
+		god_view.move_forward_xy(distance);
+	}
+
+	if(movement_controls.back) {
+		god_view.move_forward_xy(-distance);
+	}
+
+	if(movement_controls.left)
+	{
+		god_view.move_left_xy(distance);
+	}
+
+	if(movement_controls.right)
+	{
+		god_view.move_left_xy(-distance);
+	}
 }
 
 void Play_State::render() {
