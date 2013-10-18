@@ -15,6 +15,7 @@ public:
 	virtual ~Tower_Section() = 0;
 
 	virtual void on_logic(float time_step) override;
+	virtual void render() override;
 
 	Tower_Weapon* getWeapon() {return weapon;};
 	void setWeapon(Tower_Weapon* weapon_) {weapon = weapon_;};

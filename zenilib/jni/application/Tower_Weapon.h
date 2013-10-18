@@ -21,6 +21,8 @@ public:
 
 	bool hasProjectiles() {return projectiles.empty();}
 	void addProjectile(Game_Object *p) {projectiles.push_back(p);}
+	std::vector<Game_Object*>& getProjectiles() {return projectiles;};
+	void removeProjectile(Game_Object* projectile_);
 
 	virtual bool canFire(Game_Object* object);
 

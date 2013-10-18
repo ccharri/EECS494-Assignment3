@@ -33,6 +33,12 @@ Tower_Weapon::~Tower_Weapon()
 		delete p;
 }
 
+void Tower_Weapon::removeProjectile(Game_Object* projectile_)
+{
+	auto it = find(projectiles.begin(), projectiles.end(), projectile_);
+	if(it != projectiles.end()) projectiles.erase(it);
+}
+
 void Tower_Weapon::on_logic(float time_step)
 {
 	//If target cannot be fired upon

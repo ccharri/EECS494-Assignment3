@@ -13,8 +13,9 @@ public:
 	float DAMAGE_PER_Z_VEL;
 	float LAUNCH_VEL;
 
-	bool canFire(Game_Object* object);
-	void fire();
+	bool canFire(Game_Object* object) override;
+	void fire() override;
+	void on_logic(float time_step) override;
 
 private:
 	
