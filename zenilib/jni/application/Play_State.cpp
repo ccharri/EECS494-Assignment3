@@ -11,13 +11,13 @@ using namespace std;
 Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = true;
-	god_view = Camera(Point3f(-60, 0, 20), Quaternion());
+	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0));
 
 	worldLight = Light();
 
 	Game_Level::setCurrentLevel(new Level_One());
 
-	Game_Level::getCurrentLevel()->getEnemies().push_back(new Enemy_Box(Point3f(), Vector3f(), Quaternion(), 10., 100.));
+	Game_Level::getCurrentLevel()->getEnemies().push_back(new Enemy_Box(Point3f(-50, -50, 0), Vector3f(), Quaternion(), 10., 100.));
 }
 
 void Play_State::on_push() {

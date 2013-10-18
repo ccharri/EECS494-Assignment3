@@ -8,20 +8,20 @@
 using namespace Zeni;
 using namespace std;
 
-Quaternion quaternionBetweenTwoPoints(const Point3f& destination_, const Point3f& origin_)
-{
-	double dx, dy, dz;
-	dx = destination_.x - origin_.x;
-	dy = destination_.y - origin_.y;
-	dz = destination_.z - origin_.z;
-
-	double yaw, pitch, roll;
-	yaw = atan2(dz, dx);
-	pitch = atan2(sqrt(dz*dz + dx*dx), dy) + Global::pi;
-	roll = 0;
-
-	return Quaternion(yaw, pitch, roll);
-}
+//Quaternion createQuaternionBetweenTwoPoints(const Point3f& destination_, const Point3f& origin_)
+//{
+//	double dx, dy, dz;
+//	dx = destination_.x - origin_.x;
+//	dy = destination_.y - origin_.y;
+//	dz = destination_.z - origin_.z;
+//
+//	double yaw, pitch, roll;
+//	yaw = atan2(dz, dx);
+//	pitch = atan2(sqrt(dz*dz + dx*dx), dy) + Global::pi;
+//	roll = 0;
+//
+//	return Quaternion(yaw, pitch, roll);
+//}
 
 float parabolicFallTime(float target_z_initial, float target_z_vel, float launch_z, float launch_z_vel)
 {

@@ -2,9 +2,25 @@
 
 #include "Game_Level.h"
 #include "Utility.h"
+#include <math.h>
 
 using namespace Zeni;
 using namespace std;
+
+Quaternion createQuaternionBetweenTwoPoints(const Point3f& destination_, const Point3f& origin_)
+{
+	double dx, dy, dz;
+	dx = destination_.x - origin_.x;
+	dy = destination_.y - origin_.y;
+	dz = destination_.z - origin_.z;
+
+	double yaw, pitch, roll;
+	yaw = atan2(dz, dx);
+	pitch = atan2(sqrt(dz*dz + dx*dx), dy) + Global::pi;
+	roll = 0;
+
+	return Quaternion(yaw, pitch, roll);
+}
 
 Enemy::Enemy(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion facing, float speed_, float health_max_) : Game_Object(location_), speed(speed_), health_max(health_max_), health_current(health_max), moving(true), alive(true), pathIndex(0), path(nullptr)
 {
