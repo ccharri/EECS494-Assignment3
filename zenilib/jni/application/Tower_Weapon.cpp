@@ -27,6 +27,12 @@ Tower_Weapon::Tower_Weapon(Tower_Section* owner_, float cooldown_) : owner(owner
 
 }
 
+Tower_Weapon::~Tower_Weapon()
+{
+	for(Game_Object* p : projectiles)
+		delete p;
+}
+
 void Tower_Weapon::on_logic(float time_step)
 {
 	//If target cannot be fired upon

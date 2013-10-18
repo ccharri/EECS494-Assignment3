@@ -11,13 +11,16 @@ class Tower_Weapon
 public:
 	Tower_Weapon(Tower_Section* owner_, float cooldown_);
 
-	virtual ~Tower_Weapon() = 0;
+	~Tower_Weapon();
 
 	Tower_Section* getSection() const {return owner;};
 	void setSection(Tower_Section* section_) {owner = section_;};
 
 	Game_Object* getTarget() const {return target;};
 	void setTarget(Game_Object* target_) {target = target_;};
+
+	bool hasProjectiles() {return projectiles.empty();}
+	void addProjectile(Game_Object *p) {projectiles.push_back(p);}
 
 	virtual bool canFire(Game_Object* object);
 
@@ -29,6 +32,7 @@ private:
 	Tower_Section* owner;
 
 	Game_Object* target;
+	std::vector<Game_Object*> projectiles;
 
 	Zeni::Chronometer<Zeni::Time> fireTimer;
 	float cooldown;
