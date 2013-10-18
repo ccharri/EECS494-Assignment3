@@ -2,7 +2,7 @@
 #define __game__Play_State_h__
 
 #include "zenilib.h"
-#include "Player.h"
+//#include "Player.h"
 
 class Play_State : public Zeni::Gamestate_Base {
     struct Controls {
@@ -18,7 +18,7 @@ class Play_State : public Zeni::Gamestate_Base {
     Play_State();
 
     void on_push();
-		void on_pop();
+	void on_pop();
     void on_key(const SDL_KeyboardEvent &event);
     void on_mouse_motion(const SDL_MouseMotionEvent &event);
 

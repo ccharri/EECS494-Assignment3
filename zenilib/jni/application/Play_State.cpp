@@ -4,6 +4,9 @@
 #include "Game_Level.h"
 #include "Level1.h"
 #include "Enemy_Box.h"
+#include "Tower_Base.h"
+#include "Tower_Section.h"
+#include "Rock_Dropper.h"
 
 using namespace Zeni;
 using namespace std;
@@ -18,6 +21,15 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 	Game_Level::setCurrentLevel(new Level_One());
 
 	Game_Level::getCurrentLevel()->getEnemies().push_back(new Enemy_Box(Point3f(-50, -50, 0), Vector3f(), Quaternion(), 10., 100.));
+
+	Tower_Base* centerBase = new Tower_Base(Point3f(0,0,0));
+	Tower_Section* newSection = new Tower_Section(Point3f(), Vector3f());
+	Rock_Dropper* dropper = new Rock_Dropper(newSection, 2.);
+	newSection->setWeapon(dropper);
+	centerBase->pushSection(newSection);
+
+	Game_Level::getCurrentLevel()->getBases().push_back(centerBase);
+	
 }
 
 void Play_State::on_push() {

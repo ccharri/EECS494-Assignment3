@@ -22,7 +22,7 @@ bool Rock_Dropper::canFire(Game_Object* object)
 
 void Rock_Dropper::fire()
 {
-	Zeni::Vector3f vel = Zeni::Vector3f(getTarget()->getPosition() - getSection()->getPosition()).normalized() /*get direction vector*/ * 0.05 /* initial force*/;
+	Zeni::Vector3f vel = Zeni::Vector3f(getTarget()->getPosition() - getSection()->getPosition()).normalized() /*get direction vector*/ * 10 /* initial force*/;
 	Rock *r = new Rock(getSection()->getPosition(), vel);
 	addProjectile(r);
 

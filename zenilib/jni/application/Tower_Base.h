@@ -18,11 +18,11 @@ public:
 	}
 
 	void on_logic(float time_step) override;
+	void render() override;
 
-	virtual Zeni::Model* getModel() override /*{return model.getModel();}*/;
+	virtual Zeni::Model* getModel() override {return model.getModel();};
 
-
-	float getNextSectionZ() const {return segments.size()*50.f;};
+	float getNextSectionZ() const;
 	//DOES: Returns the would-be height of the next tower section. 
 	//TODO: Replace 50 with segment height constant
 	
@@ -35,7 +35,7 @@ public:
 private:
 	std::vector<Tower_Section*> segments;
 
-	//static Model_Wrapper model = Model_Wrapper(/* Insert model file location here */);
+	static Model_Wrapper model;
 };
 
 #endif
