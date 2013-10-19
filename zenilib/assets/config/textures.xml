@@ -44,10 +44,10 @@ The following things are unsupported:
       <filepath>textures/crate_light.png</filepath>
       <tile>1</tile>
     </CRATE.PNG>
-    <TOWER_BASE.PNG>
-      <filepath>textures/Tower_Base.png</filepath>
+    <TOWER_BA.PNG>
+      <filepath>textures/Tower_Ba.png</filepath>
       <tile>0</tile>
-    </TOWER_BASE.PNG>
+    </TOWER_BA.PNG>
   <!--
   <one>
     <is_sprite>0</is_sprite>

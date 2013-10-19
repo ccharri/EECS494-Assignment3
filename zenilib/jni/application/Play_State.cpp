@@ -18,6 +18,7 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 
 	worldLight = Light();
 	worldLight.set_light_type(Zeni::LIGHT_DIRECTIONAL);
+	worldLight.spot_direction =(Vector3f(1, 1, -1));
 
 	Game_Level::setCurrentLevel(new Level_One());
 
