@@ -17,6 +17,7 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 10.0f, 1000.0f, Global::pi_over_two, 1.25f);
 
 	worldLight = Light();
+	worldLight.set_light_type(Zeni::LIGHT_DIRECTIONAL);
 
 	Game_Level::setCurrentLevel(new Level_One());
 
@@ -117,6 +118,12 @@ void Play_State::performMovement(float time_step)
 }
 
 void Play_State::render() {
+	get_Video().set_lighting(true);
+	Color UILight = get_Video().get_ambient_lighting();
+	get_Video().set_ambient_lighting(Color(1.f,0.f,0.f,0.f));
+
+	get_Video().set_Light(0, worldLight);
+
 	//set up camera
   Zeni::Video &vr = Zeni::get_Video();
 	if(god_view_on)
@@ -126,4 +133,7 @@ void Play_State::render() {
 
   //render call for level
 	Game_Level::getCurrentLevel()->render();
+
+	get_Video().set_lighting(false);
+	get_Video().set_ambient_lighting(UILight);
 }
