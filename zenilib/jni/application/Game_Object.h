@@ -6,7 +6,7 @@
 class Game_Object 
 {
 public:
-	Game_Object(Zeni::Point3f position_ = Zeni::Point3f(), Zeni::Vector3f size_ = Zeni::Vector3f(), Zeni::Quaternion facing_ = Zeni::Quaternion());
+	Game_Object(Zeni::Point3f position_ = Zeni::Point3f(), Zeni::Vector3f size_ = Zeni::Vector3f(), Zeni::Quaternion facing_ = Zeni::Quaternion(), Zeni::Vector3f scale_ = Zeni::Vector3f(1,1,1));
 
 	virtual ~Game_Object() = 0;
 
@@ -42,6 +42,7 @@ private:
 	Zeni::Point3f position;
 	Zeni::Vector3f size;
 	Zeni::Quaternion facing;
+	Zeni::Vector3f scale;
 
 	float keyframe;
 };

@@ -7,7 +7,7 @@ using namespace Zeni;
 using namespace std;
 
 
-Model_Wrapper Tower_Base::model = Model_Wrapper("models/crate.3ds");
+Model_Wrapper Tower_Base::model = Model_Wrapper("models/Tower_Base.3ds");
 
 Tower_Base::~Tower_Base() 
 {
