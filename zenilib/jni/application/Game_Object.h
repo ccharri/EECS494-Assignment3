@@ -27,9 +27,10 @@ public:
 	Zeni::Vector3f getSize() const {return size;};
 	Zeni::Quaternion getFacing() const {return facing;};
 
-	void setPosition(Zeni::Point3f position_) {position = position_;};
-	void setSize(Zeni::Vector3f size_) {size = size_;};
-	void setFacing(Zeni::Quaternion facing_) {facing = facing_;};
+	virtual void setPosition(Zeni::Point3f position_) {position = position_;};
+	virtual void setSize(Zeni::Vector3f size_) {size = size_;};
+	virtual void setFacing(Zeni::Quaternion facing_) {facing = facing_;};
+	virtual void lookAt(Zeni::Point3f pos_);
 
 	virtual Zeni::Model* getModel() = 0;
 

@@ -2,6 +2,7 @@
 #define __game__Tower_Section_h__
 
 #include <zenilib.h>
+#include <memory>
 
 #include "Model_Wrapper.h"
 #include "Game_Object.h"
@@ -11,7 +12,7 @@ class Tower_Weapon;
 class Tower_Section : public Game_Object 
 {
 public:
-	Tower_Section(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_ = Zeni::Quaternion(), Tower_Weapon* weapon_ = nullptr);
+	Tower_Section(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_ = Zeni::Quaternion(), std::shared_ptr<Tower_Weapon> weapon_ = nullptr);
 
 	virtual ~Tower_Section();
 
@@ -20,13 +21,13 @@ public:
 
 	virtual Zeni::Model* getModel() override {return model.getModel();};
 
-	Tower_Weapon* getWeapon() {return weapon;};
-	void setWeapon(Tower_Weapon* weapon_) {weapon = weapon_;};
+	std::shared_ptr<Tower_Weapon> getWeapon() {return weapon;};
+	void setWeapon(std::shared_ptr<Tower_Weapon> weapon_) {weapon = weapon_;};
 
 private:
 	static Model_Wrapper model;
 
-	Tower_Weapon* weapon;
+	std::shared_ptr<Tower_Weapon> weapon;
 };
 
 #endif

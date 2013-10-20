@@ -1,11 +1,14 @@
 #include "Game_Object.h"
 
+#include "Utility.h"
+#include "Game_Level.h"
+
 using namespace Zeni;
 using namespace std;
 
 Game_Object::Game_Object(Zeni::Point3f position_ /* = Zeni::Point3f() */, Zeni::Vector3f size_ /* = Zeni::Vector3f() */, Zeni::Quaternion facing_ /* = Zeni::Quaternion() */, Zeni::Vector3f scale_)  : position(position_), size(size_), facing(facing_), scale(scale_)
 {
-
+	quatBetweenPoints(Point3f(), Point3f());
 }
 
 Game_Object::~Game_Object()
@@ -25,5 +28,11 @@ void Game_Object::render()
 
 void Game_Object::on_logic(float time_step)
 {
+}
 
+void Game_Object::lookAt(Zeni::Point3f pos_)
+{
+	Quaternion rot;
+
+	setFacing(rot);
 }

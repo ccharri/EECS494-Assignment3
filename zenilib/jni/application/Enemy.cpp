@@ -7,24 +7,10 @@
 using namespace Zeni;
 using namespace std;
 
-Quaternion createQuaternionBetweenTwoPoints(const Point3f& destination_, const Point3f& origin_)
-{
-	double dx, dy, dz;
-	dx = destination_.x - origin_.x;
-	dy = destination_.y - origin_.y;
-	dz = destination_.z - origin_.z;
-
-	double yaw, pitch, roll;
-	yaw = atan2(dz, dx);
-	pitch = atan2(sqrt(dz*dz + dx*dx), dy) + Global::pi;
-	roll = 0;
-
-	return Quaternion(yaw, pitch, roll);
-}
-
 Enemy::Enemy(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion facing, float speed_, float health_max_) : Game_Object(location_), speed(speed_), health_max(health_max_), health_current(health_max), moving(true), alive(true), pathIndex(0), path(nullptr)
 {
 	path = &Game_Level::getCurrentLevel()->getPath();
+	updateCollider();
 }
 
 Enemy::~Enemy() {};
@@ -80,8 +66,10 @@ void Enemy::doMovement(float time_step) {
 
 	if(pathIndex == path->size()) return;
 
-	if(Vector3f((*path)[pathIndex] - getPosition()).magnitude() <= (getSpeed() * time_step)) {
-		setPosition((*path)[pathIndex]);
+	Point3f next = (*path)[pathIndex];
+
+	if(Vector3f(next - getPosition()).magnitude() <= (getSpeed() * time_step)) {
+		setPosition(next);
 		if(++pathIndex >= path->size()) stopMoving();
 	}
 	else {
@@ -89,14 +77,28 @@ void Enemy::doMovement(float time_step) {
 		//setFacing(Quaternion::Vector3f_to_Vector3f((*path)[pathIndex], getPosition()));
 		//Or this
 		//setFacing(Quaternion::Vector3f_to_Vector3f(Vector3f((*destination) - getPosition()), Quaternion);
-		setFacing(createQuaternionBetweenTwoPoints((*path)[pathIndex], getPosition()));
-		setPosition(getPosition() + Vector3f((*path)[pathIndex] - getPosition()).normalized() * (getSpeed() * time_step));
+		setFacing(quatBetweenPoints(next, getPosition()));
+		setPosition(getPosition() + Vector3f(next - getPosition()).normalized() * (getSpeed() * time_step));
 	}
 }
 
 void Enemy::stopMoving() 
 {
 	moving = false;
+}
+
+void Enemy::updateCollider() 
+{
+	Point3f location = getPosition();
+	Vector3f size = getSize();
+	location += size/2.;
+	collision_capsule = Collision::Capsule(Point3f(location.x, location.y, location.z + size.z/2.), Point3f(location.x, location.y, location.z - size.z/2.), (size.x + size.y)/2. /2.);
+}
+
+void Enemy::setPosition(Zeni::Point3f position_)
+{
+	Game_Object::setPosition(position_);
+	updateCollider();
 }
 
 void Enemy::onDamage(float damage)

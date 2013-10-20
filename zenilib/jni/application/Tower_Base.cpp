@@ -19,7 +19,7 @@ float Tower_Base::getNextSectionZ() const
 	return segments.size();
 }
 
-void Tower_Base::pushSection(Tower_Section *section_)
+void Tower_Base::pushSection(shared_ptr<Tower_Section> section_)
 {
 	Point3f newPos(getPosition().x, getPosition().y, getNextSectionZ());
 	section_->setPosition(newPos);
@@ -28,7 +28,7 @@ void Tower_Base::pushSection(Tower_Section *section_)
 
 void Tower_Base::on_logic(float time_step)
 {
-	for_each(segments.begin(), segments.end(), [&](Tower_Section* section_) {
+	for_each(segments.begin(), segments.end(), [&](shared_ptr<Tower_Section> section_) {
 		section_->on_logic(time_step);
 	});
 
@@ -36,9 +36,9 @@ void Tower_Base::on_logic(float time_step)
 
 void Tower_Base::render()
 {
-	getModel()->render();
+	Game_Object::render();
 
-	for_each(segments.begin(), segments.end(), [&](Tower_Section* section_) {
+	for_each(segments.begin(), segments.end(), [&](shared_ptr<Tower_Section> section_) {
 		section_->render();
 	});
 }

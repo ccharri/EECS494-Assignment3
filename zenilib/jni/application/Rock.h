@@ -12,7 +12,6 @@ public:
 			 const Zeni::Quaternion& facing_ = Zeni::Quaternion());
 
 	void on_logic(float time_step);
-	void render() {model.getModel()->render();}
 	Zeni::Model* getModel() override {return model.getModel();}
 	
 private:

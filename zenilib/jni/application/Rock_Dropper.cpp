@@ -3,11 +3,12 @@
 #include <stdio.h>
 #include "Tower_Section.h"
 #include "Rock.h"
+#include "Utility.h"
 
 using namespace std;
 using namespace Zeni;
 
-Rock_Dropper::Rock_Dropper(Tower_Section* owner_, float cooldown_) : Tower_Weapon(owner_, cooldown_)
+Rock_Dropper::Rock_Dropper(weak_ptr<Tower_Section> owner_, float cooldown_) : Tower_Weapon(owner_, cooldown_)
 {
 	DAMAGE_PER_Z_VEL = 3;
 	LAUNCH_VEL = 100;
@@ -18,7 +19,7 @@ Rock_Dropper::~Rock_Dropper()
 
 }
 
-bool Rock_Dropper::canFire(Game_Object* object)
+bool Rock_Dropper::canFire(shared_ptr<Game_Object> object)
 {
 	//TODO: Add in the parabolic checker functions.
 	return Tower_Weapon::canFire(object);
@@ -26,9 +27,9 @@ bool Rock_Dropper::canFire(Game_Object* object)
 
 void Rock_Dropper::fire()
 {
-	cout << "GOD DAMN" << endl;
-	Vector3f vel = Vector3f(getTarget()->getPosition() - getSection()->getPosition()).normalized() /*get direction vector*/ * 10 /* initial force*/;
-	Rock *r = new Rock(getSection()->getPosition(), vel);
+	cout << "Rock Dropper Firing" << endl;
+	Vector3f vel = Vector3f(getTarget()->getPosition() - getSection()->getPosition()).normalized() /*get direction vector*/ * 10. /* initial force*/;
+	shared_ptr<Game_Object> r = shared_ptr<Game_Object>(new Rock(getSection()->getPosition(), vel, quatBetweenPoints(getTarget()->getPosition(), getSection()->getPosition())));
 	addProjectile(r);
 
 	Tower_Weapon::fire();

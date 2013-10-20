@@ -8,20 +8,20 @@
 using namespace Zeni;
 using namespace std;
 
-//Quaternion createQuaternionBetweenTwoPoints(const Point3f& destination_, const Point3f& origin_)
-//{
-//	double dx, dy, dz;
-//	dx = destination_.x - origin_.x;
-//	dy = destination_.y - origin_.y;
-//	dz = destination_.z - origin_.z;
-//
-//	double yaw, pitch, roll;
-//	yaw = atan2(dz, dx);
-//	pitch = atan2(sqrt(dz*dz + dx*dx), dy) + Global::pi;
-//	roll = 0;
-//
-//	return Quaternion(yaw, pitch, roll);
-//}
+Zeni::Quaternion quatBetweenPoints(const Zeni::Point3f& destination_, const Zeni::Point3f& origin_)
+{
+	double dx, dy, dz;
+	dx = destination_.x - origin_.x;
+	dy = destination_.y - origin_.y;
+	dz = destination_.z - origin_.z;
+
+	double yaw, pitch, roll;
+	yaw = atan2(dz, dx);
+	pitch = atan2(sqrt(dz*dz + dx*dx), dy) + Global::pi;
+	roll = 0;
+
+	return Quaternion(yaw, pitch, roll);
+}
 
 float parabolicFallTime(float target_z_initial, float target_z_vel, float launch_z, float launch_z_vel)
 {
@@ -37,7 +37,7 @@ float parabolicFallTime(float target_z_initial, float target_z_vel, float launch
 	return max(t1, t2);
 }
 
-Game_Object* closestObject(const Zeni::Point3f& pos_, const vector<Game_Object*>& objects_)
+shared_ptr<Game_Object> closestObject(const Zeni::Point3f& pos_, const vector<shared_ptr<Game_Object>>& objects_)
 {
-	return closestObjectMatching(pos_, objects_, [](Game_Object* object) {return true;});
+	return closestObjectMatching(pos_, objects_, [](shared_ptr<Game_Object> object) {return true;});
 }

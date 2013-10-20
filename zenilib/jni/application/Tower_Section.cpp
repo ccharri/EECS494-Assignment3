@@ -8,18 +8,17 @@ using namespace std;
 
 Model_Wrapper Tower_Section::model = Model_Wrapper("models/spike_ball.3ds");
 
-Tower_Section::Tower_Section(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_, Tower_Weapon* weapon_) : Game_Object(position_, size_, facing_),  weapon(weapon_) 
+Tower_Section::Tower_Section(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_, shared_ptr<Tower_Weapon> weapon_) : Game_Object(position_, size_, facing_),  weapon(weapon_) 
 {
 }
 
 
 Tower_Section::~Tower_Section()
 {
-	delete weapon;
 }
 
 void Tower_Section::render() {
-	getModel()->render();
+	Game_Object::render();
 	weapon->render();
 }
 

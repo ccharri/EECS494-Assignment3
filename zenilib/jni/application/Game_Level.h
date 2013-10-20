@@ -2,6 +2,7 @@
 #define __game__Game_Level_h__
 
 #include <zenilib.h>
+#include <memory>
 
 class Game_Object;
 class Player;
@@ -17,10 +18,10 @@ public:
 
 	virtual void on_logic(float time_step);
 
-	std::vector<Game_Object*>& getEnemies() {return enemies;};
-	void removeEnemy(Game_Object* enemy);
+	std::vector<std::shared_ptr<Game_Object> >& getEnemies() {return enemies;};
+	void removeEnemy(std::shared_ptr<Game_Object> enemy);
 
-	std::vector<Tower_Base*>& getBases() {return towerBases;};
+	std::vector<std::shared_ptr<Tower_Base> >& getBases() {return towerBases;};
 
 	std::vector<Zeni::Point3f>& getPath() {return enemy_path;};
 
@@ -28,6 +29,8 @@ public:
 	void setPlayer(Player* player_) {player = player_;};
 
 	virtual Zeni::Model* getModel() = 0;
+
+	virtual float getMaxDistance() {return 100.f;};
 
 	static Game_Level* getCurrentLevel() {return currentLevel;};
 	static void setCurrentLevel(Game_Level* level_) {if(currentLevel) delete currentLevel; currentLevel = level_;};
@@ -39,9 +42,9 @@ private:
 
 	std::vector<Zeni::Point3f> enemy_path;
 
-	std::vector<Game_Object*> enemies;
+	std::vector<std::shared_ptr<Game_Object> > enemies;
 
-	std::vector<Tower_Base*> towerBases;
+	std::vector<std::shared_ptr<Tower_Base> > towerBases;
 };
 
 #endif

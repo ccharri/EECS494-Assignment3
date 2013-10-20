@@ -36,6 +36,8 @@ public:
 
 	const Zeni::Collision::Capsule& getCollider() const {return collision_capsule;};
 
+	virtual void setPosition(Zeni::Point3f position_);
+
 	virtual void onDamage(float damage);
 
 	bool isTargetable() const override {return isAlive();};
@@ -53,6 +55,7 @@ private:
 	int pathIndex;
 	std::vector<Zeni::Point3f>* path;
 
+	void updateCollider();
 	void doMovement(float time_step);
 	void stopMoving();
 };

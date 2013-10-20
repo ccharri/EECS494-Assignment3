@@ -4,6 +4,7 @@
 #include <zenilib.h>
 
 #include <vector>
+#include <memory>
 
 #include "Game_Object.h"
 #include "Model_Wrapper.h"
@@ -12,7 +13,7 @@ class Tower_Section;
 
 class Tower_Base : public Game_Object{
 public:
-	Tower_Base(const Zeni::Point3f &position_) : Game_Object(position_, Zeni::Vector3f(10,10,10), Zeni::Quaternion(), Zeni::Vector3f(10,10,10))
+	Tower_Base(const Zeni::Point3f &position_) : Game_Object(position_, Zeni::Vector3f(1,1,1), Zeni::Quaternion(), Zeni::Vector3f(1,1,1))
 	{
 		
 	}
@@ -26,14 +27,14 @@ public:
 	//DOES: Returns the would-be height of the next tower section. 
 	//TODO: Replace 50 with segment height constant
 	
-	void pushSection(Tower_Section* section_);
+	void pushSection(std::shared_ptr<Tower_Section> section_);
 	// DOES: Takes the segment and changes its position to the top of the Tower_Base.
 
-	const std::vector<Tower_Section*>& getSegments() const {return segments;};
+	const std::vector<std::shared_ptr<Tower_Section> >& getSegments() const {return segments;};
 	virtual ~Tower_Base();
 
 private:
-	std::vector<Tower_Section*> segments;
+	std::vector<std::shared_ptr<Tower_Section>> segments;
 
 	static Model_Wrapper model;
 };

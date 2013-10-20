@@ -16,8 +16,6 @@ public:
 
 	virtual void on_logic(float time_step);
 	virtual Zeni::Model* getModel() = 0;
-	
-
 
 private:
 	Zeni::Vector3f vel;

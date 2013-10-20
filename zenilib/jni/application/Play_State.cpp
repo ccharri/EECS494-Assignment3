@@ -1,5 +1,7 @@
 #include "Play_State.h"
 
+#include <memory>
+
 #include "Player.h"
 #include "Game_Level.h"
 #include "Level1.h"
@@ -32,11 +34,11 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 
 	Game_Level::setCurrentLevel(new Level_One());
 
-	Game_Level::getCurrentLevel()->getEnemies().push_back(new Enemy_Box(Point3f(-50, -50, 0), Vector3f(), Quaternion(), 10., 100.));
+	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), Vector3f(), Quaternion(), 10., 100.)));
 
-	Tower_Base* centerBase = new Tower_Base(Point3f(0,0,0));
-	Tower_Section* newSection = new Tower_Section(Point3f(), Vector3f());
-	Rock_Dropper* dropper = new Rock_Dropper(newSection, 2.);
+	shared_ptr<Tower_Base> centerBase = shared_ptr<Tower_Base>(new Tower_Base(Point3f(0,0,0)));
+	shared_ptr<Tower_Section> newSection = shared_ptr<Tower_Section>(new Tower_Section(Point3f(), Vector3f()));
+	shared_ptr<Tower_Weapon> dropper = shared_ptr<Tower_Weapon>(new Rock_Dropper(newSection, 2.));
 	newSection->setWeapon(dropper);
 	centerBase->pushSection(newSection);
 
