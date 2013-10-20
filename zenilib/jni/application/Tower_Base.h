@@ -13,7 +13,7 @@ class Tower_Section;
 
 class Tower_Base : public Game_Object{
 public:
-	Tower_Base(const Zeni::Point3f &position_) : Game_Object(position_, Zeni::Vector3f(1,1,1), Zeni::Quaternion(), Zeni::Vector3f(1,1,1))
+	Tower_Base(const Zeni::Point3f &position_) : Game_Object(position_, Zeni::Vector3f(20,20,1), Zeni::Quaternion(), Zeni::Vector3f(1,1,1))
 	{
 		
 	}

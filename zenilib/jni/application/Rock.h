@@ -18,6 +18,8 @@ private:
 	Zeni::Vector3f size;
 	static Model_Wrapper model;
 	Zeni::Collision::Sphere collider;
+
+	void updateCollider();
 };
 
 #endif

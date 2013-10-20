@@ -14,8 +14,10 @@ public:
 	Zeni::Vector3f getVelocity() {return vel;}
 	Zeni::Vector3f getAcceleration() {return acc;}
 
-	virtual void on_logic(float time_step);
-	virtual Zeni::Model* getModel() = 0;
+	virtual void on_logic(float time_step) override;
+
+protected:
+	virtual void updateCollider() = 0;
 
 private:
 	Zeni::Vector3f vel;
