@@ -10,8 +10,6 @@
 
 class Game_Object;
 
-Zeni::Quaternion quatBetweenPoints(const Zeni::Point3f& destination_, const Zeni::Point3f& origin_);
-
 float parabolicFallTime(float target_z_initial, float target_z_vel, float launch_z);
 //NOTE: Returns a negative number if the fall is invalid
 

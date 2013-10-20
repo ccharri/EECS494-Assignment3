@@ -77,7 +77,7 @@ void Enemy::doMovement(float time_step) {
 		//setFacing(Quaternion::Vector3f_to_Vector3f((*path)[pathIndex], getPosition()));
 		//Or this
 		//setFacing(Quaternion::Vector3f_to_Vector3f(Vector3f((*destination) - getPosition()), Quaternion);
-		setFacing(quatBetweenPoints(next, getPosition()));
+		lookAt(next);
 		setPosition(getPosition() + Vector3f(next - getPosition()).normalized() * (getSpeed() * time_step));
 	}
 }

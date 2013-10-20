@@ -5,7 +5,7 @@
 using namespace Zeni;
 using namespace std;
 
-Model_Wrapper Rock::model("models/crate.3ds");
+Model_Wrapper Rock::model("models/spike_ball.3ds");
 
 Rock::Rock(const Point3f& position_, const Vector3f &vel_, const Quaternion& facing_)	
 		 : Physics_Object(position_, Vector3f(), facing_)
