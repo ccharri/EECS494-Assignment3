@@ -14,11 +14,21 @@ using namespace std;
 Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = true;
-	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 10.0f, 1000.0f, Global::pi_over_two, 1.25f);
+	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.25f);
 
 	worldLight = Light();
 	worldLight.set_light_type(Zeni::LIGHT_DIRECTIONAL);
-	worldLight.spot_direction =(Vector3f(1, 1, -1));
+	worldLight.spot_direction = Vector3f(1, 1, -1);
+
+	backLight = Light();
+	backLight.set_light_type(Zeni::LIGHT_DIRECTIONAL);
+	backLight.spot_direction = Vector3f(-1, -1, -1);
+	backLight.ambient = Color(1., .4, .4, .4);
+	backLight.diffuse = Color(1., .4, .4, .4);
+	backLight.specular = Color(1., .4, .4, .4);
+
+	get_Video().set_Light(0, worldLight);
+	get_Video().set_Light(1, backLight);
 
 	Game_Level::setCurrentLevel(new Level_One());
 
@@ -122,8 +132,6 @@ void Play_State::render() {
 	get_Video().set_lighting(true);
 	Color UILight = get_Video().get_ambient_lighting();
 	get_Video().set_ambient_lighting(Color(1.f,0.f,0.f,0.f));
-
-	get_Video().set_Light(0, worldLight);
 
 	//set up camera
   Zeni::Video &vr = Zeni::get_Video();

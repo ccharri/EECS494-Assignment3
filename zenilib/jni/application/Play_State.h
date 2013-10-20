@@ -30,7 +30,8 @@ class Play_State : public Zeni::Gamestate_Base {
     void render();
 
   private:
-		 Zeni::Light worldLight;
+		Zeni::Light worldLight;
+		Zeni::Light backLight;
 		Zeni::Camera god_view;
 		bool god_view_on;
 
