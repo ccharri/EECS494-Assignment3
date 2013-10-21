@@ -27,7 +27,6 @@ bool Rock_Dropper::canFire(shared_ptr<Game_Object> object)
 
 void Rock_Dropper::fire()
 {
-	cout << "Rock Dropper Firing" << endl;
 	Vector3f vel = Vector3f(getTarget()->getPosition() - getSection()->getPosition()).normalized() /*get direction vector*/ * 10. /* initial force*/;
 	shared_ptr<Game_Object> r = shared_ptr<Game_Object>(new Rock(getSection()->getPosition(), vel));
 	r->lookAt(getTarget()->getPosition());

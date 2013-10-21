@@ -2,8 +2,9 @@
 #define __game__Game_Object_h__
 
 #include <zenilib.h>
+#include <memory>
 
-class Game_Object 
+class Game_Object : public std::enable_shared_from_this<Game_Object>
 {
 public:
 	Game_Object(Zeni::Point3f position_ = Zeni::Point3f(), Zeni::Vector3f size_ = Zeni::Vector3f(), Zeni::Quaternion facing_ = Zeni::Quaternion(), Zeni::Vector3f scale_ = Zeni::Vector3f(1,1,1));
@@ -38,6 +39,8 @@ public:
 	void setKeyframe(float keyframe_) {keyframe = keyframe_;};
 	
 	virtual bool isTargetable() const {return false;};
+
+	virtual void onDamage(float damage) {};
 
 private:
 	Zeni::Point3f position;

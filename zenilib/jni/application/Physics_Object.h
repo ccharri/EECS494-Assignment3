@@ -11,8 +11,10 @@ public:
 
 	void setVelocity(Zeni::Vector3f vel_) {vel = vel_;}
 	void setAcceleration(Zeni::Vector3f acc_) {acc = acc_;}
+	void setRotation(Zeni::Quaternion rotation_) {rotation = rotation_;};
 	Zeni::Vector3f getVelocity() {return vel;}
 	Zeni::Vector3f getAcceleration() {return acc;}
+	Zeni::Quaternion getRotation() {return rotation;};
 
 	virtual void on_logic(float time_step) override;
 
@@ -22,6 +24,7 @@ protected:
 private:
 	Zeni::Vector3f vel;
 	Zeni::Vector3f acc;
+	Zeni::Quaternion rotation;
 };
 
 #endif

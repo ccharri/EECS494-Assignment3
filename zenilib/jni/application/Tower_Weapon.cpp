@@ -40,7 +40,6 @@ void Tower_Weapon::removeProjectile(shared_ptr<Game_Object> projectile_)
 
 void Tower_Weapon::on_logic(float time_step)
 {
-	cout << "tower weapon on " << endl;
 	for_each(projectiles.begin(), projectiles.end(), [&](shared_ptr<Game_Object> object_) {
 		if(!object_) return;
 		object_->on_logic(time_step);
@@ -56,14 +55,12 @@ void Tower_Weapon::on_logic(float time_step)
 	//If target cannot be fired upon
 	if(tar && !canFire(tar))
 	{
-		cout << "Tower Weapon Lost Target" << endl;
 		//Forget target
 		tar = nullptr;
 	}
 
 	//If no target, find new target
 	if(!tar){
-		cout << "Tower Weapon Finding Target" << endl;
 		FunctorHelper helper(shared_from_this());
 		target = closestObjectMatching(owner.lock()->getPosition(), Game_Level::getCurrentLevel()->getEnemies(), helper);
 	}
@@ -73,11 +70,8 @@ void Tower_Weapon::on_logic(float time_step)
 	//Nothing to fire upon
 	if(!tar) return;
 
-	cout << "Tower Weapon Cooldown Check" << endl;
-	cout << "Fire Timer = " << fireTimer.seconds() << ",  last_fired_time = " << last_fired_time << ", cooldown = " << cooldown << endl;
 	if(fireTimer.seconds() >= (last_fired_time + cooldown))
 	{
-		cout << "Tower Weapon Firing" << endl;
 		//Fire
 		fire();
 	}

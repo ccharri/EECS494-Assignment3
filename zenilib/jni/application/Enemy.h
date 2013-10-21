@@ -38,7 +38,7 @@ public:
 
 	virtual void setPosition(Zeni::Point3f position_);
 
-	virtual void onDamage(float damage);
+	virtual void onDamage(float damage) override;
 
 	bool isTargetable() const override {return isAlive();};
 
