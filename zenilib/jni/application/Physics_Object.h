@@ -18,9 +18,6 @@ public:
 
 	virtual void on_logic(float time_step) override;
 
-protected:
-	virtual void updateCollider() = 0;
-
 private:
 	Zeni::Vector3f vel;
 	Zeni::Vector3f acc;

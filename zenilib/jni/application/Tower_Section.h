@@ -24,6 +24,8 @@ public:
 	std::shared_ptr<Tower_Weapon> getWeapon() {return weapon;};
 	void setWeapon(std::shared_ptr<Tower_Weapon> weapon_) {weapon = weapon_;};
 
+	void updateCollider() {};
+
 private:
 	static Model_Wrapper model;
 

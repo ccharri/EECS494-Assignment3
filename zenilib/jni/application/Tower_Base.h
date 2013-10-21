@@ -33,6 +33,8 @@ public:
 	const std::vector<std::shared_ptr<Tower_Section> >& getSegments() const {return segments;};
 	virtual ~Tower_Base();
 
+	void updateCollider() {};
+
 private:
 	std::vector<std::shared_ptr<Tower_Section>> segments;
 

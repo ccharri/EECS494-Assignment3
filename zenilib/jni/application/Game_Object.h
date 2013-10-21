@@ -28,10 +28,13 @@ public:
 	Zeni::Vector3f getSize() const {return size;};
 	Zeni::Quaternion getFacing() const {return facing;};
 
-	virtual void setPosition(Zeni::Point3f position_) {position = position_;};
+	virtual void setPosition(Zeni::Point3f position_) {position = position_; updateCollider();};
 	virtual void setSize(Zeni::Vector3f size_) {size = size_;};
 	virtual void setFacing(Zeni::Quaternion facing_) {facing = facing_;};
 	virtual void lookAt(Zeni::Point3f pos_);
+
+	//Quality of Life function for setting position AND facing BEFORE updating collider (for those objects with a collider based on rotation)
+	virtual void setPositionAndLookAt(Zeni::Point3f position_, Zeni::Point3f lookPos_) {position = position_; lookAt(lookPos_);};
 
 	virtual Zeni::Model* getModel() = 0;
 
@@ -42,6 +45,8 @@ public:
 
 	virtual void onDamage(float damage) {};
 
+protected:
+	virtual void updateCollider() = 0;
 private:
 	Zeni::Point3f position;
 	Zeni::Vector3f size;

@@ -9,7 +9,7 @@ using namespace std;
 Model_Wrapper Rocket::model = Model_Wrapper("models/rocket.3ds");
 
 
-Rocket::Rocket( std::weak_ptr<Tower_Weapon> owner_, std::weak_ptr<Game_Object> target_, float damage_, float speed_, Zeni::Point3f position_, Zeni::Vector3f size_, Zeni::Quaternion facing_, Zeni::Vector3f scale_ )
+Rocket::Rocket( std::weak_ptr<Tower_Weapon> owner_, std::weak_ptr<Game_Object> target_, float damage_, float speed_, Zeni::Point3f position_, Zeni::Vector3f size_, Zeni::Quaternion facing_, Zeni::Vector3f scale_)
 	: Game_Object(position_, size_, facing_, scale_), owner(owner_), target(target_), damage(damage_), speed(speed_)
 {
 	auto tar = target.lock();
@@ -24,9 +24,16 @@ void Rocket::on_logic( float time_step )
 
 	if(!tar) explode();
 
-	Vector3f vel = Vector3f(tar->getPosition() - getPosition()).normalized() * speed;
-	setPosition(getPosition() + vel);
-	lookAt(tar->getPosition());
+	Vector3f vel = Vector3f(tar->getPosition() - getPosition()).normalized() * speed * time_step;
+
+	if(Vector3f(tar->getPosition() - getPosition()).magnitude() <= vel.magnitude())
+	{
+		setPosition(tar->getPosition());
+	}
+	else
+	{
+		setPositionAndLookAt(getPosition() + vel, tar->getPosition());
+	}
 
 	if(tar->collide(&collider))
 	{
@@ -39,7 +46,7 @@ void Rocket::on_logic( float time_step )
 
 void Rocket::updateCollider()
 {
-	collider = Collision::Capsule(getPosition(), getFacing() * (getPosition() + Vector3f(10, 0, 0)), 5.);
+	collider = Collision::Capsule(getPosition(), getFacing() * (getPosition() + Vector3f(getSize().x, 0, 0)), 1.);
 }
 
 void Rocket::explode()

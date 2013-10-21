@@ -12,7 +12,7 @@ class Tower_Weapon;
 
 class Rocket : public Game_Object {
 public:
-	Rocket(std::weak_ptr<Tower_Weapon> owner_, std::weak_ptr<Game_Object> target_, float damage_, float speed_, Zeni::Point3f position_, Zeni::Vector3f size_, Zeni::Quaternion facing_, Zeni::Vector3f scale_);
+	Rocket::Rocket( std::weak_ptr<Tower_Weapon> owner_, std::weak_ptr<Game_Object> target_, float damage_, float speed_, Zeni::Point3f position_, Zeni::Vector3f size_ = Zeni::Vector3f(2,10,2), Zeni::Quaternion facing_ = Zeni::Quaternion(), Zeni::Vector3f scale_ = Zeni::Vector3f(1,1,1));
 
 	virtual void on_logic( float time_step );
 

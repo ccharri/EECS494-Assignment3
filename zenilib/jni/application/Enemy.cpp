@@ -92,7 +92,7 @@ void Enemy::updateCollider()
 	Point3f location = getPosition();
 	Vector3f size = getSize();
 	location += size/2.;
-	collision_capsule = Collision::Capsule(Point3f(location.x, location.y, location.z + size.z/2.), Point3f(location.x, location.y, location.z - size.z/2.), (size.x + size.y)/2. /2.);
+	collision_capsule = Collision::Capsule(location + Vector3f(0,0, size.z/2.), location + Vector3f(0,0, size.z/2.), (size.x + size.y)/2. /2.);
 }
 
 void Enemy::setPosition(Zeni::Point3f position_)
@@ -106,5 +106,6 @@ void Enemy::onDamage(float damage)
 	if((health_current -= damage) <= 0)
 	{
 		alive = false;
+		Game_Level::getCurrentLevel()->removeEnemy(shared_from_this());
 	}
 }

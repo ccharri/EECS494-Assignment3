@@ -55,7 +55,7 @@ private:
 	int pathIndex;
 	std::vector<Zeni::Point3f>* path;
 
-	void updateCollider();
+	void updateCollider() override;
 	void doMovement(float time_step);
 	void stopMoving();
 };

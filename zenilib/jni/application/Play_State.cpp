@@ -9,6 +9,7 @@
 #include "Tower_Base.h"
 #include "Tower_Section.h"
 #include "Rock_Dropper.h"
+#include "Rocket_Launcher.h"
 
 using namespace Zeni;
 using namespace std;
@@ -34,13 +35,18 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 
 	Game_Level::setCurrentLevel(new Level_One());
 
-	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), Vector3f(), Quaternion(), 10., 100.)));
+	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
 
 	shared_ptr<Tower_Base> centerBase = shared_ptr<Tower_Base>(new Tower_Base(Point3f(0,0,0)));
 	shared_ptr<Tower_Section> newSection = shared_ptr<Tower_Section>(new Tower_Section(Point3f(), Vector3f()));
 	shared_ptr<Tower_Weapon> dropper = shared_ptr<Tower_Weapon>(new Rock_Dropper(newSection, 2.));
 	newSection->setWeapon(dropper);
 	centerBase->pushSection(newSection);
+
+	shared_ptr<Tower_Section> rocketSection = shared_ptr<Tower_Section>(new Tower_Section(Point3f(), Vector3f()));
+	shared_ptr<Tower_Weapon> rocketLauncher = shared_ptr<Tower_Weapon>(new Rocket_Launcher(rocketSection, 2.5));
+	rocketSection->setWeapon(rocketLauncher);
+	centerBase->pushSection(rocketSection);
 
 	Game_Level::getCurrentLevel()->getBases().push_back(centerBase);
 	
@@ -131,20 +137,22 @@ void Play_State::performMovement(float time_step)
 }
 
 void Play_State::render() {
-	get_Video().set_lighting(true);
-	Color UILight = get_Video().get_ambient_lighting();
-	get_Video().set_ambient_lighting(Color(1.f,0.f,0.f,0.f));
+	Zeni::Video &vr = Zeni::get_Video();
+	vr.set_lighting(true);
+	Color UILight = vr.get_ambient_lighting();
+	vr.set_ambient_lighting(Color(1.f,0.f,0.f,0.f));
 
 	//set up camera
-  Zeni::Video &vr = Zeni::get_Video();
+
 	if(god_view_on)
 		vr.set_3d(god_view);
+
 	//else
 	//	vr.set_3d(player.get_camera());
 
   //render call for level
 	Game_Level::getCurrentLevel()->render();
 
-	get_Video().set_lighting(false);
-	get_Video().set_ambient_lighting(UILight);
+	vr.set_lighting(false);
+	vr.set_ambient_lighting(UILight);
 }
