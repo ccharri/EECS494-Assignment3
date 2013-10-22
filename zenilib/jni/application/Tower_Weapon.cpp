@@ -83,7 +83,8 @@ void Tower_Weapon::render()
 	//Game_Object::render();
 
 	for_each(projectiles.begin(), projectiles.end(), [&](shared_ptr<Game_Object> object_) {
-		object_->render();
+		if(object_)
+			object_->render();
 	});
 }
 

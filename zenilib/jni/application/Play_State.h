@@ -45,6 +45,8 @@ class Play_State : public Zeni::Gamestate_Base {
 		int gold;
 		int lives;
 
+		float time_since_last_spawn;
+
 		//Player player;
 		bool player_moved;
 

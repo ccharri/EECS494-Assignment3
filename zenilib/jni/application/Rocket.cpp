@@ -16,6 +16,8 @@ Rocket::Rocket( std::weak_ptr<Tower_Weapon> owner_, std::weak_ptr<Game_Object> t
 
 	if(tar)
 		lookAt(tar->getPosition());
+
+	updateCollider();
 }
 
 void Rocket::on_logic( float time_step )
@@ -35,7 +37,7 @@ void Rocket::on_logic( float time_step )
 		setPositionAndLookAt(getPosition() + vel, tar->getPosition());
 	}
 
-	if(tar->collide(&collider))
+	if(tar->collide(collider))
 	{
 		tar->onDamage(damage);
 		explode();

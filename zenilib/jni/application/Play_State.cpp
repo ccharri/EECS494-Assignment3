@@ -33,6 +33,8 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 	get_Video().set_Light(0, worldLight);
 	get_Video().set_Light(1, backLight);
 
+	time_since_last_spawn = 0;
+
 	Game_Level::setCurrentLevel(new Level_One());
 
 	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
@@ -53,7 +55,7 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 }
 
 void Play_State::on_push() {
-    Zeni::get_Window().set_mouse_state(Zeni::Window::MOUSE_RELATIVE);
+    //Zeni::get_Window().set_mouse_state(Zeni::Window::MOUSE_RELATIVE);
 }
 
 void Play_State::on_pop() {
@@ -106,7 +108,15 @@ void Play_State::perform_logic() {
     if(time_step > processing_time)
       time_step = processing_time;
 
+	time_since_last_spawn += time_step;
+
 	performMovement(time_step);
+
+	if(time_since_last_spawn > 4.)
+	{
+		Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
+		time_since_last_spawn -= 4.f;
+	}
 
 	Game_Level::getCurrentLevel()->on_logic(time_step);
   }

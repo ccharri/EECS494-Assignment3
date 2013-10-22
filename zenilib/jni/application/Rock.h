@@ -19,7 +19,7 @@ private:
 	static Model_Wrapper model;
 	Zeni::Collision::Sphere collider;
 
-	void updateCollider();
+	void updateCollider() override;
 };
 
 #endif

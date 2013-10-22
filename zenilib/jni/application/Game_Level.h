@@ -28,6 +28,11 @@ public:
 	Player* getPlayer() const {return player;};
 	void setPlayer(Player* player_) {player = player_;};
 
+	int getLivesMax() const {return livesMax;};
+	int getLivesRemaining() const {return livesRemaining;};
+
+	void enemyLeaked(std::shared_ptr<Game_Object> enemy);
+
 	virtual Zeni::Model* getModel() = 0;
 
 	virtual float getMaxDistance() {return 100.f;};
@@ -39,6 +44,9 @@ private:
 	static Game_Level* currentLevel;
 
 	Player* player;
+
+	int livesMax;
+	int livesRemaining;
 
 	std::vector<Zeni::Point3f> enemy_path;
 

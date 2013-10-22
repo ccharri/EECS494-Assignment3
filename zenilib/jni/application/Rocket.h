@@ -29,7 +29,7 @@ private:
 	float speed;
 	std::weak_ptr<Game_Object> target;
 
-	void updateCollider();
+	void updateCollider() override;
 	void explode();
 };
 

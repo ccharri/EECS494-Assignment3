@@ -15,44 +15,44 @@ Enemy::Enemy(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion fac
 
 Enemy::~Enemy() {};
 
-bool Enemy::collide(const Collision::Capsule* collider_) const
+bool Enemy::collide(const Collision::Capsule& collider_) const
 {
-	return collider_->intersects(collision_capsule);
+	return collision_capsule.intersects(collider_);
 }
 
-bool Enemy::collide(const Collision::Infinite_Cylinder* collider_) const
+bool Enemy::collide(const Collision::Infinite_Cylinder& collider_) const
 {
-	return collider_->intersects(collision_capsule);
+	return collision_capsule.intersects(collider_);
 }
 
-bool Enemy::collide(const Collision::Line* collider_) const
+bool Enemy::collide(const Collision::Line& collider_) const
 {
-	return collider_->intersects(collision_capsule);
+	return collision_capsule.intersects(collider_);
 }
 
-bool Enemy::collide(const Collision::Line_Segment* collider_) const
+bool Enemy::collide(const Collision::Line_Segment& collider_) const
 {
-	return collider_->intersects(collision_capsule);
+	return collision_capsule.intersects(collider_);
 }
 
-bool Enemy::collide(const Collision::Parallelepiped* collider_) const
+bool Enemy::collide(const Collision::Parallelepiped& collider_) const
 {
-	return collider_->intersects(collision_capsule);
+	return collision_capsule.intersects(collider_);
 }
 
-bool Enemy::collide(const Collision::Plane* collider_) const
+bool Enemy::collide(const Collision::Plane& collider_) const
 {
-	return collider_->intersects(collision_capsule);
+	return collision_capsule.intersects(collider_);
 }
 
-bool Enemy::collide(const Collision::Ray* collider_) const
+bool Enemy::collide(const Collision::Ray& collider_) const
 {
-	return collider_->intersects(collision_capsule);
+	return collision_capsule.intersects(collider_);
 }
 
-bool Enemy::collide(const Collision::Sphere* collider_) const
+bool Enemy::collide(const Collision::Sphere& collider_) const
 {
-	return collider_->intersects(collision_capsule);
+	return collision_capsule.intersects(collider_);
 }
 
 void Enemy::on_logic(float time_step) 
@@ -71,14 +71,16 @@ void Enemy::doMovement(float time_step) {
 	if(Vector3f(next - getPosition()).magnitude() <= (getSpeed() * time_step)) {
 		setPosition(next);
 		if(++pathIndex >= path->size()) stopMoving();
+		lookAt((*path)[pathIndex]);
+		Game_Level::getCurrentLevel()->enemyLeaked(shared_from_this());
 	}
 	else {
 		//It's either this
 		//setFacing(Quaternion::Vector3f_to_Vector3f((*path)[pathIndex], getPosition()));
 		//Or this
 		//setFacing(Quaternion::Vector3f_to_Vector3f(Vector3f((*destination) - getPosition()), Quaternion);
-		lookAt(next);
 		setPosition(getPosition() + Vector3f(next - getPosition()).normalized() * (getSpeed() * time_step));
+		lookAt(next);
 	}
 }
 
@@ -91,14 +93,7 @@ void Enemy::updateCollider()
 {
 	Point3f location = getPosition();
 	Vector3f size = getSize();
-	location += size/2.;
-	collision_capsule = Collision::Capsule(location + Vector3f(0,0, size.z/2.), location + Vector3f(0,0, size.z/2.), (size.x + size.y)/2. /2.);
-}
-
-void Enemy::setPosition(Zeni::Point3f position_)
-{
-	Game_Object::setPosition(position_);
-	updateCollider();
+	collision_capsule = Collision::Capsule(location, location + Vector3f(0,0, size.z), (size.x + size.y)/2. /2.);
 }
 
 void Enemy::onDamage(float damage)

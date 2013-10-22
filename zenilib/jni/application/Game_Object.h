@@ -15,14 +15,14 @@ public:
 
 	virtual void on_logic(float time_step);
 
-	virtual bool collide(const Zeni::Collision::Capsule* collider_) const {return false;};
-	virtual bool collide(const Zeni::Collision::Infinite_Cylinder* collider_) const {return false;};
-	virtual bool collide(const Zeni::Collision::Line* collider_) const {return false;};
-	virtual bool collide(const Zeni::Collision::Line_Segment* collider_) const {return false;};
-	virtual bool collide(const Zeni::Collision::Parallelepiped* collider_) const {return false;};
-	virtual bool collide(const Zeni::Collision::Plane* collider_) const {return false;};
-	virtual bool collide(const Zeni::Collision::Ray* collider_) const {return false;};
-	virtual bool collide(const Zeni::Collision::Sphere* collider_) const {return false;};
+	virtual bool collide(const Zeni::Collision::Capsule& collider_) const {return false;};
+	virtual bool collide(const Zeni::Collision::Infinite_Cylinder& collider_) const {return false;};
+	virtual bool collide(const Zeni::Collision::Line& collider_) const {return false;};
+	virtual bool collide(const Zeni::Collision::Line_Segment& collider_) const {return false;};
+	virtual bool collide(const Zeni::Collision::Parallelepiped& collider_) const {return false;};
+	virtual bool collide(const Zeni::Collision::Plane& collider_) const {return false;};
+	virtual bool collide(const Zeni::Collision::Ray& collider_) const {return false;};
+	virtual bool collide(const Zeni::Collision::Sphere& collider_) const {return false;};
 
 	Zeni::Point3f getPosition() const {return position;};
 	Zeni::Vector3f getSize() const {return size;};
@@ -44,6 +44,8 @@ public:
 	virtual bool isTargetable() const {return false;};
 
 	virtual void onDamage(float damage) {};
+
+	virtual int leakAmount() const {return 0;};
 
 protected:
 	virtual void updateCollider() = 0;
