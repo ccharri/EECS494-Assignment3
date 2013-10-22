@@ -48,7 +48,7 @@ public:
 	virtual int leakAmount() const {return 0;};
 
 protected:
-	virtual void updateCollider() = 0;
+	virtual void updateCollider() {} ;
 private:
 	Zeni::Point3f position;
 	Zeni::Vector3f size;

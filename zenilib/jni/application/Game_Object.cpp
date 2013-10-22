@@ -8,6 +8,7 @@ using namespace std;
 
 Game_Object::Game_Object(Zeni::Point3f position_ /* = Zeni::Point3f() */, Zeni::Vector3f size_ /* = Zeni::Vector3f() */, Zeni::Quaternion facing_ /* = Zeni::Quaternion() */, Zeni::Vector3f scale_)  : position(position_), size(size_), facing(facing_), scale(scale_)
 {
+	updateCollider();
 }
 
 Game_Object::~Game_Object()
