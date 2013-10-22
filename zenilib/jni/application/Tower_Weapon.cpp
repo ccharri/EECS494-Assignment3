@@ -16,7 +16,11 @@ public:
 	FunctorHelper(shared_ptr<Tower_Weapon> weapon_) : weapon(weapon_) {};
 
 	bool operator()(shared_ptr<Game_Object> object_) {
-		return weapon->canFire(object_);
+		if(object_)
+			return weapon->canFire(object_);
+		else {
+			return false;
+		}
 	}
 
 private:
@@ -41,12 +45,14 @@ void Tower_Weapon::removeProjectile(shared_ptr<Game_Object> projectile_)
 void Tower_Weapon::on_logic(float time_step)
 {
 	for_each(projectiles.begin(), projectiles.end(), [&](shared_ptr<Game_Object> object_) {
-		if(!object_) return;
-		object_->on_logic(time_step);
-
-		if(Vector3f(object_->getPosition()).magnitude() > Game_Level::getCurrentLevel()->getMaxDistance())
+		if(object_)
 		{
-			removeProjectile(object_);
+			object_->on_logic(time_step);
+
+			if(Vector3f(object_->getPosition()).magnitude() > Game_Level::getCurrentLevel()->getMaxDistance())
+			{
+				removeProjectile(object_);
+			}
 		}
 	});
 

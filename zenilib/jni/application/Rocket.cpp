@@ -24,7 +24,11 @@ void Rocket::on_logic( float time_step )
 {
 	shared_ptr<Game_Object> tar = target.lock();
 
-	if(!tar) explode();
+	if(!tar) 
+	{
+		explode();
+		return;
+	}
 
 	Vector3f vel = Vector3f(tar->getPosition() - getPosition()).normalized() * speed * time_step;
 

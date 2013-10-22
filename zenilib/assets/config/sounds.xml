@@ -28,4 +28,7 @@ HOWTO:  To convert between types, or to downmix to mono,
   <hello_world>
     <filepath>sfx/104469__dkmedic__world</filepath>
   </hello_world>
+  <enemy_leaked>
+    <filepath>sfx/26375__dj-chronos__created-siren</filepath>
+  </enemy_leaked>
 </Sounds>

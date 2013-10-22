@@ -45,4 +45,6 @@ void Game_Level::enemyLeaked( std::shared_ptr<Game_Object> enemy )
 	livesRemaining -= enemy->leakAmount();
 
 	removeEnemy(enemy);
+
+	play_sound("enemy_leaked");
 }

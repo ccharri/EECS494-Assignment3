@@ -67,13 +67,18 @@ void Enemy::doMovement(float time_step) {
 
 	Point3f next = (*path)[pathIndex];
 
-	if(Vector3f(next - getPosition()).magnitude() <= (getSpeed() * time_step)) {
+	if(Vector3f(next - getPosition()).magnitude() <= (getSpeed() * time_step)) 
+	{
 		setPosition(next);
-		if(++pathIndex >= path->size()) stopMoving();
-		lookAt((*path)[pathIndex]);
-		Game_Level::getCurrentLevel()->enemyLeaked(shared_from_this());
+		if(++pathIndex >= path->size()) 
+		{
+				stopMoving();
+				Game_Level::getCurrentLevel()->enemyLeaked(shared_from_this());
+				return;
+		}
 	}
-	else {
+	else 
+	{
 		//It's either this
 		//setFacing(Quaternion::Vector3f_to_Vector3f((*path)[pathIndex], getPosition()));
 		//Or this
