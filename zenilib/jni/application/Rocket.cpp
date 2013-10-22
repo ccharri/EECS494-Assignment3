@@ -46,7 +46,7 @@ void Rocket::on_logic( float time_step )
 
 void Rocket::updateCollider()
 {
-	collider = Collision::Capsule(getPosition(), getFacing() * (getPosition() + Vector3f(getSize().x, 0, 0)), 1.);
+	collider = Collision::Capsule(getPosition(), getPosition() + (getFacing() * Vector3f(getSize().x, 0, 0)), getSize().y/2.);
 }
 
 void Rocket::explode()

@@ -25,14 +25,14 @@ public:
 
 	bool isAlive() const {return alive;};
 
-	bool collide(const Zeni::Collision::Capsule* collider_) const;
-	bool collide(const Zeni::Collision::Infinite_Cylinder* collider_) const;
-	bool collide(const Zeni::Collision::Line* collider_) const;
-	bool collide(const Zeni::Collision::Line_Segment* collider_) const;
-	bool collide(const Zeni::Collision::Parallelepiped* collider_) const;
-	bool collide(const Zeni::Collision::Plane* collider_) const;
-	bool collide(const Zeni::Collision::Ray* collider_) const;
-	bool collide(const Zeni::Collision::Sphere* collider_) const;
+	bool collide(const Zeni::Collision::Capsule* collider_) const override;
+	bool collide(const Zeni::Collision::Infinite_Cylinder* collider_) const override;
+	bool collide(const Zeni::Collision::Line* collider_) const override;
+	bool collide(const Zeni::Collision::Line_Segment* collider_) const override;
+	bool collide(const Zeni::Collision::Parallelepiped* collider_) const override;
+	bool collide(const Zeni::Collision::Plane* collider_) const override;
+	bool collide(const Zeni::Collision::Ray* collider_) const override;
+	bool collide(const Zeni::Collision::Sphere* collider_) const override;
 
 	const Zeni::Collision::Capsule& getCollider() const {return collision_capsule;};
 
