@@ -1,28 +1,36 @@
-<level>
-	<!-- Level Specifications -->
-	<round>			1 </round>
-	<description>	This is the first level </description>
-	<bonus>			1000 </bonus>		<!-- How much gold you get for surviving the live -->
+<!-- The overall level -->
+<level
+	name = 'Thunder Plains',
+	number = '5',
+	model = 'Level1.3ds'>
+	<!-- The path creeps take -->
+	<path> 
+		<!-- A point in the path *MIGHT WANT TO DECODE FROM MODEL INSTEAD! -->
+		<node x='1', y='1', z='0'> </node> 
+		<node x='5', y='5', z='0'> </node>
+	</path>
 	
-	<wave>
-		<!-- A wave is a sub-level. For example, a general followed by an army would be in seperate waves -->
-		<start_time> 	1000 </start_time> 	<!-- When the wave starts: THIS IS THE ONLY ORDERING FACTOR -->
-		<number> 		5 </number>
-		<duration>		1000 </duration>
-			
-		<!-- Per Enemy Attributes -->
-		<enemy>
-			<health>	500	</health>
-			<speed>		100	</speed>
-			<height>	1	</height> 	<!-- Height level: This gets multiplied by the level difference! -->
-			<lives>		1	</lives> 	<!-- Number of lives subtracted -->
-			<bounty>	3	</bounty>	<!-- How much gold an enemy gives upon death -->
-			<scaling>	1.0 <scaling>	<!-- Model scaling factor -->
-			<tint_r>	255 </tint_r>	<!-- What tint the model will have -->
-			<tint_g>	255 </tint_g>
-			<tint_b>	255 </tint_b>
-			<model>		crate.3ds </model>
-			<type> 		Basic </type> 	<!-- Which class is used to implement the model; e.g: sprinting vs. basic vs. resurrecting -->
-		</enemy>
-	</wave>
+	<!-- A round in the level -->
+	<round
+		number = '1',
+		bonus = '100'> 
+		<!-- Handles the number and type of creeps spawned. A round can have multiple waves. -->
+		<wave
+			size = '5',
+			duration = '1000',
+			time_start = '0'> 
+			<!--The enemy spawned for the wave. Only one is allowed per wave -->
+			<enemy
+				name = 'Peasent Robot',
+				health = '500',
+				speed = '100',
+				height = '1',
+				model = 'Crate.3ds',
+				scaling = '1.0',
+				type = 'Basic'
+				bounty = '3'
+				lives = '1'>
+			</enemy>
+		</wave>
+	</round>
 </level>
