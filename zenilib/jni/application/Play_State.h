@@ -18,14 +18,21 @@ class Play_State : public Zeni::Gamestate_Base {
     Play_State();
 
     void on_push();
-	void on_pop();
+		void on_pop();
     void on_key(const SDL_KeyboardEvent &event);
     void on_mouse_motion(const SDL_MouseMotionEvent &event);
 		void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event);
 
+		int getGold() {return gold;}
+		int incrementGold(int delta) {gold += delta;}
+		int setGold(int amount) {gold = amount;}
+		int getLives() {return lives;}
+		int decrementLives(int delta) {lives -= delta;}
+		int setLives(int amount) {lives = amount;}
+
     void perform_logic();
 
-	void performMovement(float time_step);
+		void performMovement(float time_step);
 
     void render();
 
@@ -35,8 +42,11 @@ class Play_State : public Zeni::Gamestate_Base {
 		Zeni::Camera god_view;
 		bool god_view_on;
 
+		int gold;
+		int lives;
+
 		//Player player;
-		 bool player_moved;
+		bool player_moved;
 
 		Zeni::Time_HQ time_passed;
 };

@@ -1,0 +1,28 @@
+<level>
+	<!-- Level Specifications -->
+	<round>			1 </round>
+	<description>	This is the first level </description>
+	<bonus>			1000 </bonus>		<!-- How much gold you get for surviving the live -->
+	
+	<wave>
+		<!-- A wave is a sub-level. For example, a general followed by an army would be in seperate waves -->
+		<start_time> 	1000 </start_time> 	<!-- When the wave starts: THIS IS THE ONLY ORDERING FACTOR -->
+		<number> 		5 </number>
+		<duration>		1000 </duration>
+			
+		<!-- Per Enemy Attributes -->
+		<enemy>
+			<health>	500	</health>
+			<speed>		100	</speed>
+			<height>	1	</height> 	<!-- Height level: This gets multiplied by the level difference! -->
+			<lives>		1	</lives> 	<!-- Number of lives subtracted -->
+			<bounty>	3	</bounty>	<!-- How much gold an enemy gives upon death -->
+			<scaling>	1.0 <scaling>	<!-- Model scaling factor -->
+			<tint_r>	255 </tint_r>	<!-- What tint the model will have -->
+			<tint_g>	255 </tint_g>
+			<tint_b>	255 </tint_b>
+			<model>		crate.3ds </model>
+			<type> 		Basic </type> 	<!-- Which class is used to implement the model; e.g: sprinting vs. basic vs. resurrecting -->
+		</enemy>
+	</wave>
+</level>
