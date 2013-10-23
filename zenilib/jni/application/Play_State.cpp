@@ -11,6 +11,7 @@
 #include "Rock_Dropper.h"
 #include "Rocket_Launcher.h"
 #include "Rock.h"
+#include "Rocket.h"
 #include "Utility.h"
 #include "XML_Level.h"
 
@@ -57,6 +58,8 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 
 	Game_Level::getCurrentLevel()->getBases().push_back(centerBase);
 
+	testNear = shared_ptr<Game_Object>(new Rock(Point3f(), Vector3f()));
+	testFar = shared_ptr<Game_Object>(new Rocket(shared_ptr<Tower_Weapon>(nullptr), shared_ptr<Game_Object>(nullptr),0,0,Point3f()));
 }
 
 void Play_State::on_push() {
@@ -121,11 +124,21 @@ void Play_State::perform_logic() {
 
 	proj = Projector3D(god_view); 
 
-	Point3f mouseScreenPos = Point3f(mousePos.x, mousePos.y, 0);
+	Point3f closeMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, .01));
+	Point3f farMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, .02));
+
+	//Vector3f rayDir = rayDirection(closeMouseScreenPos, farMouseScreenPos);
 	
-	Collision::Infinite_Cylinder mouseRay(proj.unproject(mouseScreenPos), god_view.get_forward(), 1. );
+	Vector3f rayDir = Vector3f(farMouseScreenPos - closeMouseScreenPos).normalized();
+
+	testNear->setPosition(closeMouseScreenPos);
+	testFar->setPosition(farMouseScreenPos);
+	testNear->setFacing(Quaternion::Forward_Up(rayDir, Vector3f(0,0,1)));
+	testFar->setFacing(Quaternion::Forward_Up(rayDir, Vector3f(0,0,1)));
+
+	Collision::Infinite_Cylinder mouseRay(closeMouseScreenPos, rayDir, 1. );
 	auto collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemies());
-	mouseoverObj = closestObject(proj.unproject(mouseScreenPos), collidingObjects);
+	mouseoverObj = closestObject(closeMouseScreenPos, collidingObjects);
 	if(time_since_last_spawn > 4.)
 	{
 		Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
@@ -198,6 +211,9 @@ void Play_State::render() {
 	vr.set_lighting(false);
 	vr.set_ambient_lighting(UILight);
 
+	testNear->render();
+	testFar->render();
+
 	vr.set_2d();
 
 	shared_ptr<Game_Object> targetedObj = mouseoverObj.lock();
@@ -208,7 +224,7 @@ void Play_State::render() {
 
 		fr.render_text(
 			targetedObj->getName(),
-			Point2f(400.0f, Window::get_width()/2.),
+			Point2f(Window::get_width()/2., 0),
 			get_Colors()["title_text"],
 			ZENI_CENTER);
 	}
@@ -217,4 +233,21 @@ void Play_State::render() {
 void Play_State::on_mouse_button( const SDL_MouseButtonEvent &event )
 {
 	Gamestate_Base::on_mouse_button(event);
+}
+
+Zeni::Vector3f Play_State::rayDirection( Zeni::Point3f& nearClipP, Zeni::Point3f& farClipP ) const
+{
+	float dx, dy;
+	auto viewMatrix = god_view.get_view_matrix();
+	auto invViewMatrix = viewMatrix.inverted();
+	float aspect = (float)Window::get_width() / (float)Window::get_height();
+
+	dx = tanf(god_view.get_tunneled_fov_rad())*(mousePos.x/Window::get_width()/2. - 1.f)/aspect;
+	dy = tanf(god_view.get_tunneled_fov_rad())*(1-0 - mousePos.y/Window::get_height()/2.);
+	nearClipP = Vector3f(dx*god_view.get_tunneled_near_clip(), dy * god_view.get_tunneled_near_clip(), god_view.get_tunneled_near_clip());
+	farClipP = Vector3f(dx*god_view.get_tunneled_far_clip(), dy*god_view.get_tunneled_far_clip(), god_view.get_tunneled_far_clip());
+	nearClipP = invViewMatrix * nearClipP;
+	farClipP = invViewMatrix * farClipP;
+
+	return Vector3f(farClipP - nearClipP).normalized();
 }

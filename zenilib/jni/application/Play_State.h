@@ -24,7 +24,7 @@ class Play_State : public Zeni::Gamestate_Base {
 		void on_pop();
     void on_key(const SDL_KeyboardEvent &event);
     void on_mouse_motion(const SDL_MouseMotionEvent &event);
-		void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event);
+		void on_mouse_wheel(const SDL_MouseWheelEvent &event);
 
 		int getGold() {return gold;}
 		int incrementGold(int delta) {gold += delta;}
@@ -42,6 +42,9 @@ class Play_State : public Zeni::Gamestate_Base {
 	virtual void on_mouse_button( const SDL_MouseButtonEvent &event );
 
   private:
+
+	  Zeni::Vector3f rayDirection(Zeni::Point3f& nearClipP, Zeni::Point3f& farClipP) const;
+
 	  Zeni::Projector3D proj;
 
 		Zeni::Light worldLight;
@@ -59,6 +62,9 @@ class Play_State : public Zeni::Gamestate_Base {
 
 		Zeni::Point2f mousePos;
 		std::weak_ptr<Game_Object> mouseoverObj;
+
+		std::shared_ptr<Game_Object> testNear;
+		std::shared_ptr<Game_Object> testFar;
 
 		Zeni::Time_HQ time_passed;
 };

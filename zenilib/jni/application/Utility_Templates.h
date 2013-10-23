@@ -4,6 +4,7 @@
 #include "Game_Object.h"
 #include <algorithm>
 #include <memory>
+#include <float.h>
 #include <zenilib.h>
 
 template <typename Func>
@@ -30,7 +31,7 @@ std::vector<std::shared_ptr<Game_Object> > findCollidingObjects(const collider& 
 {
 	std::vector<std::shared_ptr<Game_Object> > r_vector;
 
-	for_each(objects_.begin(), objects_.end(), [&](shared_ptr<Game_Object> object_) {
+	for_each(objects_.begin(), objects_.end(), [&](std::shared_ptr<Game_Object> object_) {
 		if(object_ && object_->collide(collider_)) 
 			r_vector.push_back(object_);
 	});
