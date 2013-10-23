@@ -24,7 +24,7 @@ class Play_State : public Zeni::Gamestate_Base {
 		void on_pop();
     void on_key(const SDL_KeyboardEvent &event);
     void on_mouse_motion(const SDL_MouseMotionEvent &event);
-		void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event);
+		void on_mouse_wheel(const SDL_MouseWheelEvent &event);
 
 		int getGold() {return gold;}
 		int incrementGold(int delta) {gold += delta;}
