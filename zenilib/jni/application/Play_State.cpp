@@ -20,7 +20,7 @@ using namespace std;
 Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = true;
-	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.25f);
+	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.f);
 
 	worldLight = Light();
 	worldLight.set_light_type(Zeni::LIGHT_DIRECTIONAL);
@@ -119,10 +119,10 @@ void Play_State::perform_logic() {
 
 	performMovement(time_step);
 
-	proj = Projector3D(god_view); 
+	proj = Projector3D(god_view, get_Video().get_viewport());
 
-	Point3f closeMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, .01));
-	Point3f farMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, .02));
+	Point3f closeMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, 0));
+	Point3f farMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, 1));
 
 	//Vector3f rayDir = rayDirection(closeMouseScreenPos, farMouseScreenPos);
 	
@@ -133,7 +133,7 @@ void Play_State::perform_logic() {
 	testNear->setFacing(Quaternion::Forward_Up(rayDir, Vector3f(0,0,1)));
 	testFar->setFacing(Quaternion::Forward_Up(rayDir, Vector3f(0,0,1)));
 
-	Collision::Infinite_Cylinder mouseRay(closeMouseScreenPos, rayDir, 1. );
+	Collision::Infinite_Cylinder mouseRay(closeMouseScreenPos, farMouseScreenPos, 1. );
 	auto collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemies());
 	mouseoverObj = closestObject(closeMouseScreenPos, collidingObjects);
 	if(time_since_last_spawn > 4.)
@@ -205,12 +205,12 @@ void Play_State::render() {
   //render call for level
 	Game_Level::getCurrentLevel()->render();
 
+//    testNear->render();
+//	testFar->render();
+    
 	vr.set_lighting(false);
 	vr.set_ambient_lighting(UILight);
-
-	testNear->render();
-	testFar->render();
-
+    
 	vr.set_2d();
 
 	shared_ptr<Game_Object> targetedObj = mouseoverObj.lock();
