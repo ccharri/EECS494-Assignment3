@@ -14,6 +14,7 @@ Rock::Rock(const Point3f& position_, const Vector3f &vel_, const Quaternion& fac
 	setVelocity(vel_);
 	setAcceleration(GRAVITY_VECTOR);
 	updateCollider();
+	//setRotation(Quaternion::Forward_Up(facing_ * Vector3f(1, 0, -20).normalized(), facing_ *Vector3f(0,0,1)));
 }
 
 void Rock::on_logic(float time_step)

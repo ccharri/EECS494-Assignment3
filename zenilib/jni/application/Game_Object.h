@@ -24,6 +24,9 @@ public:
 	virtual bool collide(const Zeni::Collision::Ray& collider_) const {return false;};
 	virtual bool collide(const Zeni::Collision::Sphere& collider_) const {return false;};
 
+	Zeni::String getName() const {return name;};
+	void setName(const Zeni::String& name_) {name = name_;};
+
 	Zeni::Point3f getPosition() const {return position;};
 	Zeni::Vector3f getSize() const {return size;};
 	Zeni::Quaternion getFacing() const {return facing;};
@@ -54,6 +57,8 @@ private:
 	Zeni::Vector3f size;
 	Zeni::Quaternion facing;
 	Zeni::Vector3f scale;
+
+	Zeni::String name;
 
 	float keyframe;
 };

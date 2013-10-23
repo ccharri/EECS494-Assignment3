@@ -25,7 +25,7 @@ void Physics_Object::on_logic(float time_step){
 	setPosition(getPosition() + vel * time_step);
 	//cout << "Next Position = " << getPosition().x << ", " << getPosition().y << ", " << getPosition().z << endl;
 
-	setFacing(getFacing() * rotation);
+	setFacing(getFacing() + rotation);
 
 	updateCollider();
 

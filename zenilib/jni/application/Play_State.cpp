@@ -10,6 +10,8 @@
 #include "Tower_Section.h"
 #include "Rock_Dropper.h"
 #include "Rocket_Launcher.h"
+#include "Rock.h"
+#include "Utility.h"
 
 using namespace Zeni;
 using namespace std;
@@ -51,7 +53,7 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 	centerBase->pushSection(rocketSection);
 
 	Game_Level::getCurrentLevel()->getBases().push_back(centerBase);
-	
+
 }
 
 void Play_State::on_push() {
@@ -114,6 +116,13 @@ void Play_State::perform_logic() {
 
 	performMovement(time_step);
 
+	proj = Projector3D(god_view); 
+
+	Point3f mouseScreenPos = Point3f(mousePos.x, mousePos.y, 0);
+	
+	Collision::Infinite_Cylinder mouseRay(proj.unproject(mouseScreenPos), god_view.get_forward(), 1. );
+	auto collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemies());
+	mouseoverObj = closestObject(proj.unproject(mouseScreenPos), collidingObjects);
 	if(time_since_last_spawn > 4.)
 	{
 		Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
@@ -185,6 +194,21 @@ void Play_State::render() {
 
 	vr.set_lighting(false);
 	vr.set_ambient_lighting(UILight);
+
+	vr.set_2d();
+
+	shared_ptr<Game_Object> targetedObj = mouseoverObj.lock();
+
+	if(targetedObj)
+	{
+		Zeni::Font &fr = get_Fonts()["title"];
+
+		fr.render_text(
+			targetedObj->getName(),
+			Point2f(400.0f, Window::get_width()/2.),
+			get_Colors()["title_text"],
+			ZENI_CENTER);
+	}
 }
 
 void Play_State::on_mouse_button( const SDL_MouseButtonEvent &event )

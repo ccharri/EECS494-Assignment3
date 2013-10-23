@@ -15,4 +15,5 @@ float parabolicFallTime(float target_z_initial, float target_z_vel, float launch
 
 std::shared_ptr<Game_Object> closestObject(const Zeni::Point3f& pos_, const std::vector<std::shared_ptr<Game_Object> >& objects_);
 
+
 #endif
