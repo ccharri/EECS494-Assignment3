@@ -36,6 +36,8 @@ class Play_State : public Zeni::Gamestate_Base {
 
     void render();
 
+	virtual void on_mouse_button( const SDL_MouseButtonEvent &event );
+
   private:
 		Zeni::Light worldLight;
 		Zeni::Light backLight;
@@ -49,6 +51,8 @@ class Play_State : public Zeni::Gamestate_Base {
 
 		//Player player;
 		bool player_moved;
+
+		Zeni::Point2f mousePos;
 
 		Zeni::Time_HQ time_passed;
 };

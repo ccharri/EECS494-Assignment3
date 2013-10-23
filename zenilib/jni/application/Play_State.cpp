@@ -56,6 +56,7 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 
 void Play_State::on_push() {
     //Zeni::get_Window().set_mouse_state(Zeni::Window::MOUSE_RELATIVE);
+	Zeni::get_Window().set_mouse_state(Zeni::Window::MOUSE_GRABBED);
 }
 
 void Play_State::on_pop() {
@@ -89,7 +90,8 @@ void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event) {
 }
 
 void Play_State::on_mouse_motion(const SDL_MouseMotionEvent &event) {
-  //TODO: Maybe add some crate code back into here from Crate_State.cpp
+	mousePos = Point2f(event.x, event.y);
+	Gamestate_Base::on_mouse_motion(event);
 }
 
 
@@ -127,20 +129,38 @@ void Play_State::performMovement(float time_step)
 	float speed = 20.f;
 	float distance = speed * time_step;
 
-	if(movement_controls.forward) {
+	float mouseWindowPanBufferDistance = 40.f;
+
+	if(mousePos.y <= mouseWindowPanBufferDistance)
+	{
+		god_view.move_forward_xy((mouseWindowPanBufferDistance - mousePos.y) * time_step);
+	}
+	else if(movement_controls.forward) {
 		god_view.move_forward_xy(distance);
 	}
 
-	if(movement_controls.back) {
+	if(mousePos.y >= (Window::get_height() - mouseWindowPanBufferDistance))
+	{
+		god_view.move_forward_xy(((Window::get_height() - mouseWindowPanBufferDistance) - mousePos.y) * time_step);
+	}
+	else if(movement_controls.back) {
 		god_view.move_forward_xy(-distance);
 	}
 
-	if(movement_controls.left)
+	if(mousePos.x <= mouseWindowPanBufferDistance)
+	{
+		god_view.move_left_xy((mouseWindowPanBufferDistance - mousePos.x) * time_step);
+	}
+	else if(movement_controls.left)
 	{
 		god_view.move_left_xy(distance);
 	}
 
-	if(movement_controls.right)
+	if(mousePos.x >= (Window::get_width() - mouseWindowPanBufferDistance))
+	{
+		god_view.move_left_xy(((Window::get_width() - mouseWindowPanBufferDistance)- mousePos.x) * time_step);
+	}
+	else if(movement_controls.right)
 	{
 		god_view.move_left_xy(-distance);
 	}
@@ -165,4 +185,9 @@ void Play_State::render() {
 
 	vr.set_lighting(false);
 	vr.set_ambient_lighting(UILight);
+}
+
+void Play_State::on_mouse_button( const SDL_MouseButtonEvent &event )
+{
+	Gamestate_Base::on_mouse_button(event);
 }
