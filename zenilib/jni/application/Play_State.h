@@ -42,6 +42,9 @@ class Play_State : public Zeni::Gamestate_Base {
 	virtual void on_mouse_button( const SDL_MouseButtonEvent &event );
 
   private:
+
+	  Zeni::Vector3f rayDirection(Zeni::Point3f& nearClipP, Zeni::Point3f& farClipP) const;
+
 	  Zeni::Projector3D proj;
 
 		Zeni::Light worldLight;
@@ -59,6 +62,9 @@ class Play_State : public Zeni::Gamestate_Base {
 
 		Zeni::Point2f mousePos;
 		std::weak_ptr<Game_Object> mouseoverObj;
+
+		std::shared_ptr<Game_Object> testNear;
+		std::shared_ptr<Game_Object> testFar;
 
 		Zeni::Time_HQ time_passed;
 };
