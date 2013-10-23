@@ -12,6 +12,7 @@
 #include "Rocket_Launcher.h"
 #include "Rock.h"
 #include "Utility.h"
+#include "XML_Level.h"
 
 using namespace Zeni;
 using namespace std;
@@ -40,6 +41,8 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 	Game_Level::setCurrentLevel(new Level_One());
 
 	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
+
+	XML_Level fredrick(Zeni::String("levels/level1.xml"));
 
 	shared_ptr<Tower_Base> centerBase = shared_ptr<Tower_Base>(new Tower_Base(Point3f(0,0,0)));
 	shared_ptr<Tower_Section> newSection = shared_ptr<Tower_Section>(new Tower_Section(Point3f(), Vector3f()));

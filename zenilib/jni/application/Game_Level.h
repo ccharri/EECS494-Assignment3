@@ -30,6 +30,10 @@ public:
 
 	int getLivesMax() const {return livesMax;};
 	int getLivesRemaining() const {return livesRemaining;};
+	int setLivesRemaining(int amount) {livesRemaining = amount;}
+
+	int getGold() {return gold;}
+	int setGold(int amount) {gold = amount;}
 
 	void enemyLeaked(std::shared_ptr<Game_Object> enemy);
 
@@ -47,6 +51,7 @@ private:
 
 	int livesMax;
 	int livesRemaining;
+	int gold;
 
 	std::vector<Zeni::Point3f> enemy_path;
 
