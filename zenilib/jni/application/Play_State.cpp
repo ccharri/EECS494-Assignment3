@@ -54,9 +54,6 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 	centerBase->pushSection(rocketSection);
 
 	Game_Level::getCurrentLevel()->getBases().push_back(centerBase);
-
-	testNear = shared_ptr<Game_Object>(new Rock(Point3f(), Vector3f()));
-	testFar = shared_ptr<Game_Object>(new Rocket(shared_ptr<Tower_Weapon>(nullptr), shared_ptr<Game_Object>(nullptr),0,0,Point3f()));
 }
 
 void Play_State::on_push() {
@@ -69,6 +66,8 @@ void Play_State::on_pop() {
 }
 
 void Play_State::on_key(const SDL_KeyboardEvent &event) {
+	gui.on_key(event);
+
   switch(event.keysym.sym) {
     case SDLK_w:
       movement_controls.forward = event.type == SDL_KEYDOWN; break;
@@ -95,7 +94,7 @@ void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event) {
 }
 
 void Play_State::on_mouse_motion(const SDL_MouseMotionEvent &event) {
-	mousePos = Point2f(event.x, event.y);
+	gui.on_mouse_motion(event);
 	Gamestate_Base::on_mouse_motion(event);
 }
 
@@ -121,21 +120,8 @@ void Play_State::perform_logic() {
 
 	proj = Projector3D(god_view, get_Video().get_viewport());
 
-	Point3f closeMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, 0));
-	Point3f farMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, 1));
+	gui.on_logic(proj);
 
-	//Vector3f rayDir = rayDirection(closeMouseScreenPos, farMouseScreenPos);
-	
-	Vector3f rayDir = Vector3f(farMouseScreenPos - closeMouseScreenPos).normalized();
-
-	testNear->setPosition(closeMouseScreenPos);
-	testFar->setPosition(farMouseScreenPos);
-	testNear->setFacing(Quaternion::Forward_Up(rayDir, Vector3f(0,0,1)));
-	testFar->setFacing(Quaternion::Forward_Up(rayDir, Vector3f(0,0,1)));
-
-	Collision::Infinite_Cylinder mouseRay(closeMouseScreenPos, farMouseScreenPos, 1. );
-	auto collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemies());
-	mouseoverObj = closestObjectMatching(closeMouseScreenPos, collidingObjects, [&](shared_ptr<Game_Object> object_) {return object_->isTargetable();});
 	if(time_since_last_spawn > 4.)
 	{
 		Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
@@ -152,6 +138,8 @@ void Play_State::performMovement(float time_step)
 	float distance = speed * time_step;
 
 	float mouseWindowPanBufferDistance = 40.f;
+
+	Point2f mousePos = gui.getMousePos();
 
 	if(mousePos.y <= mouseWindowPanBufferDistance)
 	{
@@ -205,34 +193,16 @@ void Play_State::render() {
   //render call for level
 	Game_Level::getCurrentLevel()->render();
 
-//    testNear->render();
-//	testFar->render();
-    
 	vr.set_lighting(false);
 	vr.set_ambient_lighting(UILight);
     
 	vr.set_2d();
 
-	shared_ptr<Game_Object> targetedObj = mouseoverObj.lock();
-
-	if(targetedObj)
-	{
-		Zeni::Font &fr = get_Fonts()["title"];
-
-		fr.render_text(
-			targetedObj->getName(),
-			Point2f(Window::get_width()/2., 0),
-			get_Colors()["title_text"],
-			ZENI_CENTER);
-
-		Point3f screenPosProj = proj.project(targetedObj->getPosition());
-		Point2f screenPos(screenPosProj.x, screenPosProj.y);
-		Vector2f size(64, 64);
-		render_image("selection", screenPos - size/2., screenPos + size/2.);
-	}
+	gui.render();
 }
 
 void Play_State::on_mouse_button( const SDL_MouseButtonEvent &event )
 {
+	gui.on_mouse_button(event);
 	Gamestate_Base::on_mouse_button(event);
 }

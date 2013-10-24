@@ -3,6 +3,7 @@
 
 #include "zenilib.h"
 #include <memory>
+#include "ZTDGUI.h"
 //#include "Player.h"
 
 class Game_Object;
@@ -42,12 +43,14 @@ class Play_State : public Zeni::Gamestate_Base {
 	virtual void on_mouse_button( const SDL_MouseButtonEvent &event );
 
   private:
-	  Zeni::Projector3D proj;
+		Zeni::Projector3D proj;
 
 		Zeni::Light worldLight;
 		Zeni::Light backLight;
 		Zeni::Camera god_view;
 		bool god_view_on;
+
+		ZTDGUI gui;
 
 		int gold;
 		int lives;
@@ -56,12 +59,6 @@ class Play_State : public Zeni::Gamestate_Base {
 
 		//Player player;
 		bool player_moved;
-
-		Zeni::Point2f mousePos;
-		std::weak_ptr<Game_Object> mouseoverObj;
-
-		std::shared_ptr<Game_Object> testNear;
-		std::shared_ptr<Game_Object> testFar;
 
 		Zeni::Time_HQ time_passed;
 };
