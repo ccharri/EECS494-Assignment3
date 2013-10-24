@@ -6,8 +6,7 @@
 
 #include "Model_Wrapper.h"
 #include "Game_Object.h"
-
-class Tower_Weapon;
+#include "Tower_Weapon.h"
 
 class Tower_Section : public Game_Object 
 {
@@ -23,6 +22,10 @@ public:
 
 	std::shared_ptr<Tower_Weapon> getWeapon() {return weapon;};
 	void setWeapon(std::shared_ptr<Tower_Weapon> weapon_) {weapon = weapon_;};
+
+	virtual float getPrimaryAttributeMax() const {return weapon->getCooldown();};
+	virtual float getPrimaryAttributeCurrent() const {return weapon->getCooldownRemaining();};
+	virtual Zeni::Color getPrimaryColor() const {return Zeni::Color(1.f, .5, .5, .5);};
 
 	void updateCollider() {};
 

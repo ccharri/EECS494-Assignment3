@@ -56,12 +56,37 @@ void ZTDGUI::render()
 	if(textObj)
 	{
 		Zeni::Font &fr = get_Fonts()["title"];
+		Zeni::Font &detailfont = get_Fonts()["system_36_800x600"];
 
 		fr.render_text(
 			textObj->getName(),
 			Point2f(Window::get_width()/2., 0),
 			get_Colors()["title_text"],
 			ZENI_CENTER);
+		
+		Color primColor = textObj->getPrimaryColor();
+		float primMax = textObj->getPrimaryAttributeMax();
+		float primCur = textObj->getPrimaryAttributeCurrent();
+		float primWidth = 300;
+		float primHeight = 50;
+		Point2f ulp((Window::get_width() - primWidth)/2. ,fr.get_text_height());
+		Point2f lrp((Window::get_width() - primWidth)/2. + (300 * primCur / primMax), fr.get_text_height() + primHeight);
+
+		Vertex2f_Color ul, ll, lr, ur;
+		ul = Vertex2f_Color(ulp, primColor);
+		ll = Vertex2f_Color(ulp + Vector2f(0, primHeight), primColor);
+		lr = Vertex2f_Color(lrp, primColor);
+		ur = Vertex2f_Color(lrp - Vector2f(0, primHeight), primColor);
+		Quadrilateral<Vertex2f_Color> primQuad(ul, ll, lr, ur);
+		
+		get_Video().render(primQuad);
+
+		detailfont.render_text(
+			ftoa(primCur, 3) + "/" + ftoa(primMax, 3),
+			Point2f(Window::get_width()/2., (ulp.y + lrp.y)/2.),
+			get_Colors()["title_text"],
+			ZENI_CENTER
+			);
 	}
 }
 

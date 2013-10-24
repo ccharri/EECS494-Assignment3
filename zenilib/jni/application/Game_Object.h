@@ -36,6 +36,10 @@ public:
 	virtual void setFacing(Zeni::Quaternion facing_) {facing = facing_;};
 	virtual void lookAt(Zeni::Point3f pos_);
 
+	virtual float getPrimaryAttributeMax() const {return 0;};
+	virtual float getPrimaryAttributeCurrent() const {return 0;};
+	virtual Zeni::Color getPrimaryColor() const {return Zeni::Color(0.f, 0.f, 0.f, 0.f);};
+
 	//Quality of Life function for setting position AND facing BEFORE updating collider (for those objects with a collider based on rotation)
 	virtual void setPositionAndLookAt(Zeni::Point3f position_, Zeni::Point3f lookPos_) {position = position_; lookAt(lookPos_);};
 

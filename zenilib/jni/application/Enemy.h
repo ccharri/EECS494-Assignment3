@@ -36,6 +36,10 @@ public:
 
 	const Zeni::Collision::Capsule& getCollider() const {return collision_capsule;};
 
+	virtual float getPrimaryAttributeMax() const {return health_max;};
+	virtual float getPrimaryAttributeCurrent() const {return health_current;};
+	virtual Zeni::Color getPrimaryColor() const {return Zeni::Color(1.0, (1.0 -(health_current / health_max)), health_current / health_max, 0.f);};
+
 	virtual void onDamage(float damage) override;
 
 	bool isTargetable() const override {return isAlive();};

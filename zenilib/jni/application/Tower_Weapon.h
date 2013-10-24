@@ -28,6 +28,9 @@ public:
 
 	virtual bool canFire(std::shared_ptr<Game_Object> object);
 
+	virtual float getCooldown() const {return cooldown;};
+	virtual float getCooldownRemaining() const {return (last_fired_time + cooldown) - fireTimer.seconds();};
+
 	virtual void on_logic(float time_step) /*override*/;
 	virtual void render() /*override*/;
 
