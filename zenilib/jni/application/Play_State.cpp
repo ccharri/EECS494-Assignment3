@@ -135,7 +135,7 @@ void Play_State::perform_logic() {
 
 	Collision::Infinite_Cylinder mouseRay(closeMouseScreenPos, farMouseScreenPos, 1. );
 	auto collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemies());
-	mouseoverObj = closestObject(closeMouseScreenPos, collidingObjects);
+	mouseoverObj = closestObjectMatching(closeMouseScreenPos, collidingObjects, [&](shared_ptr<Game_Object> object_) {return object_->isTargetable();});
 	if(time_since_last_spawn > 4.)
 	{
 		Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
@@ -224,27 +224,15 @@ void Play_State::render() {
 			Point2f(Window::get_width()/2., 0),
 			get_Colors()["title_text"],
 			ZENI_CENTER);
+
+		Point3f screenPosProj = proj.project(targetedObj->getPosition());
+		Point2f screenPos(screenPosProj.x, screenPosProj.y);
+		Vector2f size(64, 64);
+		render_image("selection", screenPos - size/2., screenPos + size/2.);
 	}
 }
 
 void Play_State::on_mouse_button( const SDL_MouseButtonEvent &event )
 {
 	Gamestate_Base::on_mouse_button(event);
-}
-
-Zeni::Vector3f Play_State::rayDirection( Zeni::Point3f& nearClipP, Zeni::Point3f& farClipP ) const
-{
-	float dx, dy;
-	auto viewMatrix = god_view.get_view_matrix();
-	auto invViewMatrix = viewMatrix.inverted();
-	float aspect = (float)Window::get_width() / (float)Window::get_height();
-
-	dx = tanf(god_view.get_tunneled_fov_rad())*(mousePos.x/Window::get_width()/2. - 1.f)/aspect;
-	dy = tanf(god_view.get_tunneled_fov_rad())*(1-0 - mousePos.y/Window::get_height()/2.);
-	nearClipP = Vector3f(dx*god_view.get_tunneled_near_clip(), dy * god_view.get_tunneled_near_clip(), god_view.get_tunneled_near_clip());
-	farClipP = Vector3f(dx*god_view.get_tunneled_far_clip(), dy*god_view.get_tunneled_far_clip(), god_view.get_tunneled_far_clip());
-	nearClipP = invViewMatrix * nearClipP;
-	farClipP = invViewMatrix * farClipP;
-
-	return Vector3f(farClipP - nearClipP).normalized();
 }
