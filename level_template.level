@@ -1,0 +1,41 @@
+<level name> 	Thunderplains
+<level num> 	1
+<level model>	level1.3ds
+<path>
+	<node> 0, 0, 0
+	<node> 100, 0, 0
+	<node> 100, 100, 0
+	<node> 0, 100, 0
+<tower_bases>
+	<base> 50, 50, 0
+<round>
+	<round num>		1
+	<round bonus>	100
+	<wave>
+		<number>		5
+		<duration>		100
+		<time_start>	0
+		<health>		100
+		<speed>			10
+		<size>			10, 10, 10
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			Basic
+		<bounty>		3
+		<lives>			1
+<round>
+	<number>	2
+	<bonus>		100
+	<wave>
+		<size>			20
+		<duration>		100
+		<time_start>	0
+		<health>		100
+		<speed>			10
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			Basic
+		<bounty>		3
+		<lives>			1

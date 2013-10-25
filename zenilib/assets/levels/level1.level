@@ -1,0 +1,27 @@
+<level name> 	Thunderplains
+<level num> 	1
+<level model>	Level1.3ds
+<path>
+	<node> -50, -50, 0
+	<node> 50, -50, 5 
+	<node> 50, 50, 10
+	<node> -50, 50, 15
+	<node> -50, -50, 20
+<tower_bases>
+	<base> 25, 25, 0
+<round>
+	<round num>		1
+	<round bonus>	100
+	<wave>
+		<total>			5
+		<duration>		10
+		<time_start>	0
+		<health>		50
+		<speed>			10
+		<size>			10, 10, 10
+		<model>			spike_ball.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<lives>			1
