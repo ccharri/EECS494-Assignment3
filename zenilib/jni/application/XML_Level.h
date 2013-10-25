@@ -18,6 +18,7 @@ class XML_Level : public Game_Level
 		float duration;
 		float time_start;
 		
+		Zeni::String name;
 		float health;
 		float speed;
 		int height;

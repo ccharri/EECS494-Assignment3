@@ -3,16 +3,17 @@
 <level model>	Level1.3ds
 <path>
 	<node> -50, -50, 0
-	<node> 50, -50, 5 
+	<node> -50, 50, 5 
 	<node> 50, 50, 10
-	<node> -50, 50, 15
+	<node> 50, -50, 15
 	<node> -50, -50, 20
 <tower_bases>
-	<base> 25, 25, 0
+	<base> -25, 25, 50
 <round>
 	<round num>		1
 	<round bonus>	100
 	<wave>
+		<name>			Rustic Farmboy
 		<total>			5
 		<duration>		10
 		<time_start>	0
@@ -25,3 +26,20 @@
 		<type>			basic
 		<bounty>		3
 		<lives>			1
+<round>
+	<round num>		2
+	<round bonus>	100
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	5
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<lives>			100

@@ -45,6 +45,8 @@ XML_Level::XML_Level(string xml) : levelModel("models/Crate.3ds")
 			rounds.back().waves.back().duration = float(atof(value.c_str()));
 		else if(comment == "time_start")
 			rounds.back().waves.back().time_start = float(atof(value.c_str()));
+		else if(comment == "name")
+			rounds.back().waves.back().name = value;
 		else if(comment == "health")
 			rounds.back().waves.back().health = float(atof(value.c_str()));
 		else if(comment == "speed")
@@ -87,6 +89,9 @@ Enemy* XML_Level::Wave::spawnEnemy()
 	if(type == BASIC)
 		e = new Basic_Enemy(Game_Level::getCurrentLevel()->getPath().front(), speed, health, model);
 	e->setSize(size);
+	e->setName(name);
+	e->setBounty(bounty);
+	e->setLeakAmount(lives);
 	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Enemy>(e));
 	spawned++;
 	return e;
@@ -101,6 +106,7 @@ void XML_Level::startRound()
 
 bool XML_Level::isRoundOver()
 {
+	cout << "num: " << getEnemies().size() << endl;
 	if(getEnemies().size() == 0)
 		return false;
 	for(Wave &w : rounds[currentRound].waves)

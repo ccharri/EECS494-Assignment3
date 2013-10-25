@@ -22,6 +22,11 @@ public:
 
 	float getMaxHealth() const {return health_max;};
 	float getCurrentHealth() const {return health_current;};
+	
+	int leakAmount(){return lifeCost;}
+	void setLeakAmount(int i){lifeCost = i;}
+	int getBounty() {return bounty;}
+	void setBounty(int i) {bounty = i;}
 
 	bool isAlive() const {return alive;};
 
@@ -54,6 +59,8 @@ private:
 	float health_max;
 	float health_current;
 	bool alive;
+	int bounty;
+	int lifeCost;
 protected:
 	int pathIndex;
 	std::vector<Zeni::Point3f>* path;
