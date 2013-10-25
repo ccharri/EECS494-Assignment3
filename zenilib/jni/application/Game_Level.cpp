@@ -42,9 +42,11 @@ void Game_Level::on_logic(float time_step)
 
 void Game_Level::enemyLeaked( std::shared_ptr<Game_Object> enemy )
 {
+	
+	if(enemy->leakAmount())
+		play_sound("enemy_leaked");
+
 	livesRemaining -= enemy->leakAmount();
 
 	removeEnemy(enemy);
-
-	play_sound("enemy_leaked");
 }

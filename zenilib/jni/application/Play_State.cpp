@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "Player.h"
+#include "Arrow.h"
 #include "Game_Level.h"
 #include "Level1.h"
 #include "Enemy_Box.h"
@@ -21,7 +22,7 @@ using namespace std;
 Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = true;
-	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.25f);
+	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.f);
 
 	worldLight = Light();
 	worldLight.set_light_type(Zeni::LIGHT_DIRECTIONAL);
@@ -41,6 +42,7 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 
 	Game_Level::setCurrentLevel(new Level_One());
 
+	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Arrow(Point3f(-50., -50., 0.))));
 	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
 
 	XML_Level fredrick(Zeni::String("levels/level1.xml"));
@@ -57,9 +59,6 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 	centerBase->pushSection(rocketSection);
 
 	Game_Level::getCurrentLevel()->getBases().push_back(centerBase);
-
-	testNear = shared_ptr<Game_Object>(new Rock(Point3f(), Vector3f()));
-	testFar = shared_ptr<Game_Object>(new Rocket(shared_ptr<Tower_Weapon>(nullptr), shared_ptr<Game_Object>(nullptr),0,0,Point3f()));
 }
 
 void Play_State::on_push() {
@@ -72,6 +71,8 @@ void Play_State::on_pop() {
 }
 
 void Play_State::on_key(const SDL_KeyboardEvent &event) {
+	gui.on_key(event);
+
   switch(event.keysym.sym) {
     case SDLK_w:
       movement_controls.forward = event.type == SDL_KEYDOWN; break;
@@ -98,7 +99,7 @@ void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event) {
 }
 
 void Play_State::on_mouse_motion(const SDL_MouseMotionEvent &event) {
-	mousePos = Point2f(event.x, event.y);
+	gui.on_mouse_motion(event);
 	Gamestate_Base::on_mouse_motion(event);
 }
 
@@ -122,23 +123,10 @@ void Play_State::perform_logic() {
 
 	performMovement(time_step);
 
-	proj = Projector3D(god_view); 
+	proj = Projector3D(god_view, get_Video().get_viewport());
 
-	Point3f closeMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, .01));
-	Point3f farMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, .02));
+	gui.on_logic(proj);
 
-	//Vector3f rayDir = rayDirection(closeMouseScreenPos, farMouseScreenPos);
-	
-	Vector3f rayDir = Vector3f(farMouseScreenPos - closeMouseScreenPos).normalized();
-
-	testNear->setPosition(closeMouseScreenPos);
-	testFar->setPosition(farMouseScreenPos);
-	testNear->setFacing(Quaternion::Forward_Up(rayDir, Vector3f(0,0,1)));
-	testFar->setFacing(Quaternion::Forward_Up(rayDir, Vector3f(0,0,1)));
-
-	Collision::Infinite_Cylinder mouseRay(closeMouseScreenPos, rayDir, 1. );
-	auto collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemies());
-	mouseoverObj = closestObject(closeMouseScreenPos, collidingObjects);
 	if(time_since_last_spawn > 4.)
 	{
 		Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
@@ -155,6 +143,8 @@ void Play_State::performMovement(float time_step)
 	float distance = speed * time_step;
 
 	float mouseWindowPanBufferDistance = 40.f;
+
+	Point2f mousePos = gui.getMousePos();
 
 	if(mousePos.y <= mouseWindowPanBufferDistance)
 	{
@@ -210,44 +200,14 @@ void Play_State::render() {
 
 	vr.set_lighting(false);
 	vr.set_ambient_lighting(UILight);
-
-	testNear->render();
-	testFar->render();
-
+    
 	vr.set_2d();
 
-	shared_ptr<Game_Object> targetedObj = mouseoverObj.lock();
-
-	if(targetedObj)
-	{
-		Zeni::Font &fr = get_Fonts()["title"];
-
-		fr.render_text(
-			targetedObj->getName(),
-			Point2f(Window::get_width()/2., 0),
-			get_Colors()["title_text"],
-			ZENI_CENTER);
-	}
+	gui.render();
 }
 
 void Play_State::on_mouse_button( const SDL_MouseButtonEvent &event )
 {
+	gui.on_mouse_button(event);
 	Gamestate_Base::on_mouse_button(event);
-}
-
-Zeni::Vector3f Play_State::rayDirection( Zeni::Point3f& nearClipP, Zeni::Point3f& farClipP ) const
-{
-	float dx, dy;
-	auto viewMatrix = god_view.get_view_matrix();
-	auto invViewMatrix = viewMatrix.inverted();
-	float aspect = (float)Window::get_width() / (float)Window::get_height();
-
-	dx = tanf(god_view.get_tunneled_fov_rad())*(mousePos.x/Window::get_width()/2. - 1.f)/aspect;
-	dy = tanf(god_view.get_tunneled_fov_rad())*(1-0 - mousePos.y/Window::get_height()/2.);
-	nearClipP = Vector3f(dx*god_view.get_tunneled_near_clip(), dy * god_view.get_tunneled_near_clip(), god_view.get_tunneled_near_clip());
-	farClipP = Vector3f(dx*god_view.get_tunneled_far_clip(), dy*god_view.get_tunneled_far_clip(), god_view.get_tunneled_far_clip());
-	nearClipP = invViewMatrix * nearClipP;
-	farClipP = invViewMatrix * farClipP;
-
-	return Vector3f(farClipP - nearClipP).normalized();
 }
