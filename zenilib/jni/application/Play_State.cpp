@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "Player.h"
+#include "Arrow.h"
 #include "Game_Level.h"
 #include "Level1.h"
 #include "Enemy_Box.h"
@@ -40,6 +41,7 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 
 	Game_Level::setCurrentLevel(new Level_One());
 
+	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Arrow(Point3f(-50., -50., 0.))));
 	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
 
 	shared_ptr<Tower_Base> centerBase = shared_ptr<Tower_Base>(new Tower_Base(Point3f(0,0,0)));

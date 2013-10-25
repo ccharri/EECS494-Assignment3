@@ -42,21 +42,22 @@ public:
 
 	virtual void onDamage(float damage) override;
 
-	bool isTargetable() const override {return isAlive();};
+	virtual bool isTargetable() const override {return isAlive();};
 
 private:
 	Zeni::Collision::Capsule collision_capsule;
 
+protected:
 	float speed;
 	bool moving;
-
+private:
 	float health_max;
 	float health_current;
 	bool alive;
-
+protected:
 	int pathIndex;
 	std::vector<Zeni::Point3f>* path;
-
+private:
 	void updateCollider() override;
 	void doMovement(float time_step);
 	void stopMoving();
