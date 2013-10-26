@@ -14,7 +14,7 @@ public:
     {
     }
 
-    std::shared_ptr<Zeni::Model> getModel() const override {return model.getModel();}
+    std::shared_ptr<Zeni::Model> getModel() const override {return model.getModel();};
 
 	~Basic_Enemy() {};
 
