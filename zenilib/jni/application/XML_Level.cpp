@@ -115,7 +115,7 @@ void XML_Level::startRound()
 bool XML_Level::isRoundOver()
 {
 	cout << "num: " << getEnemies().size() << endl;
-	if(getEnemies().size() == 0)
+	if(getEnemies().size() != 0)
 		return false;
 	for(Wave &w : rounds[currentRound].waves)
 		if(!w.isOver())
@@ -148,6 +148,7 @@ void XML_Level::on_logic(float time_step)
 		if(currentRound >= rounds.size())
 		{
 			currentRound--;
+			//TODO: VICTORY CONDITION HERE?
 		}
         
         //add delay
