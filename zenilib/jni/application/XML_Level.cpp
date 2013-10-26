@@ -30,6 +30,11 @@ XML_Level::XML_Level(string xml)
 			levelName = value;
 		else if(comment  == "level model")
 			levelModel = shared_ptr<Model>(new Model(Zeni::String("models/" + value)));
+		else if("level lives" == comment)
+		{
+			setLivesMax(atoi(value.c_str()));
+			setLivesRemaining(atoi(value.c_str()));
+		}
 		else if(comment == "node")
 			getPath().push_back(getPointFromValue(value));
 		else if(comment == "base")
@@ -69,8 +74,8 @@ XML_Level::XML_Level(string xml)
 		}
 		else if(comment == "bounty")
 				rounds.back().waves.back().bounty = atoi(value.c_str());
-		else if(comment == "lives")
-				rounds.back().waves.back().lives = atoi(value.c_str());
+		else if(comment == "life cost")
+				rounds.back().waves.back().lifeCost = atoi(value.c_str());
 	}
 	in.close();
 	currentRound = 0;
@@ -94,7 +99,7 @@ shared_ptr<Enemy> XML_Level::Wave::spawnEnemy()
 	e->setSize(size);
 	e->setName(name);
 	e->setBounty(bounty);
-	e->setLeakAmount(lives);
+	e->setLeakAmount(lifeCost);
 	Game_Level::getCurrentLevel()->pushEnemy(e);
 	spawned++;
 	return e;
@@ -121,6 +126,7 @@ bool XML_Level::isRoundOver()
 void XML_Level::endRound()
 {
 	//award bonus gold
+	Game_Level::getCurrentLevel()->addGold(rounds[currentRound].goldBonus);
 
 
 }

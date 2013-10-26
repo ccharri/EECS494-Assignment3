@@ -32,11 +32,12 @@ public:
 	void setPlayer(Player* player_) {player = player_;};
 
 	int getLivesMax() const {return livesMax;};
+	void setLivesMax(int i) { livesMax = i;};
 	int getLivesRemaining() const {return livesRemaining;};
 	void setLivesRemaining(int amount) {livesRemaining = amount;};
 
-	int getGold() {return gold;};
-	void setGold(int amount) {gold = amount;};
+	int getGold() const {return gold;};
+	void addGold(int amount) {gold += amount;};
 
 	void enemyLeaked(std::shared_ptr<Game_Object> enemy);
 

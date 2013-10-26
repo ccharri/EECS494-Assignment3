@@ -1,6 +1,7 @@
 <level name> 	Thunderplains
 <level num> 	1
 <level model>	Level1.3ds
+<level lives>	50
 <path>
 	<node> -50, -50, 0
 	<node> -50, 50, 5 
@@ -17,7 +18,7 @@
 		<total>			5
 		<duration>		10
 		<time_start>	0
-		<health>		50
+		<health>		51
 		<speed>			10
 		<size>			10, 10, 10
 		<model>			spike_ball.3ds
@@ -33,7 +34,7 @@
 		<name>			Boss Crate
 		<total>			1
 		<duration>		1
-		<time_start>	5
+		<time_start>	50
 		<health>		500
 		<speed>			15
 		<size>			10, 10, 10
@@ -42,4 +43,4 @@
 		<scaling>		1.00
 		<type>			basic
 		<bounty>		3
-		<lives>			100
+		<life cost>			100

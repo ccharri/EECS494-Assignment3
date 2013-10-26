@@ -11,7 +11,7 @@ class Arrow : public Enemy
 {
 public:
 	Arrow(Zeni::Point3f location_, Zeni::Vector3f size_ = Zeni::Vector3f(), Zeni::Quaternion facing_ = Zeni::Quaternion(), float speed_ = 50) : Enemy(location_, size_, facing_, speed_, 0)
-	{};
+	{setLeakAmount(0);};
 
 	~Arrow() {};
 

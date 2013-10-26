@@ -14,7 +14,7 @@ Game_Level* Game_Level::currentLevel = nullptr;
 
 Game_Level::Game_Level()
 {
-
+	gold = 0;
 }
 
 Game_Level::~Game_Level() {

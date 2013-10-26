@@ -106,6 +106,7 @@ void Enemy::onDamage(float damage)
 	if((health_current -= damage) <= 0)
 	{
 		alive = false;
+		Game_Level::getCurrentLevel()->addGold(bounty);
 		Game_Level::getCurrentLevel()->removeEnemy(shared_from_this());
 	}
 }

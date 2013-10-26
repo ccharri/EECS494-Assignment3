@@ -23,7 +23,7 @@ class XML_Level : public Game_Level
 		float speed;
 		int height;
 		int bounty;
-		int lives;
+		int lifeCost;
 		Zeni::Vector3f size;
 		Enemy_Type_e type;
 

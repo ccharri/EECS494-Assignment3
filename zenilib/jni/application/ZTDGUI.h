@@ -30,6 +30,8 @@ private:
 	std::weak_ptr<Game_Object> findMousedTarget();
 
 	Zeni::Point2f mousePos;
+
+	void renderPlayerAttributes(Zeni::Point2f upperLeft);
 };
 
 #endif
