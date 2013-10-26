@@ -5,6 +5,7 @@
 #include "Game_Object.h"
 #include "Player.h"
 #include "Tower_Base.h"
+#include "Tower_Section.h"
 
 using namespace Zeni;
 using namespace std;
@@ -49,4 +50,23 @@ void Game_Level::enemyLeaked( std::shared_ptr<Game_Object> enemy )
 	livesRemaining -= enemy->leakAmount();
 
 	removeEnemy(enemy);
+}
+
+vector<shared_ptr<Game_Object> > Game_Level::getTowerParts() const
+{
+    vector<shared_ptr<Game_Object> > rVector;
+    
+    auto bases = getBases();
+    
+    for_each(bases.begin(), bases.end(), [&](shared_ptr<Tower_Base> base) {
+        rVector.push_back(static_pointer_cast<Game_Object>(base));
+        
+        auto segments = base->getSegments();
+        
+        for_each(segments.begin(), segments.end(), [&](shared_ptr<Tower_Section> segment) {
+            rVector.push_back(static_pointer_cast<Game_Object>(segment));
+        });
+    });
+    
+    return rVector;
 }

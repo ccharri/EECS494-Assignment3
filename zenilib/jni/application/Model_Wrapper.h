@@ -2,25 +2,32 @@
 #define __game__Model_Wrapper_h__
 
 #include <zenilib.h>
+#include <memory>
 
 class Model_Wrapper {
 public:
 	Model_Wrapper(const Zeni::String& file_) : fileName(file_), model(nullptr) {};
-	Model_Wrapper(Zeni::Model* model_) : fileName(""), model(model_) {};
-	~Model_Wrapper() {delete model;};
+	Model_Wrapper(Zeni::Model* model_) : fileName(""), model(std::shared_ptr<Zeni::Model>(model_)) {};
+    Model_Wrapper(std::shared_ptr<Zeni::Model> model_) : fileName(""), model(model_) {};
+	~Model_Wrapper() {};
 
-	Zeni::Model* getModel() {
+    std::shared_ptr<Zeni::Model> getModel() const {
 		if(!model)
 		{
-			model = new Zeni::Model(fileName);
+            if(fileName.length())
+            {
+                model = std::shared_ptr<Zeni::Model>(new Zeni::Model(fileName));
+            }
+            else {
+                model = std::shared_ptr<Zeni::Model>(nullptr);
+            }
 		}
 		return model;
 	};
 
 private:
 	Zeni::String fileName;
-	Zeni::Model* model;
-	int useCount;
+    mutable std::shared_ptr<Zeni::Model> model;
 };
 
 #endif

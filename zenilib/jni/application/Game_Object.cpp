@@ -17,7 +17,7 @@ Game_Object::~Game_Object()
 
 void Game_Object::render()
 {
-	Model* model = getModel();
+	shared_ptr<Model> model = getModel();
 
 	model->set_keyframe(keyframe);
 	model->set_rotate(facing);

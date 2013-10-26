@@ -23,7 +23,7 @@ public:
 	float getMaxHealth() const {return health_max;};
 	float getCurrentHealth() const {return health_current;};
 	
-	int leakAmount(){return lifeCost;}
+	int leakAmount() const override {return lifeCost;}
 	void setLeakAmount(int i){lifeCost = i;}
 	int getBounty() {return bounty;}
 	void setBounty(int i) {bounty = i;}

@@ -8,7 +8,8 @@ using namespace std;
 
 Rocket_Launcher::Rocket_Launcher( std::weak_ptr<Tower_Section> owner_, float cooldown_ ) : Tower_Weapon(owner_, cooldown_)
 {
-
+    auto owner = owner_.lock();
+    if(owner) owner->setName("Rocket Launcher");
 }
 
 

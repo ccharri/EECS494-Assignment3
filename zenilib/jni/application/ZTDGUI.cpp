@@ -102,6 +102,13 @@ weak_ptr<Game_Object> ZTDGUI::findMousedTarget()
 	Point3f farMouseScreenPos = proj.unproject(Point3f(mousePos.x, mousePos.y, 1));
 
 	Collision::Infinite_Cylinder mouseRay(closeMouseScreenPos, farMouseScreenPos, 1. );
-	auto collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemies());
-	return closestObjectMatching(closeMouseScreenPos, collidingObjects, [&](shared_ptr<Game_Object> object_) {return object_->isTargetable();});
+    auto collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getTowerParts());
+    auto collidedObject = closestObjectMatching(closeMouseScreenPos, collidingObjects, [&](shared_ptr<Game_Object> object_) {return object_->isTargetable();});;
+    if(!collidedObject)
+    {
+        collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemies());
+        collidedObject = closestObjectMatching(closeMouseScreenPos, collidingObjects, [&](shared_ptr<Game_Object> object_) {return object_->isTargetable();});
+    }
+    
+	return collidedObject;
 }

@@ -4,6 +4,7 @@
 #include "Physics_Object.h"
 #include "Model_Wrapper.h"
 #include <zenilib.h>
+#include <memory>
 
 class Rock : public Physics_Object
 {
@@ -12,7 +13,7 @@ public:
 			 const Zeni::Quaternion& facing_ = Zeni::Quaternion());
 
 	void on_logic(float time_step);
-	Zeni::Model* getModel() override {return model.getModel();}
+    std::shared_ptr<Zeni::Model> getModel() const override {return model.getModel();}
 	
 private:
 	Zeni::Vector3f size;

@@ -44,7 +44,7 @@ public:
 	//Quality of Life function for setting position AND facing BEFORE updating collider (for those objects with a collider based on rotation)
 	virtual void setPositionAndLookAt(Zeni::Point3f position_, Zeni::Point3f lookPos_) {position = position_; lookAt(lookPos_);};
 
-	virtual Zeni::Model* getModel() = 0;
+	virtual std::shared_ptr<Zeni::Model> getModel() const = 0;
 
 	float getKeyframe() const {return keyframe;};
 	void setKeyframe(float keyframe_) {keyframe = keyframe_;};

@@ -8,9 +8,8 @@ using namespace std;
 
 Model_Wrapper Rocket::model = Model_Wrapper("models/rocket.3ds");
 
-
 Rocket::Rocket( std::weak_ptr<Tower_Weapon> owner_, std::weak_ptr<Game_Object> target_, float damage_, float speed_, Zeni::Point3f position_, Zeni::Vector3f size_, Zeni::Quaternion facing_, Zeni::Vector3f scale_)
-	: Game_Object(position_, size_, facing_, scale_), owner(owner_), target(target_), damage(damage_), speed(speed_)
+	: Game_Object(position_, size_, facing_, scale_), owner(owner_), damage(damage_), speed(speed_), target(target_)
 {
 	auto tar = target.lock();
 

@@ -20,7 +20,7 @@ public:
 
 	~Level_One() {};
 
-	virtual Zeni::Model* getModel() {return model.getModel();};
+	virtual std::shared_ptr<Zeni::Model> getModel() const override {return model.getModel();};
 
 private:
 	static Model_Wrapper model;

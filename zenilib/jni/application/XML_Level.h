@@ -27,21 +27,21 @@ class XML_Level : public Game_Level
 		Zeni::Vector3f size;
 		Enemy_Type_e type;
 
-		std::shared_ptr<Model_Wrapper> model;
+        std::shared_ptr<Zeni::Model> model;
 		float scaling;
 
-		Wave(){spawned = 0; time_start = 0; health = 1; speed = 10;}
+		Wave() : spawned(0), time_start(0), health(1), speed(10) {}
 
 		bool canSpawn(float time_passed);
 		bool isOver() {return total <= spawned;}
-		Enemy* spawnEnemy();
+        std::shared_ptr<Enemy> spawnEnemy();
 	};
 	struct Round
 	{
 		int num;
 		int goldBonus;
 
-		Round(){goldBonus = 0; num = 1;}
+		Round() :  num(1), goldBonus(0) {}
 
 		std::vector<Wave> waves;
 	};
@@ -49,7 +49,7 @@ class XML_Level : public Game_Level
 public:
 	XML_Level(std::string xml);
 	
-	Zeni::Model* getModel() override {return levelModel.getModel();};
+    std::shared_ptr<Zeni::Model> getModel() const override {return levelModel.getModel();};
 	void on_logic(float time_step) override;
 	bool isRoundOver();
 

@@ -8,16 +8,18 @@
 
 class Basic_Enemy : public Enemy {
 public:
-	Basic_Enemy(Zeni::Point3f loc_, float speed_, float health_, std::shared_ptr<Model_Wrapper> model_, 
-							Zeni::Vector3f size_ = Zeni::Vector3f(1,1,1), Zeni::Quaternion facing = Zeni::Quaternion()) 
-							: Enemy(loc_, size_, facing, speed_, health_) {model = model_;}
+	Basic_Enemy(Zeni::Point3f loc_, float speed_, float health_, std::shared_ptr<Zeni::Model> model_,
+							Zeni::Vector3f size_ = Zeni::Vector3f(1,1,1), Zeni::Quaternion facing_ = Zeni::Quaternion())
+    : Enemy(loc_, size_, facing_, speed_, health_), model(model_)
+    {
+    }
 
-	virtual Zeni::Model* getModel() override {return model->getModel();}
+    std::shared_ptr<Zeni::Model> getModel() const override {return model.getModel();}
 
 	~Basic_Enemy() {};
 
 private:
-	std::shared_ptr<Model_Wrapper> model;
+    Model_Wrapper model;
 };
 
 

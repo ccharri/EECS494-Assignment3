@@ -29,11 +29,11 @@ XML_Level::XML_Level(string xml)
 		else if(comment == "level name")
 			levelName = value;
 		else if(comment  == "level model")
-			levelModel = Model_Wrapper(Zeni::String("models/" + value));
+			levelModel = shared_ptr<Model>(new Model(Zeni::String("models/" + value)));
 		else if(comment == "node")
 			getPath().push_back(getPointFromValue(value));
 		else if(comment == "base")
-			getBases().push_back(make_shared<Tower_Base>(getPointFromValue(value)));
+			pushBase(make_shared<Tower_Base>(getPointFromValue(value)));
 		else if(comment == "round")
 			rounds.emplace_back();
 		else if(comment == "round num")
@@ -59,7 +59,7 @@ XML_Level::XML_Level(string xml)
 		else if(comment == "height")
 			rounds.back().waves.back().height = atoi(value.c_str());
 		else if(comment == "model")
-			rounds.back().waves.back().model = shared_ptr<Model_Wrapper>(new Model_Wrapper(Zeni::String("models/" + value)));
+			rounds.back().waves.back().model = shared_ptr<Zeni::Model>(new Model(Zeni::String("models/" + value)));
 		else if(comment == "scaling")
 			rounds.back().waves.back().scaling = float(atof(value.c_str()));
 		else if(comment == "type")
@@ -83,19 +83,19 @@ XML_Level::XML_Level(string xml)
 bool XML_Level::Wave::canSpawn(float time_passed)
 {
 	cout << "s: " << spawned << " d: " << duration << "t: " << total << endl;
-	return (time_passed - time_start) >= (duration / (total)) * spawned;
+	return (time_passed - time_start) >= (duration / (total+1)) * spawned;
 }
 
-Enemy* XML_Level::Wave::spawnEnemy()
+shared_ptr<Enemy> XML_Level::Wave::spawnEnemy()
 {
-	Enemy *e;
+	shared_ptr<Enemy> e;
 	if(type == BASIC)
-		e = new Basic_Enemy(Game_Level::getCurrentLevel()->getPath().front(), speed, health, model);
+		e =  shared_ptr<Enemy>(new Basic_Enemy(Game_Level::getCurrentLevel()->getPath().front(), speed, health, model));
 	e->setSize(size);
 	e->setName(name);
 	e->setBounty(bounty);
 	e->setLeakAmount(lives);
-	Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Enemy>(e));
+	Game_Level::getCurrentLevel()->pushEnemy(e);
 	spawned++;
 	return e;
 	
@@ -143,6 +143,8 @@ void XML_Level::on_logic(float time_step)
 		{
 			currentRound--;
 		}
+        
+        //add delay
 		startRound();
 	}
 }

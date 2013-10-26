@@ -2,6 +2,7 @@
 #define __game__Arrow_h__
 
 #include <zenilib.h>
+#include <memory>
 
 #include "Enemy.h"
 #include "Model_Wrapper.h"
@@ -26,7 +27,7 @@ public:
 		}
 	}
 
-	virtual Zeni::Model* getModel() {return model.getModel();};
+	virtual std::shared_ptr<Zeni::Model> getModel() const override {return model.getModel();};
 
 private:
 	static Model_Wrapper model;
