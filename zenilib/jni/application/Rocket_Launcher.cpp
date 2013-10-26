@@ -20,7 +20,7 @@ void Rocket_Launcher::on_logic( float time_step )
 
 void Rocket_Launcher::fire()
 {
-	shared_ptr<Game_Object> rocket = shared_ptr<Game_Object>(new Rocket(shared_from_this(), getTarget(), 50., 20., getSection()->getPosition()));
+	shared_ptr<Game_Object> rocket = shared_ptr<Game_Object>(new Rocket(shared_from_this(), getTarget(), 50., 60., getSection()->getPosition()));
 	rocket->lookAt(getTarget()->getPosition());
 	addProjectile(rocket);
 

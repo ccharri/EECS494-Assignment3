@@ -36,7 +36,7 @@ public:
 	void updateCollider() {};
 
 private:
-	std::vector<std::shared_ptr<Tower_Section>> segments;
+	std::vector<std::shared_ptr<Tower_Section> > segments;
 
 	static Model_Wrapper model;
 };

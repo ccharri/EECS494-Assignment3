@@ -49,7 +49,7 @@ class XML_Level : public Game_Level
 public:
 	XML_Level(std::string xml);
 	
-	Zeni::Model* getModel() override {return levelModel.getModel();}
+	Zeni::Model* getModel() override {return levelModel.getModel();};
 	void on_logic(float time_step) override;
 	bool isRoundOver();
 
@@ -57,7 +57,7 @@ private:
 	int levelNum;
 	std::string levelName;
 
-	Model_Wrapper levelModel;
+	static Model_Wrapper levelModel;
 
 	std::vector<Round> rounds;
 	int currentRound;

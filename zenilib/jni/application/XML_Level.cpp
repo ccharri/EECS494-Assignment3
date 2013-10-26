@@ -5,12 +5,15 @@
 #include "Basic_Enemy.h"
 #include <fstream>
 #include <sstream>
+#include <memory>
 
 
 using namespace std;
 using namespace Zeni;
 
-XML_Level::XML_Level(string xml) : levelModel("models/Crate.3ds")
+Model_Wrapper XML_Level::levelModel("models/Crate.3ds");
+
+XML_Level::XML_Level(string xml)
 {
 	string line;
 	ifstream in;
@@ -80,7 +83,7 @@ XML_Level::XML_Level(string xml) : levelModel("models/Crate.3ds")
 bool XML_Level::Wave::canSpawn(float time_passed)
 {
 	cout << "s: " << spawned << " d: " << duration << "t: " << total << endl;
-	return (time_passed - time_start) >= (duration / (total - 1)) * spawned;
+	return (time_passed - time_start) >= (duration / (total)) * spawned;
 }
 
 Enemy* XML_Level::Wave::spawnEnemy()
