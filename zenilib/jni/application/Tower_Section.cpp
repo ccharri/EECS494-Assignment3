@@ -10,7 +10,7 @@ Model_Wrapper Tower_Section::model = Model_Wrapper("models/crate.3ds");
 
 Tower_Section::Tower_Section(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_, shared_ptr<Tower_Weapon> weapon_) : Game_Object(position_, size_, facing_),  weapon(weapon_) 
 {
-    collider = Collision::Parallelepiped(position_ - Vector3f(size_.x, size_.y, 0)/2., Vector3f(size_.x, 0, 0), Vector3f(0, size_.y, 0), Vector3f(0, 0, size_.z));
+    updateCollider();
 }
 
 
@@ -66,4 +66,10 @@ bool Tower_Section::collide(const Collision::Ray& collider_) const
 bool Tower_Section::collide(const Collision::Sphere& collider_) const
 {
     return collider.intersects(collider_);
+}
+
+void Tower_Section::updateCollider()
+{
+    Vector3f size = getSize();
+    collider = Collision::Parallelepiped(getPosition() - Vector3f(size.x, size.y, 0)/2., Vector3f(size.x, 0, 0), Vector3f(0, size.y, 0), Vector3f(0, 0, size.z));
 }

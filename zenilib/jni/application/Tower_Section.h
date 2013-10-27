@@ -38,7 +38,7 @@ public:
     
     virtual bool isTargetable() const override {return true;};
 
-	void updateCollider() {};
+	void updateCollider() override;
 
 private:
 	static Model_Wrapper model;
