@@ -60,10 +60,10 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 	float error, angle, time;
 	do
 	{
-        angle = getAngleParabolic(targetPos, launchPos, launchVel);
+        angle = getAngleParabolic(iterativePos, launchPos, launchVel);
 		if(angle == 2*acos(1))
 			return -1;
-        time = getTimeParabolic(targetPos.z - launchPos.z, sin(angle)*launchVel);
+        time = getTimeParabolic(iterativePos.z - launchPos.z, sin(angle)*launchVel);
 		if(time < 0)
 			return -1;
 		Point3f newPos = targetPos + targetVel * time;
