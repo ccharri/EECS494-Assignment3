@@ -11,7 +11,7 @@ using namespace Zeni;
 Rock_Dropper::Rock_Dropper(weak_ptr<Tower_Section> owner_, float cooldown_) : Tower_Weapon(owner_, cooldown_)
 {
 	DAMAGE_PER_Z_VEL = 3;
-	LAUNCH_VEL = 100;
+	LAUNCH_VEL = 10;
   
   auto owner = owner_.lock();
   if(owner) 
@@ -26,17 +26,31 @@ Rock_Dropper::~Rock_Dropper()
 bool Rock_Dropper::canFire(shared_ptr<Game_Object> object)
 {
 	//TODO: Add in the parabolic checker functions.
+	Vector3f vel = object->getFacing() * Vector3f(object->getSpeed(), 0, 0);
+	float time = getTimeIterativeParabolic(object->getPosition(), vel, getSection()->getPosition(), LAUNCH_VEL);
+	if(time < 0)
+		return false;
 	return Tower_Weapon::canFire(object);
 }
 
 void Rock_Dropper::fire()
 {
-	Vector3f vel = Vector3f(getTarget()->getPosition() - getSection()->getPosition() + Vector3f(0,0,10)).normalized() /*get direction vector*/ * 30. /* initial force*/;
-	shared_ptr<Game_Object> r = shared_ptr<Game_Object>(new Rock(getSection()->getPosition(), vel));
+	Tower_Weapon::fire();
+	Point3f launchPos = getSection()->getPosition();
+	Point3f targetPos = getTarget()->getPosition();
+	Vector3f targetVel = getTarget()->getFacing() * Vector3f(getTarget()->getSpeed(), 0, 0);
+	float time = getTimeIterativeParabolic(targetPos, targetVel, launchPos, LAUNCH_VEL);
+	targetPos = targetPos + targetVel * time;
+	
+	float vAngle = getAngleParabolic(targetPos, getSection()->getPosition(), LAUNCH_VEL);
+	float hAngle = atan2(targetPos.x-launchPos.x, targetPos.y-launchPos.y);
+	Vector3f projectileVel(cos(hAngle)*cos(vAngle) * LAUNCH_VEL, sin(hAngle)*cos(vAngle) * LAUNCH_VEL, sin(vAngle)*LAUNCH_VEL);
+
+	shared_ptr<Game_Object> r = shared_ptr<Game_Object>(new Rock(getSection()->getPosition(), projectileVel));
+	getSection()->lookAt(Point3f(targetPos.x, targetPos.y, 0));
 	r->lookAt(getTarget()->getPosition());
 	addProjectile(r);
-
-	Tower_Weapon::fire();
+	
 }
 
 void Rock_Dropper::on_logic(float time_step)

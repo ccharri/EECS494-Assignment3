@@ -18,6 +18,8 @@ public:
 
 	virtual std::shared_ptr<Zeni::Model> getModel() const override {return model.getModel();};
 
+	float getSpeed() const {return speed;}
+
 private:
 	static Model_Wrapper model;
 

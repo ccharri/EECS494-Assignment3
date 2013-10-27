@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include "Tower_Section.h"
+#include "Constants.h"
 
 using namespace Zeni;
 using namespace std;
@@ -16,7 +17,7 @@ Tower_Base::~Tower_Base()
 
 float Tower_Base::getNextSectionZ() const
 {
-	return segments.size();
+	return segments.size()*HEIGHT_INCREMENT + HEIGHT_INCREMENT*0.5;
 }
 
 void Tower_Base::pushSection(shared_ptr<Tower_Section> section_)

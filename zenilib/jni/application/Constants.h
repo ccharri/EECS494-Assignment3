@@ -7,5 +7,5 @@ extern const float SPEED_OF_GRAVITY;
 extern const float GROUND_ABSORPTION_COEFFICIENT;
 extern const Zeni::Vector3f GRAVITY_VECTOR;
 extern const float PHYSICS_MIN_MOVEMENT_THRESHOLD;
-
+extern const float HEIGHT_INCREMENT;
 #endif
