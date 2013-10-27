@@ -56,19 +56,24 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 //NOTE: Returns a time, or -1 if there's no trajectory.
 {
 	Point3f iterativePos = targetPos;
-	float error;
+	float error, angle, time;
 	do
 	{
-		float angle = getAngleParabolic(targetPos, targetVel, launchVel);
+        angle = getAngleParabolic(targetPos, targetVel, launchVel);
 		if(angle == 2*acos(1))
 			return -1;
-		float time = getTimeParabolic(targetPos.z - launchPos.z, sin(angle)*launchVel);
+        time = getTimeParabolic(targetPos.z - launchPos.z, sin(angle)*launchVel);
 		if(time < 0)
 			return -1;
 		Point3f newPos = targetPos + targetVel * time;
+        //Don't sqr root
 		error = pow(iterativePos.x - newPos.x, 2) + pow(iterativePos.y - newPos.y, 2) + pow(iterativePos.z - newPos.z, 2); 
 		iterativePos = newPos;
-	}while(error < 0.25);
+        //Because we compare against .05 (our error value) squared
+        //Nice!
+	}while(error > 0.25);
+    
+    return time;
 }
 
 shared_ptr<Game_Object> closestObject(const Zeni::Point3f& pos_, const vector<shared_ptr<Game_Object>>& objects_)
