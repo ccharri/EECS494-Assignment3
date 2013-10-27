@@ -3,6 +3,7 @@
 #include <functional>
 #include <algorithm>
 
+#include "Enemy.h"
 #include "Utility.h"
 #include "Game_Level.h"
 #include "Game_Object.h"
@@ -56,7 +57,7 @@ void Tower_Weapon::on_logic(float time_step)
 		}
 	});
 
-	shared_ptr<Game_Object> tar = target.lock();
+	shared_ptr<Enemy> tar = target.lock();
 
 	//If target cannot be fired upon
 	if(tar && !canFire(tar))
@@ -71,7 +72,7 @@ void Tower_Weapon::on_logic(float time_step)
         if(fireTimer.seconds() < (last_fired_time + cooldown)) return;
         
 		FunctorHelper helper(shared_from_this());
-		target = closestObjectMatching(owner.lock()->getPosition(), Game_Level::getCurrentLevel()->getEnemies(), helper);
+		target = std::dynamic_pointer_cast<Enemy>(closestObjectMatching(owner.lock()->getPosition(), Game_Level::getCurrentLevel()->getEnemyObjs(), helper));
 	}
 
 	tar = target.lock();

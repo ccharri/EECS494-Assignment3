@@ -108,7 +108,7 @@ weak_ptr<Game_Object> ZTDGUI::findMousedTarget()
     auto collidedObject = closestObjectMatching(closeMouseScreenPos, collidingObjects, [&](shared_ptr<Game_Object> object_) {return object_->isTargetable();});;
     if(!collidedObject)
     {
-        collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemies());
+        collidingObjects = findCollidingObjects(mouseRay, Game_Level::getCurrentLevel()->getEnemyObjs());
         collidedObject = closestObjectMatching(closeMouseScreenPos, collidingObjects, [&](shared_ptr<Game_Object> object_) {return object_->isTargetable();});
     }
     

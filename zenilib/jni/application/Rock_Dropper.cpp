@@ -1,6 +1,8 @@
 #include "Rock_Dropper.h"
 
 #include <stdio.h>
+
+#include "Enemy.h"
 #include "Tower_Section.h"
 #include "Rock.h"
 #include "Utility.h"

@@ -74,7 +74,7 @@ void Enemy::doMovement(float time_step) {
 		if(++pathIndex >= path->size()) 
 		{
 				stopMoving();
-				Game_Level::getCurrentLevel()->enemyLeaked(shared_from_this());
+            Game_Level::getCurrentLevel()->enemyLeaked(enable_shared_from_this<Enemy>::shared_from_this());
 				return;
 		}
 	}
@@ -107,6 +107,6 @@ void Enemy::onDamage(float damage)
 	{
 		alive = false;
 		Game_Level::getCurrentLevel()->addGold(bounty);
-		Game_Level::getCurrentLevel()->removeEnemy(shared_from_this());
+		Game_Level::getCurrentLevel()->removeEnemy(enable_shared_from_this<Enemy>::shared_from_this());
 	}
 }

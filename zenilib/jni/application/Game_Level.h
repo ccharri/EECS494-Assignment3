@@ -7,6 +7,7 @@
 class Game_Object;
 class Player;
 class Tower_Base;
+class Enemy;
 
 class Game_Level {
 public:
@@ -17,15 +18,16 @@ public:
 
 	virtual void on_logic(float time_step);
 
-	void enemyLeaked(std::shared_ptr<Game_Object> enemy);
+	void enemyLeaked(std::shared_ptr<Enemy> enemy);
 
-	const std::vector<std::shared_ptr<Game_Object> >& getEnemies() const {return enemies;};
-  void pushEnemy(std::shared_ptr<Game_Object> enemy_) {enemies.push_back(enemy_);};
-	void removeEnemy(std::shared_ptr<Game_Object> enemy);
+	const std::vector<std::shared_ptr<Enemy> >& getEnemies() const {return enemies;};
+    const std::vector<std::shared_ptr<Game_Object> > getEnemyObjs() const;
+    void pushEnemy(std::shared_ptr<Enemy> enemy_) {enemies.push_back(enemy_);};
+	void removeEnemy(std::shared_ptr<Enemy> enemy);
 
 	const std::vector<std::shared_ptr<Tower_Base> >& getBases() const {return towerBases;};
-  void pushBase(std::shared_ptr<Tower_Base> base_) {towerBases.push_back(base_);};
-  std::vector<std::shared_ptr<Game_Object> > getTowerParts() const;
+    void pushBase(std::shared_ptr<Tower_Base> base_) {towerBases.push_back(base_);};
+    std::vector<std::shared_ptr<Game_Object> > getTowerParts() const;
 
 	std::vector<Zeni::Point3f>& getPath() {return enemy_path;};
 
@@ -67,7 +69,7 @@ private:
 
 	std::vector<Zeni::Point3f> enemy_path;
 
-	std::vector<std::shared_ptr<Game_Object> > enemies;
+	std::vector<std::shared_ptr<Enemy> > enemies;
 
 	std::vector<std::shared_ptr<Tower_Base> > towerBases;
 

@@ -1,5 +1,6 @@
 #include "Rocket_Launcher.h"
 
+#include "Enemy.h"
 #include "Rocket.h"
 #include "Tower_Section.h"
 
