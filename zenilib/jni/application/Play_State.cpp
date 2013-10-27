@@ -47,15 +47,21 @@ Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))
 	//Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
 
 	shared_ptr<Tower_Base> centerBase = shared_ptr<Tower_Base>(new Tower_Base(Point3f(0,0,0)));
+
+	for(int i = 0; i < 3; i++)
+	{
+		shared_ptr<Tower_Section> rocketSection = shared_ptr<Tower_Section>(new Tower_Section(Point3f(), Vector3f(1,1,1)));
+		shared_ptr<Tower_Weapon> rocketLauncher = shared_ptr<Tower_Weapon>(new Rocket_Launcher(rocketSection, 2.5));
+		rocketSection->setWeapon(rocketLauncher);
+		centerBase->pushSection(rocketSection);
+	}
+
 	shared_ptr<Tower_Section> newSection = shared_ptr<Tower_Section>(new Tower_Section(Point3f(), Vector3f(1,1,1)));
 	shared_ptr<Tower_Weapon> dropper = shared_ptr<Tower_Weapon>(new Rock_Dropper(newSection, 2.));
 	newSection->setWeapon(dropper);
 	centerBase->pushSection(newSection);
 
-	shared_ptr<Tower_Section> rocketSection = shared_ptr<Tower_Section>(new Tower_Section(Point3f(), Vector3f(1,1,1)));
-	shared_ptr<Tower_Weapon> rocketLauncher = shared_ptr<Tower_Weapon>(new Rocket_Launcher(rocketSection, 2.5));
-	rocketSection->setWeapon(rocketLauncher);
-	centerBase->pushSection(rocketSection);
+	
 
 	Game_Level::getCurrentLevel()->pushBase(centerBase);
 }

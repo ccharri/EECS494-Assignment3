@@ -11,7 +11,7 @@ using namespace Zeni;
 Rock_Dropper::Rock_Dropper(weak_ptr<Tower_Section> owner_, float cooldown_) : Tower_Weapon(owner_, cooldown_)
 {
 	DAMAGE_PER_Z_VEL = 3;
-	LAUNCH_VEL = 10;
+	LAUNCH_VEL = 25;
   
   auto owner = owner_.lock();
   if(owner) 
@@ -25,12 +25,15 @@ Rock_Dropper::~Rock_Dropper()
 
 bool Rock_Dropper::canFire(shared_ptr<Game_Object> object)
 {
-	//TODO: Add in the parabolic checker functions.
+	if(Tower_Weapon::canFire(object))
+		return false;
+
 	Vector3f vel = object->getFacing() * Vector3f(object->getSpeed(), 0, 0);
 	float time = getTimeIterativeParabolic(object->getPosition(), vel, getSection()->getPosition(), LAUNCH_VEL);
 	if(time < 0)
 		return false;
-	return Tower_Weapon::canFire(object);
+
+	return true;
 }
 
 void Rock_Dropper::fire()
