@@ -67,6 +67,9 @@ void Tower_Weapon::on_logic(float time_step)
 
 	//If no target, find new target
 	if(!tar){
+        
+        if(fireTimer.seconds() < (last_fired_time + cooldown)) return;
+        
 		FunctorHelper helper(shared_from_this());
 		target = closestObjectMatching(owner.lock()->getPosition(), Game_Level::getCurrentLevel()->getEnemies(), helper);
 	}

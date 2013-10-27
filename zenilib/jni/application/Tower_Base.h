@@ -17,6 +17,7 @@ public:
 	{
         Zeni::Vector3f size = getSize();
 		collider = Zeni::Collision::Parallelepiped(position_ - Zeni::Vector3f(size.x, size.y, 0)/2., Zeni::Vector3f(size.x, 0, 0), Zeni::Vector3f(0, size.y, 0), Zeni::Vector3f(0, 0, size.z));
+        setName("Tower Base");
 	}
 
 	void on_logic(float time_step) override;
@@ -41,6 +42,10 @@ public:
 	// DOES: Takes the segment and changes its position to the top of the Tower_Base.
 
 	const std::vector<std::shared_ptr<Tower_Section> >& getSegments() const {return segments;};
+    
+    virtual float getPrimaryAttributeMax() const {return segments.capacity();};
+	virtual float getPrimaryAttributeCurrent() const {return segments.size();};
+	virtual Zeni::Color getPrimaryColor() const {return Zeni::Color(1.f, .5, .5, .5);};
     
     virtual bool isTargetable() const override {return true;};
     

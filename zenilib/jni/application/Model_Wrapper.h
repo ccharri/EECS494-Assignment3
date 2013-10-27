@@ -6,9 +6,9 @@
 
 class Model_Wrapper {
 public:
-	Model_Wrapper(const Zeni::String& file_) : fileName(file_), model(nullptr) {};
-	Model_Wrapper(Zeni::Model* model_) : fileName(""), model(std::shared_ptr<Zeni::Model>(model_)) {};
-    Model_Wrapper(std::shared_ptr<Zeni::Model> model_) : fileName(""), model(model_) {};
+	Model_Wrapper(const Zeni::String& file_ = "") : fileName(file_), model(nullptr) {};
+	Model_Wrapper(Zeni::Model* model_ = nullptr) : fileName(""), model(std::shared_ptr<Zeni::Model>(model_)) {};
+    Model_Wrapper(std::shared_ptr<Zeni::Model> model_ = std::shared_ptr<Zeni::Model>(nullptr)) : fileName(""), model(model_) {};
 	~Model_Wrapper() {};
 
     std::shared_ptr<Zeni::Model> getModel() const {
