@@ -2,7 +2,6 @@
 
 #include <algorithm>
 
-#include "Enemy.h"
 #include "Game_Object.h"
 #include "Player.h"
 #include "Tower_Base.h"
@@ -21,16 +20,7 @@ Game_Level::Game_Level()
 Game_Level::~Game_Level() {
 }
 
-const std::vector<std::shared_ptr<Game_Object> > Game_Level::getEnemyObjs() const
-{
-    vector<shared_ptr<Game_Object> > enemyObjs;
-    const vector<shared_ptr<Enemy> >& enemies = Game_Level::getCurrentLevel()->getEnemies();
-    for_each(enemies.begin(), enemies.end(), [&](shared_ptr<Enemy> enemy_) {enemyObjs.push_back(std::static_pointer_cast<Game_Object>(enemy_));});
-    
-    return enemyObjs;
-}
-
-void Game_Level::removeEnemy(shared_ptr<Enemy> enemy){
+void Game_Level::removeEnemy(shared_ptr<Game_Object> enemy){
 	auto it = find(enemies.begin(), enemies.end(), enemy);
 	if(it != enemies.end()) enemies.erase(it);
 }
@@ -51,7 +41,7 @@ void Game_Level::on_logic(float time_step)
 	for_each(towerBases.begin(), towerBases.end(), [&](shared_ptr<Tower_Base> base_) {if(base_) base_->on_logic(time_step);});
 }
 
-void Game_Level::enemyLeaked( std::shared_ptr<Enemy> enemy )
+void Game_Level::enemyLeaked( std::shared_ptr<Game_Object> enemy )
 {
 	
 	if(enemy->leakAmount())

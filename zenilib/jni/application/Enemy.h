@@ -4,10 +4,9 @@
 #include "Game_Object.h"
 
 #include <vector>
-#include <memory>
 #include <zenilib.h>
 
-class Enemy : public Game_Object, public std::enable_shared_from_this<Enemy>
+class Enemy : public Game_Object
 {
 public:
 	Enemy(Zeni::Point3f location_, Zeni::Vector3f size_, Zeni::Quaternion facing_, float speed_, float health_max_);
