@@ -22,7 +22,7 @@ Rocket::Rocket( std::weak_ptr<Tower_Weapon> owner_, std::weak_ptr<Enemy> target_
 
 void Rocket::on_logic( float time_step )
 {
-	shared_ptr<Enemy> tar = target.lock();
+	shared_ptr<Game_Object> tar = target.lock();
 
 	if(!tar) 
 	{
