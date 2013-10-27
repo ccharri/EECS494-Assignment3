@@ -25,7 +25,7 @@ Rock_Dropper::~Rock_Dropper()
 
 bool Rock_Dropper::canFire(shared_ptr<Game_Object> object)
 {
-	if(Tower_Weapon::canFire(object))
+	if(!Tower_Weapon::canFire(object))
 		return false;
 
 	Vector3f vel = object->getFacing() * Vector3f(object->getSpeed(), 0, 0);
