@@ -30,7 +30,7 @@ XML_Level::XML_Level(string xml)
 		if(comment == "level num")
 			levelNum = atoi(value.c_str());
 		else if(comment == "level name")
-			levelName = value;
+			setLevelName(value);
 		else if(comment  == "level model")
 			levelModel = shared_ptr<Model>(new Model(Zeni::String("models/" + value)));
 		else if("level lives" == comment)

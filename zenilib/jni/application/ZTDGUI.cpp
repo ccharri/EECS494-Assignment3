@@ -122,22 +122,32 @@ void ZTDGUI::renderPlayerAttributes(Point2f upperLeft)
     
 	//renders gold, lives, level, and level name
 	// render gold & lives
-	Vector2f size(160, 3 * sub.get_text_height());
+	Vector2f size(240, 5 * sub.get_text_height());
 	render_image("selection", upperLeft, upperLeft+size);
 
 	sub.render_text(
-        String("Gold:  ") + String(to_string(Game_Level::getCurrentLevel()->getGold())),
+		String(Game_Level::getCurrentLevel()->getLevelName()),
 		upperLeft + Point2f(20, 10),
 		get_Colors()["title_text"],
 		ZENI_LEFT);
 	sub.render_text(
-		String("Lives: ") + String(to_string(Game_Level::getCurrentLevel()->getLivesRemaining())),
+		String("Round: ") + String(to_string(Game_Level::getCurrentLevel()->getCurrentRound())),
 		upperLeft + Point2f(20, 40),
 		get_Colors()["title_text"],
 		ZENI_LEFT);
 	sub.render_text(
-		String("Time:  ") + String(to_string(int(Game_Level::getCurrentLevel()->getTimeUntilNextRound()))),
+        String("Gold:  ") + String(to_string(Game_Level::getCurrentLevel()->getGold())),
 		upperLeft + Point2f(20, 70),
+		get_Colors()["title_text"],
+		ZENI_LEFT);
+	sub.render_text(
+		String("Lives: ") + String(to_string(Game_Level::getCurrentLevel()->getLivesRemaining())),
+		upperLeft + Point2f(20, 100),
+		get_Colors()["title_text"],
+		ZENI_LEFT);
+	sub.render_text(
+		String("Time:  ") + String(to_string(int(Game_Level::getCurrentLevel()->getTimeUntilNextRound()))),
+		upperLeft + Point2f(20, 130),
 		get_Colors()["title_text"],
 		ZENI_LEFT);
 }

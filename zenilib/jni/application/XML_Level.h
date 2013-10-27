@@ -57,7 +57,6 @@ public:
 
 private:
 	int levelNum;
-	std::string levelName;
 
 	static Model_Wrapper levelModel;
 
