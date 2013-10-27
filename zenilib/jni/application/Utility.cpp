@@ -52,6 +52,7 @@ float getAngleParabolic(const Point3f targetPos, const Point3f launchPos, const 
 	float a2 = atan2(v*v - sqrt(det), SPEED_OF_GRAVITY*d);
 	return min(a2, a1);
 }
+
 float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVel, const Point3f launchPos, const float launchVel)
 //NOTE: Returns a time, or -1 if there's no trajectory.
 {
@@ -59,7 +60,7 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 	float error, angle, time;
 	do
 	{
-        angle = getAngleParabolic(targetPos, targetVel, launchVel);
+        angle = getAngleParabolic(targetPos, launchPos, launchVel);
 		if(angle == 2*acos(1))
 			return -1;
         time = getTimeParabolic(targetPos.z - launchPos.z, sin(angle)*launchVel);
