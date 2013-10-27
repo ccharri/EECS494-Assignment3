@@ -12,9 +12,10 @@ Rock_Dropper::Rock_Dropper(weak_ptr<Tower_Section> owner_, float cooldown_) : To
 {
 	DAMAGE_PER_Z_VEL = 3;
 	LAUNCH_VEL = 100;
-    
-    auto owner = owner_.lock();
-    if(owner) owner->setName("Rock Dropper");
+  
+  auto owner = owner_.lock();
+  if(owner) 
+		owner->setName("Rock Dropper");
 }
 
 Rock_Dropper::~Rock_Dropper() 

@@ -1,7 +1,8 @@
-<level name> 	Thunderplains
-<level num> 	1
-<level model>	Level1.3ds
-<level lives>	50
+<level name> 		Thunderplains
+<level model>		Level1.3ds
+<level num> 		1
+<level lives>		50
+<round gap time> 	15
 <path>
 	<node> -50, -50, 0
 	<node> -50, 50, 5 
@@ -9,7 +10,7 @@
 	<node> 50, -50, 15
 	<node> -50, -50, 20
 <tower_bases>
-	<base> -25, 25, 50
+	<base> -35, 35, 0
 <round>
 	<round num>		1
 	<round bonus>	100
@@ -25,16 +26,33 @@
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
+		<bounty>		1
 		<lives>			1
 <round>
 	<round num>		2
 	<round bonus>	100
 	<wave>
+		<name>			Furious Luggage
+		<total>			20
+		<duration>		10
+		<time_start>	0
+		<health>		25
+		<speed>			20
+		<size>			10, 10, 10
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		2
+		<life cost>		1
+<round>
+	<round num>		3
+	<round bonus>	100
+	<wave>
 		<name>			Boss Crate
 		<total>			1
 		<duration>		1
-		<time_start>	50
+		<time_start>	0
 		<health>		500
 		<speed>			15
 		<size>			10, 10, 10
@@ -43,4 +61,4 @@
 		<scaling>		1.00
 		<type>			basic
 		<bounty>		3
-		<life cost>			100
+		<life cost>		100

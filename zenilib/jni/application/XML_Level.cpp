@@ -19,6 +19,9 @@ XML_Level::XML_Level(string xml)
 	ifstream in;
 	in.open(xml);
 	
+	roundGapTime = 3;
+	nextRoundTimer.start();
+	
 	while(getline(in, line))
 	{
 		string comment = grabComment(line);
@@ -35,6 +38,8 @@ XML_Level::XML_Level(string xml)
 			setLivesMax(atoi(value.c_str()));
 			setLivesRemaining(atoi(value.c_str()));
 		}
+		else if("round gap time" == comment)
+			roundGapTime = atof(value.c_str());
 		else if(comment == "node")
 			getPath().push_back(getPointFromValue(value));
 		else if(comment == "base")
@@ -78,10 +83,8 @@ XML_Level::XML_Level(string xml)
 				rounds.back().waves.back().lifeCost = atoi(value.c_str());
 	}
 	in.close();
-	currentRound = 0;
-	levelTime = 0;
+	setCurrentRound(0);
 	startRound();
-
 }
 
 
@@ -108,8 +111,8 @@ shared_ptr<Enemy> XML_Level::Wave::spawnEnemy()
 
 void XML_Level::startRound()
 {
-	//display any data
-	//add in level gap/spending time
+	roundTime = 0;
+	waiting  = false;
 }
 
 bool XML_Level::isRoundOver()
@@ -117,42 +120,56 @@ bool XML_Level::isRoundOver()
 	cout << "num: " << getEnemies().size() << endl;
 	if(getEnemies().size() != 0)
 		return false;
-	for(Wave &w : rounds[currentRound].waves)
+	for(Wave &w : rounds[getCurrentRound()].waves)
 		if(!w.isOver())
 			return false;
 	return true;
 }
 
+float XML_Level::getTimeUntilNextRound() const
+{
+	if(waiting == false)
+		return 0;
+	return nextRoundStartTime - nextRoundTimer.seconds();
+}
+
 void XML_Level::endRound()
 {
 	//award bonus gold
-	Game_Level::getCurrentLevel()->addGold(rounds[currentRound].goldBonus);
-
-
+	Game_Level::getCurrentLevel()->addGold(rounds[getCurrentRound()].goldBonus);
+	waiting = true;
+	nextRoundStartTime = roundGapTime + nextRoundTimer.seconds();
 }
 
 void XML_Level::on_logic(float time_step)
 {
 	Game_Level::on_logic(time_step);
-	levelTime += time_step;
+	roundTime += time_step;
 
-	for(Wave &w : rounds[currentRound].waves)
-		if(!w.isOver() && w.canSpawn(levelTime))
-			w.spawnEnemy();
+	
 	
 	if(isRoundOver())
 	{
-		cout << "round ended: " << currentRound << endl; 
+		cout << "round ended: " << getCurrentRound() << endl; 
 		endRound();
-		currentRound++;
-		if(currentRound >= rounds.size())
+		setCurrentRound(getCurrentRound()+1);
+		if(getCurrentRound() >= rounds.size())
 		{
-			currentRound--;
-			//TODO: VICTORY CONDITION HERE?
+			//look, this line is totally stupid
+			setCurrentRound(getCurrentRound()-1);
+			//TODO: VICTORY CONDITION HERE
 		}
-        
-        //add delay
-		startRound();
+	}
+	if(waiting)
+	{
+		if(getTimeUntilNextRound() <= 0)
+			startRound();
+	}
+	else
+	{
+		for(Wave &w : rounds[getCurrentRound()].waves)
+		if(!w.isOver() && w.canSpawn(roundTime))
+			w.spawnEnemy();
 	}
 }
 

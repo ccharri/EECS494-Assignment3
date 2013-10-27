@@ -134,4 +134,9 @@ void ZTDGUI::renderPlayerAttributes(Point2f upperLeft)
 		upperLeft + Point2f(20, 40),
 		get_Colors()["title_text"],
 		ZENI_CENTER);
+	sub.render_text(
+		Zeni::String(to_string(int(Game_Level::getCurrentLevel()->getTimeUntilNextRound()))),
+		upperLeft + Point2f(20, 70),
+		get_Colors()["title_text"],
+		ZENI_CENTER);
 }

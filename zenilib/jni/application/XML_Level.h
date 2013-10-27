@@ -27,7 +27,7 @@ class XML_Level : public Game_Level
 		Zeni::Vector3f size;
 		Enemy_Type_e type;
 
-        std::shared_ptr<Zeni::Model> model;
+    std::shared_ptr<Zeni::Model> model;
 		float scaling;
 
 		Wave() : spawned(0), time_start(0), health(1), speed(10) {}
@@ -49,7 +49,9 @@ class XML_Level : public Game_Level
 public:
 	XML_Level(std::string xml);
 	
-    std::shared_ptr<Zeni::Model> getModel() const override {return levelModel.getModel();};
+  std::shared_ptr<Zeni::Model> getModel() const override {return levelModel.getModel();};
+	
+	float getTimeUntilNextRound() const;
 	void on_logic(float time_step) override;
 	bool isRoundOver();
 
@@ -60,8 +62,12 @@ private:
 	static Model_Wrapper levelModel;
 
 	std::vector<Round> rounds;
-	int currentRound;
-	float levelTime;
+	float roundTime;
+	
+	Zeni::Chronometer<Zeni::Time> nextRoundTimer;
+	bool waiting;
+	float nextRoundStartTime;
+	float roundGapTime;
 
 	void startRound();
 	void endRound();
