@@ -7,12 +7,12 @@ using namespace std;
 
 Model_Wrapper Rock::model = Model_Wrapper("models/spike_ball.3ds");
 
-Rock::Rock(const Point3f& position_, const Vector3f &vel_, const Quaternion& facing_)	
+Rock::Rock(const Point3f& position_, const Vector3f &vel_, const float gravity, const Quaternion& facing_)	
 		 : Physics_Object(position_, Vector3f(4,4,4), facing_)
 {
-	//setSize(Zeni::Vector3f(5, 5, 5));
+	setSize(Zeni::Vector3f(6, 6, 6));
 	setVelocity(vel_);
-	setAcceleration(GRAVITY_VECTOR);
+	setAcceleration(Vector3f(0, 0, -gravity));
 	updateCollider();
 	//setRotation(Quaternion::Forward_Up(facing_ * Vector3f(1, 0, -20).normalized(), facing_ *Vector3f(0,0,1)));
 }

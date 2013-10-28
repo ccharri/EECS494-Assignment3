@@ -14,6 +14,7 @@ public:
 
 	float DAMAGE_PER_Z_VEL;
 	float LAUNCH_VEL;
+	float GRAVITY;
 
 	bool canFire(std::shared_ptr<Game_Object> object) override;
 	void fire() override;

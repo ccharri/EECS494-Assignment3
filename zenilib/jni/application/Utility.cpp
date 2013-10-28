@@ -24,10 +24,10 @@ using namespace std;
 //}
 
 
-float getTimeParabolic(float velY, float deltaY)
+float getTimeParabolic(float velY, float deltaY, const float g)
 //NOTE: Returns a negative value if the parabolic can't work.
 {
-	float a = SPEED_OF_GRAVITY;
+	float a = g;
 	float b = velY;
 	float c = deltaY;
 	float det = b*b - 4*a*c;
@@ -42,22 +42,22 @@ float getTimeParabolic(float velY, float deltaY)
 	return min(t1, t2);
 }
 
-float getAngleParabolic(const Point3f targetPos, const Point3f launchPos, const float launchVel)
+float getAngleParabolic(const Point3f targetPos, const Point3f launchPos, const float launchVel, const float g)
 //NOTE: Returns a value between pi/2 and -pi/2. If no trajectory, returns 2pi.
 {
 	float d = hypot(targetPos.x - launchPos.x, targetPos.y - launchPos.y);
 	float z = targetPos.z - launchPos.z;
 	float v = launchVel;
-	float det = v*v*v*v - SPEED_OF_GRAVITY*(SPEED_OF_GRAVITY*d*d + 2*z*v*v);
+	float det = v*v*v*v - g*(g*d*d + 2*z*v*v);
 	if(det < 0)
 		return 2*acos(1);
-	float a1 = atan2(v*v + sqrt(det), SPEED_OF_GRAVITY*d);
-	float a2 = atan2(v*v - sqrt(det), SPEED_OF_GRAVITY*d);
+	float a1 = atan2(v*v + sqrt(det), g*d);
+	float a2 = atan2(v*v - sqrt(det), g*d);
 	cout << "@@@@: " << min(a2, a1) << endl;
 	return min(a2, a1);
 }
 
-float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVel, const Point3f launchPos, const float launchVel)
+float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVel, const Point3f launchPos, const float launchVel, const float g)
 //NOTE: Returns a time, or -1 if there's no trajectory.
 {
 	Point3f iterativePos = targetPos;
@@ -65,23 +65,16 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 	int i = 0;
 	do
 	{
-        angle = getAngleParabolic(iterativePos, launchPos, launchVel);
+        angle = getAngleParabolic(iterativePos, launchPos, launchVel, g);
 		if(angle == 2*acos(1))
 			return -1;
-        time = getTimeParabolic(iterativePos.z - launchPos.z, sin(angle)*launchVel);
+        time = getTimeParabolic(iterativePos.z - launchPos.z, sin(angle)*launchVel, g);
 		if(time < 0)
 			return -1;
 		Point3f newPos = targetPos + targetVel * time;
-        
-        //Don't sqr root
 		error = pow(iterativePos.x - newPos.x, 2) + pow(iterativePos.y - newPos.y, 2) + pow(iterativePos.z - newPos.z, 2); 
 		iterativePos = .5 * (iterativePos + newPos);
-
-
-		if(i > 50)
-			exit(45);
-		cout << newPos.x << " , " << newPos.y << " , " << angle << " , " << time << " , " << i << ", " << error << endl;
-	}while(error > 0.5 && i++ < 5);
+	}while(error > 0.5 && i++ < 3);
     return time;
 }
 

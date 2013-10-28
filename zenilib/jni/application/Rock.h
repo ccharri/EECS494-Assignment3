@@ -3,13 +3,14 @@
 
 #include "Physics_Object.h"
 #include "Model_Wrapper.h"
+#include "Constants.h"
 #include <zenilib.h>
 #include <memory>
 
 class Rock : public Physics_Object
 {
 public:
-	Rock(const Zeni::Point3f& position_, const Zeni::Vector3f &vel, 
+	Rock(const Zeni::Point3f& position_, const Zeni::Vector3f &vel, const float gravity = SPEED_OF_GRAVITY,
 			 const Zeni::Quaternion& facing_ = Zeni::Quaternion());
 
 	void on_logic(float time_step);
