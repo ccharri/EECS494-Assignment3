@@ -13,7 +13,7 @@ using namespace Zeni;
 Rock_Dropper::Rock_Dropper(weak_ptr<Tower_Section> owner_, float cooldown_) : Tower_Weapon(owner_, cooldown_)
 {
 	DAMAGE_PER_Z_VEL = 3;
-	LAUNCH_VEL = 25;
+	LAUNCH_VEL = 20;
 	GRAVITY = 19.6;
   
   auto owner = owner_.lock();

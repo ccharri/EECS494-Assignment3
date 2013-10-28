@@ -10,7 +10,7 @@ Model_Wrapper Rock::model = Model_Wrapper("models/spike_ball.3ds");
 Rock::Rock(const Point3f& position_, const Vector3f &vel_, const float gravity, const Quaternion& facing_)	
 		 : Physics_Object(position_, Vector3f(4,4,4), facing_)
 {
-	setSize(Zeni::Vector3f(6, 6, 6));
+	setSize(Zeni::Vector3f(8, 8, 8));
 	setVelocity(vel_);
 	setAcceleration(Vector3f(0, 0, -gravity));
 	updateCollider();
