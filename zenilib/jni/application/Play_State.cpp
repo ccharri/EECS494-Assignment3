@@ -46,22 +46,22 @@ Play_State::Play_State() : Widget_Gamestate(make_pair(Point2f(get_Video().get_vi
 	Game_Level::getCurrentLevel()->pushEnemy(shared_ptr<Game_Object>(new Arrow(Point3f(-50., -50., 0.))));
 	//Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
 
-	shared_ptr<Tower_Base> centerBase = shared_ptr<Tower_Base>(new Tower_Base(Point3f(0,0,0)));
-
-	for(int i = 0; i < 3; i++)
-	{
-		shared_ptr<Tower_Section> rocketSection = shared_ptr<Tower_Section>(new Tower_Section());
-		shared_ptr<Tower_Weapon> rocketLauncher = shared_ptr<Tower_Weapon>(new Rocket_Launcher(rocketSection, 2.5));
-		rocketSection->setWeapon(rocketLauncher);
-		centerBase->pushSection(rocketSection);
-	}
-
-	shared_ptr<Tower_Section> newSection = shared_ptr<Tower_Section>(new Tower_Section());
-	shared_ptr<Tower_Weapon> dropper = shared_ptr<Tower_Weapon>(new Rock_Dropper(newSection, 2.));
-	newSection->setWeapon(dropper);
-	centerBase->pushSection(newSection);
-
-	Game_Level::getCurrentLevel()->pushBase(centerBase);
+//	shared_ptr<Tower_Base> centerBase = shared_ptr<Tower_Base>(new Tower_Base(Point3f(0,0,0)));
+//
+//	for(int i = 0; i < 3; i++)
+//	{
+//		shared_ptr<Tower_Section> rocketSection = shared_ptr<Tower_Section>(new Tower_Section());
+//		shared_ptr<Tower_Weapon> rocketLauncher = shared_ptr<Tower_Weapon>(new Rocket_Launcher(rocketSection, 2.5));
+//		rocketSection->setWeapon(rocketLauncher);
+//		centerBase->pushSection(rocketSection);
+//	}
+//
+//	shared_ptr<Tower_Section> newSection = shared_ptr<Tower_Section>(new Tower_Section());
+//	shared_ptr<Tower_Weapon> dropper = shared_ptr<Tower_Weapon>(new Rock_Dropper(newSection, 2.));
+//	newSection->setWeapon(dropper);
+//	centerBase->pushSection(newSection);
+//
+//	Game_Level::getCurrentLevel()->pushBase(centerBase);
 }
 
 void Play_State::on_push() {

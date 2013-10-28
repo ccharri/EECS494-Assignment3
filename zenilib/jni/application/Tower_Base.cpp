@@ -6,6 +6,7 @@
 #include "Play_State.h"
 #include "Tower_Section.h"
 #include "Rock_Dropper.h"
+#include "Rocket_Launcher.h"
 #include "Constants.h"
 #include "ZTDGUI.h"
 
@@ -49,6 +50,40 @@ private:
 	Tower_Base* owner;
 };
 
+class Rocket_Button : public Text_Button
+{
+public:
+	Rocket_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) : Text_Button(upperLeft_, lowerRight_, "system_36_800x600", String("Rocket Launcher\n") + itoa(Rocket_Launcher::getCost())), owner(owner_)
+	{
+        
+	}
+    
+	void on_accept() override
+	{
+        auto level = Game_Level::getCurrentLevel();
+        level->getState()->getGUI().markIgnoreNextClick();
+        
+        if(level->getGold() < Rocket_Launcher::getCost()) return;
+        
+		shared_ptr<Tower_Section> rocketSection(new Tower_Section());
+		shared_ptr<Tower_Weapon> rocketWeapon(new Rocket_Launcher(rocketSection));
+		rocketSection->setWeapon(rocketWeapon);
+		owner->pushSection(rocketSection);
+        
+        level->removeGold(Rocket_Launcher::getCost());
+        
+		Text_Button::on_accept();
+	}
+    
+    void on_hover() override
+    {
+        
+    }
+    
+private:
+	Tower_Base* owner;
+};
+
 Tower_Base::Tower_Base(const Point3f &position_) : Game_Object(position_, Vector3f(20,20,1), Quaternion(), Vector3f(1,1,1))
 {
     Vector3f size = getSize();
@@ -56,8 +91,10 @@ Tower_Base::Tower_Base(const Point3f &position_) : Game_Object(position_, Vector
     setName("Tower Base");
 
 	Dropper_Button* dropperButton = new Dropper_Button(this, Point2f(25, Window::get_height() - 125), Point2f(225, Window::get_height() - 25));
+    Rocket_Button* rocketButton = new Rocket_Button(this, Point2f(250, Window::get_height()-125), Point2f(450, Window::get_height() - 25));
 
 	towerSegmentButtons.push_back(dropperButton);
+    towerSegmentButtons.push_back(rocketButton);
 }
 
 Tower_Base::~Tower_Base() 

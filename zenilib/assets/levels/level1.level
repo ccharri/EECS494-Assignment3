@@ -11,13 +11,14 @@
 	<node> 45, -45, 1
 	<node> -45, -45, 1
 <tower_bases>
+	<base> 0, 0, 0
 	<base> -35, 35, 0
 	<base> 35, 35, 0
 	<base> -35, -35, 0
 	<base> 35, -35, 0
 <round>
 	<round num>		1
-	<round bonus>	10
+	<round bonus>	50
 	<wave>
 		<name>			Smallpox Box
 		<total>			10
@@ -34,7 +35,7 @@
 		<life cost>		1
 <round>
 	<round num>		2
-	<round bonus>	20
+	<round bonus>	55
 	<wave>
 		<name>			Furious Luggage
 		<total>			22
@@ -51,7 +52,7 @@
 		<life cost>		1
 <round>
 	<round num>		3
-	<round bonus>	30
+	<round bonus>	60
 	<wave>
 		<name>			Box of Purity and Light
 		<total>			2
@@ -68,7 +69,7 @@
 		<life cost>		5
 <round>
 	<round num>		4
-	<round bonus>	40
+	<round bonus>	65
 	<wave>
 		<name>			Assassin Box
 		<total>			2
@@ -99,7 +100,7 @@
 		<life cost>		0
 <round>
 	<round num>		5
-	<round bonus>	50
+	<round bonus>	70
 	<wave>
 		<name>			God
 		<total>			1
@@ -116,7 +117,7 @@
 		<life cost>		10
 <round>
 	<round num>		6
-	<round bonus>	60
+	<round bonus>	75
 	<wave>
 		<name>			Box Full of Zerglings
 		<total>			30
@@ -133,7 +134,7 @@
 		<life cost>		1
 <round>
 	<round num>		7
-	<round bonus>	70
+	<round bonus>	80
 	<wave>
 		<name>			Box with Anodized Nails
 		<total>			5
@@ -150,7 +151,7 @@
 		<life cost>		3
 <round>
 	<round num>		8
-	<round bonus>	80
+	<round bonus>	85f
 	<wave>
 		<name>			Boss of Anodized Nails
 		<total>			5
