@@ -23,7 +23,7 @@
 		<name>			Smallpox Box
 		<total>			10
 		<duration>		10
-		<time_start>	0
+		<time_start>	15
 		<health>		75
 		<speed>			10
 		<size>			1, 1, 1
