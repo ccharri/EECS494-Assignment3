@@ -22,7 +22,7 @@
 		<time_start>	0
 		<health>		75
 		<speed>			10
-		<size>			10, 10, 10
+		<size>			1, 1, 1
 		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
@@ -39,7 +39,7 @@
 		<time_start>	0
 		<health>		25
 		<speed>			10
-		<size>			10, 10, 10
+		<size>			1, 1, 1
 		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
@@ -50,13 +50,13 @@
 	<round num>		3
 	<round bonus>	30
 	<wave>
-		<name>			Hammerhead Box
+		<name>			Box of Purity and Light
 		<total>			2
 		<duration>		10
 		<time_start>	0
-		<health>		300
+		<health>		700
 		<speed>			15
-		<size>			10, 10, 10
+		<size>			1, 1, 1
 		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
@@ -67,19 +67,33 @@
 	<round num>		4
 	<round bonus>	40
 	<wave>
-		<name>			
-		<total>			1
-		<duration>		1
-		<time_start>	0
-		<health>		500
-		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
+		<name>			Assassin Box
+		<total>			2
+		<duration>		2
+		<time_start>	5
+		<health>		125
+		<speed>			20
+		<size>			1, 1, 1
+		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		20
+		<life cost>		10
+	<wave>
+		<name>			Decoy Box
+		<total>			12
+		<duration>		12
+		<time_start>	0
+		<health>		75
+		<speed>			10
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		0
+		<life cost>		0
 <round>
 	<round num>		5
 	<round bonus>	50

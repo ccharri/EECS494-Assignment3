@@ -41,7 +41,7 @@ XML_Level::XML_Level(string xml)
 		else if("round gap time" == comment)
 			roundGapTime = atof(value.c_str());
 		else if("initial gold" == comment)
-			Game_Level::getCurrentLevel()->addGold(atoi(value.c_str()));
+			addGold(atoi(value.c_str()));
 		else if(comment == "node")
 			getPath().push_back(getPointFromValue(value));
 		else if(comment == "base")

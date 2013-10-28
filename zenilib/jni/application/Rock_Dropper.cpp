@@ -45,7 +45,7 @@ void Rock_Dropper::fire()
 	targetPos = targetPos + targetVel * time;
 	
 	float vAngle = getAngleParabolic(targetPos, getSection()->getPosition(), LAUNCH_VEL);
-	float hAngle = atan2(targetPos.x-launchPos.x, targetPos.y-launchPos.y);
+	float hAngle = atan2(targetPos.y-launchPos.y, targetPos.x-launchPos.x);
 	Vector3f projectileVel(cos(hAngle)*cos(vAngle) * LAUNCH_VEL, sin(hAngle)*cos(vAngle) * LAUNCH_VEL, sin(vAngle)*LAUNCH_VEL);
 
 	shared_ptr<Game_Object> r = shared_ptr<Game_Object>(new Rock(getSection()->getPosition(), projectileVel));
