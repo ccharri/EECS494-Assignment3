@@ -15,6 +15,8 @@ void ZTDGUI::on_key(const SDL_KeyboardEvent &event)
 
 void ZTDGUI::on_mouse_button( const SDL_MouseButtonEvent &event )
 {
+	if(event.state == SDL_PRESSED) return;
+
 	switch(event.button)
 	{
 		case 1:

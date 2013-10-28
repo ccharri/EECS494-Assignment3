@@ -25,6 +25,8 @@ public:
 		shared_ptr<Tower_Weapon> dropperWeapon(new Rock_Dropper(dropperSection));
 		dropperSection->setWeapon(dropperWeapon);
 		owner->pushSection(dropperSection);
+
+		Text_Button::on_accept();
 	}
 
 
@@ -38,12 +40,14 @@ Tower_Base::Tower_Base(const Point3f &position_) : Game_Object(position_, Vector
 	collider = Collision::Parallelepiped(position_ - Vector3f(size.x, size.y, 0)/2., Vector3f(size.x, 0, 0), Vector3f(0, size.y, 0), Vector3f(0, 0, size.z));
     setName("Tower Base");
 
-	Text_Button &dropperButton = Dropper_Button(this, Point2f(50, Window::get_height() - 100), Point2f(150, Window::get_height() - 50));
+	Dropper_Button* dropperButton = new Dropper_Button(this, Point2f(25, Window::get_height() - 100), Point2f(225, Window::get_height() - 50));
+
+	towerSegmentButtons.push_back(dropperButton);
 }
 
 Tower_Base::~Tower_Base() 
 {
-
+	for_each(towerSegmentButtons.begin(), towerSegmentButtons.end(), [&](Text_Button* button_) {delete button_;});
 }
 
 float Tower_Base::getNextSectionZ() const
@@ -78,15 +82,15 @@ void Tower_Base::render()
 
 void Tower_Base::onSelection(ZTDGUI* gui_)
 {
-	for_each(towerSegmentButtons.begin(), towerSegmentButtons.end(), [&](Text_Button &button_) {
-		gui_->lendWidget(button_);
+	for_each(towerSegmentButtons.begin(), towerSegmentButtons.end(), [&](Text_Button* button_) {
+		gui_->lendWidget(*button_);
 	});
 }
 
 void Tower_Base::onDeselection(ZTDGUI* gui_)
 {
-	for_each(towerSegmentButtons.begin(), towerSegmentButtons.end(), [&](Text_Button &button_) {
-		gui_->unlendWidget(button_);
+	for_each(towerSegmentButtons.begin(), towerSegmentButtons.end(), [&](Text_Button* button_) {
+		gui_->unlendWidget(*button_);
 	});
 }
 

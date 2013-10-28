@@ -1,6 +1,8 @@
 #include "Rock_Dropper.h"
 
 #include <stdio.h>
+
+#include "Game_Level.h"
 #include "Tower_Section.h"
 #include "Rock.h"
 #include "Utility.h"
@@ -58,4 +60,20 @@ void Rock_Dropper::fire()
 void Rock_Dropper::on_logic(float time_step)
 {
 	Tower_Weapon::on_logic(time_step);
+
+	auto projectiles = getProjectiles();
+	for_each(projectiles.begin(), projectiles.end(), [&](shared_ptr<Game_Object> rock_) {
+		auto rock = dynamic_pointer_cast<Rock>(rock_);
+		auto collidingEnemies = findCollidingObjects(rock->getCollider(), Game_Level::getCurrentLevel()->getEnemies());
+
+
+		for_each(collidingEnemies.begin(), collidingEnemies.end(), [&](shared_ptr<Game_Object> enemy_) {
+			enemy_->onDamage(DAMAGE_PER_Z_VEL * abs(rock->getVelocity().z));
+		});
+
+		if(collidingEnemies.size())
+		{
+			removeProjectile(rock);
+		}
+	});
 }

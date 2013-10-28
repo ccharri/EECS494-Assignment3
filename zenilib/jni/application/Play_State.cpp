@@ -98,13 +98,13 @@ void Play_State::on_key(const SDL_KeyboardEvent &event) {
 }
 
 void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event) {
-	god_view.position += god_view.get_forward().normalized() * event.y;
 	Widget_Gamestate::on_mouse_wheel(event);
+	god_view.position += god_view.get_forward().normalized() * event.y;
 }
 
 void Play_State::on_mouse_motion(const SDL_MouseMotionEvent &event) {
-	gui.on_mouse_motion(event);
 	Widget_Gamestate::on_mouse_motion(event);
+	gui.on_mouse_motion(event);
 }
 
 
@@ -213,10 +213,12 @@ void Play_State::render() {
 	vr.clear_depth_buffer();
 
 	gui.render();
+
+	m_widgets.render();
 }
 
 void Play_State::on_mouse_button( const SDL_MouseButtonEvent &event )
 {
+	Widget_Gamestate::on_mouse_button(event);
 	gui.on_mouse_button(event);
-	Gamestate_Base::on_mouse_button(event);
 }

@@ -37,11 +37,11 @@ class Play_State : public Zeni::Widget_Gamestate {
 		int decrementLives(int delta) {lives -= delta;}
 		int setLives(int amount) {lives = amount;}
 
-    void perform_logic();
+    void perform_logic() override;
 
-		void performMovement(float time_step);
+	void performMovement(float time_step);
 
-    void render();
+    void render() override;
 
 	virtual void on_mouse_button( const SDL_MouseButtonEvent &event );
 

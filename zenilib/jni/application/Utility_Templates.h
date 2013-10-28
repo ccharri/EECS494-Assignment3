@@ -32,6 +32,8 @@ std::vector<std::shared_ptr<Game_Object> > findCollidingObjects(const collider& 
 	std::vector<std::shared_ptr<Game_Object> > r_vector;
 
 	for_each(objects_.begin(), objects_.end(), [&](std::shared_ptr<Game_Object> object_) {
+		if(!object_->isTargetable()) return;
+
 		if(object_ && object_->collide(collider_)) 
 			r_vector.push_back(object_);
 	});

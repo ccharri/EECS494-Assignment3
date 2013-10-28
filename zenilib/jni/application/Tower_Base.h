@@ -58,7 +58,7 @@ private:
     
     Zeni::Collision::Parallelepiped collider;
 
-	std::vector<Zeni::Text_Button> towerSegmentButtons;
+	std::vector<Zeni::Text_Button*> towerSegmentButtons;
 };
 
 #endif

@@ -14,6 +14,8 @@ public:
 
 	void on_logic(float time_step);
     std::shared_ptr<Zeni::Model> getModel() const override {return model.getModel();}
+
+	const Zeni::Collision::Sphere& getCollider() const {return collider;}; 
 	
 private:
 	Zeni::Vector3f size;
