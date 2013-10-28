@@ -209,6 +209,7 @@ void Play_State::render() {
 	vr.set_ambient_lighting(UILight);
     
 	vr.set_2d();
+	vr.clear_depth_buffer();
 
 	gui.render();
 }
