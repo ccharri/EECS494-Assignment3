@@ -28,8 +28,7 @@ bool Rock_Dropper::canFire(shared_ptr<Game_Object> object)
 	if(!Tower_Weapon::canFire(object))
 		return false;
 
-	Vector3f vel = object->getFacing() * Vector3f(object->getSpeed(), 0, 0);
-	float time = getTimeIterativeParabolic(object->getPosition(), vel, getSection()->getPosition(), LAUNCH_VEL);
+	float time = getTimeIterativeParabolic(object->getPosition(), object->getVel(), getSection()->getPosition(), LAUNCH_VEL);
 	if(time < 0)
 		return false;
 
@@ -41,7 +40,7 @@ void Rock_Dropper::fire()
 	Tower_Weapon::fire();
 	Point3f launchPos = getSection()->getPosition();
 	Point3f targetPos = getTarget()->getPosition();
-	Vector3f targetVel = getTarget()->getFacing() * Vector3f(getTarget()->getSpeed(), 0, 0);
+	Vector3f targetVel = getTarget()->getVel();
 	float time = getTimeIterativeParabolic(targetPos, targetVel, launchPos, LAUNCH_VEL);
 	targetPos = targetPos + targetVel * time;
 	

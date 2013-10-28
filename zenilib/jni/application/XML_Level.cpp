@@ -40,6 +40,8 @@ XML_Level::XML_Level(string xml)
 		}
 		else if("round gap time" == comment)
 			roundGapTime = atof(value.c_str());
+		else if("initial gold" == comment)
+			Game_Level::getCurrentLevel()->addGold(atoi(value.c_str()));
 		else if(comment == "node")
 			getPath().push_back(getPointFromValue(value));
 		else if(comment == "base")
@@ -90,7 +92,6 @@ XML_Level::XML_Level(string xml)
 
 bool XML_Level::Wave::canSpawn(float time_passed)
 {
-	cout << "s: " << spawned << " d: " << duration << "t: " << total << endl;
 	return (time_passed - time_start) >= (duration / (total+1)) * spawned;
 }
 
@@ -98,7 +99,7 @@ shared_ptr<Enemy> XML_Level::Wave::spawnEnemy()
 {
 	shared_ptr<Enemy> e;
 	if(type == BASIC)
-		e =  shared_ptr<Enemy>(new Basic_Enemy(Game_Level::getCurrentLevel()->getPath().front(), speed, health, model));
+		e = shared_ptr<Enemy>(new Basic_Enemy(Game_Level::getCurrentLevel()->getPath().front(), speed, health, model));
 	e->setSize(size);
 	e->setName(name);
 	e->setBounty(bounty);
@@ -117,7 +118,6 @@ void XML_Level::startRound()
 
 bool XML_Level::isRoundOver()
 {
-	cout << "num: " << getEnemies().size() << endl;
 	if(getEnemies().size() != 0)
 		return false;
 	for(Wave &w : rounds[getCurrentRound()].waves)
@@ -146,8 +146,6 @@ void XML_Level::on_logic(float time_step)
 	Game_Level::on_logic(time_step);
 	roundTime += time_step;
 
-	
-	
 	if(isRoundOver())
 	{
 		cout << "round ended: " << getCurrentRound() << endl; 

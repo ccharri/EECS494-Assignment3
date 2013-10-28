@@ -41,7 +41,8 @@ public:
 	virtual float getPrimaryAttributeCurrent() const {return 0;};
 	virtual Zeni::Color getPrimaryColor() const {return Zeni::Color(0.f, 0.f, 0.f, 0.f);};
 
-	virtual float getSpeed() const {return 0;}
+	virtual Zeni::Vector3f getVel() const {return Zeni::Vector3f(0,0,0);};
+	float getSpeed() const {return getVel().magnitude();}
 
 	//Quality of Life function for setting position AND facing BEFORE updating collider (for those objects with a collider based on rotation)
 	virtual void setPositionAndLookAt(Zeni::Point3f position_, Zeni::Point3f lookPos_) {position = position_; lookAt(lookPos_);};

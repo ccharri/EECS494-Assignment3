@@ -16,7 +16,7 @@ public:
 	Zeni::Vector3f getAcceleration() {return acc;}
 	Zeni::Quaternion getRotation() {return rotation;};
 
-	float getSpeed() const {return vel.magnitude();} 
+	Zeni::Vector3f getVel() const {return vel;} 
 
 	virtual void on_logic(float time_step) override;
 

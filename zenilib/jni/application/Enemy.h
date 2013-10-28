@@ -17,7 +17,8 @@ public:
 
 	void setPath(std::vector<Zeni::Point3f>* path_) {path = path_;};
 
-	float getSpeed() const {return speed;};
+	Zeni::Vector3f getVel() const;
+	float getSpeed() const {return speed;}
 	bool isMoving() const {return moving;};
 
 	float getMaxHealth() const {return health_max;};

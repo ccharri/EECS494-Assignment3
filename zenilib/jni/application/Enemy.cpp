@@ -60,6 +60,11 @@ void Enemy::on_logic(float time_step)
 	doMovement(time_step);
 }
 
+Vector3f Enemy::getVel() const {
+	Point3f next = (*path)[pathIndex];
+	return Vector3f(next - getPosition()).normalized() * getSpeed();
+}
+
 void Enemy::doMovement(float time_step) {
 	if(!moving) return;
 	if(!alive) return;

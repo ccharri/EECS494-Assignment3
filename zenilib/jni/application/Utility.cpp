@@ -30,8 +30,11 @@ float getTimeParabolic(float velY, float deltaY)
 	float a = SPEED_OF_GRAVITY;
 	float b = velY;
 	float c = deltaY;
-	float t1 = (-b + sqrt(b*b - 4*a*c))/(2*a);
-	float t2 = (-b - sqrt(b*b - 4*a*c))/(2*a);
+	float det = b*b - 4*a*c;
+	if(det < 0)
+		return -1;
+	float t1 = (-b + sqrt(det))/(2*a);
+	float t2 = (-b - sqrt(det))/(2*a);
 	if(t1 < 0)
 		return t2;
 	else if(t2 < 0)
@@ -50,6 +53,7 @@ float getAngleParabolic(const Point3f targetPos, const Point3f launchPos, const 
 		return 2*acos(1);
 	float a1 = atan2(v*v + sqrt(det), SPEED_OF_GRAVITY*d);
 	float a2 = atan2(v*v - sqrt(det), SPEED_OF_GRAVITY*d);
+	cout << "@@@@: " << min(a2, a1) << endl;
 	return min(a2, a1);
 }
 
@@ -58,6 +62,7 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 {
 	Point3f iterativePos = targetPos;
 	float error, angle, time;
+	int i = 0;
 	do
 	{
         angle = getAngleParabolic(iterativePos, launchPos, launchVel);
@@ -72,8 +77,11 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 		iterativePos = newPos;
         //Because we compare against .05 (our error value) squared
         //Nice!
-	}while(error > 0.25);
-    
+		i++;
+		if(i > 50)
+			exit(45);
+		cout << newPos.x << " , " << newPos.y << " , " << angle << " , " << time << " , " << i << ", " << error << endl;
+	}while(error > 0.5 && i < 2);
     return time;
 }
 

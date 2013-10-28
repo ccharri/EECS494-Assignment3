@@ -2,42 +2,26 @@
 <level model>		Level1.3ds
 <level num> 		1
 <level lives>		50
+<initial gold>		100
 <round gap time> 	15
 <path>
-	<node> -50, -50, 0
-	<node> -50, 50, 5 
-	<node> 50, 50, 10
-	<node> 50, -50, 15
-	<node> -50, -50, 20
+	<node> -45, -45, 1
+	<node> -45, 45, 1
+	<node> 45, 45, 1
+	<node> 45, -45, 1
+	<node> -45, -45, 1
 <tower_bases>
 	<base> -35, 35, 0
 <round>
 	<round num>		1
-	<round bonus>	100
+	<round bonus>	10
 	<wave>
-		<name>			Rustic Farmboy
-		<total>			5
+		<name>			Smallpox Box
+		<total>			10
 		<duration>		10
 		<time_start>	0
-		<health>		51
+		<health>		75
 		<speed>			10
-		<size>			10, 10, 10
-		<model>			spike_ball.3ds
-		<height>		0
-		<scaling>		1.00
-		<type>			basic
-		<bounty>		1
-		<lives>			1
-<round>
-	<round num>		2
-	<round bonus>	100
-	<wave>
-		<name>			Furious Luggage
-		<total>			20
-		<duration>		10
-		<time_start>	0
-		<health>		25
-		<speed>			20
 		<size>			10, 10, 10
 		<model>			Crate.3ds
 		<height>		0
@@ -46,7 +30,143 @@
 		<bounty>		2
 		<life cost>		1
 <round>
+	<round num>		2
+	<round bonus>	20
+	<wave>
+		<name>			Furious Luggage
+		<total>			22
+		<duration>		10
+		<time_start>	0
+		<health>		25
+		<speed>			10
+		<size>			10, 10, 10
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		1
+		<life cost>		1
+<round>
 	<round num>		3
+	<round bonus>	30
+	<wave>
+		<name>			Hammerhead Box
+		<total>			2
+		<duration>		10
+		<time_start>	0
+		<health>		300
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		10
+		<life cost>		5
+<round>
+	<round num>		4
+	<round bonus>	40
+	<wave>
+		<name>			
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		5
+	<round bonus>	50
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		6
+	<round bonus>	60
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		7
+	<round bonus>	70
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		8
+	<round bonus>	80
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		9
+	<round bonus>	90
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		10
 	<round bonus>	100
 	<wave>
 		<name>			Boss Crate
@@ -62,3 +182,88 @@
 		<type>			basic
 		<bounty>		3
 		<life cost>		100
+<round>
+	<round num>		11
+	<round bonus>	110
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		12
+	<round bonus>	120
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		13
+	<round bonus>	130
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		14
+	<round bonus>	140
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100	
+<round>		
+	<round num>		15
+	<round bonus>	150
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100	
