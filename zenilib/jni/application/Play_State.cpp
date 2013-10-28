@@ -19,7 +19,7 @@
 using namespace Zeni;
 using namespace std;
 
-Play_State::Play_State() : Widget_Gamestate(make_pair(Point2f(get_Video().get_viewport().first), Point2f(get_Video().get_viewport().second))) /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
+Play_State::Play_State() : Widget_Gamestate(make_pair(Point2f(get_Video().get_viewport().first), Point2f(get_Video().get_viewport().second))), gui(this) /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = true;
 	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.f);
@@ -50,18 +50,16 @@ Play_State::Play_State() : Widget_Gamestate(make_pair(Point2f(get_Video().get_vi
 
 	for(int i = 0; i < 3; i++)
 	{
-		shared_ptr<Tower_Section> rocketSection = shared_ptr<Tower_Section>(new Tower_Section(Point3f(), Vector3f(1,1,1)));
+		shared_ptr<Tower_Section> rocketSection = shared_ptr<Tower_Section>(new Tower_Section());
 		shared_ptr<Tower_Weapon> rocketLauncher = shared_ptr<Tower_Weapon>(new Rocket_Launcher(rocketSection, 2.5));
 		rocketSection->setWeapon(rocketLauncher);
 		centerBase->pushSection(rocketSection);
 	}
 
-	shared_ptr<Tower_Section> newSection = shared_ptr<Tower_Section>(new Tower_Section(Point3f(), Vector3f(1,1,1)));
+	shared_ptr<Tower_Section> newSection = shared_ptr<Tower_Section>(new Tower_Section());
 	shared_ptr<Tower_Weapon> dropper = shared_ptr<Tower_Weapon>(new Rock_Dropper(newSection, 2.));
 	newSection->setWeapon(dropper);
 	centerBase->pushSection(newSection);
-
-	
 
 	Game_Level::getCurrentLevel()->pushBase(centerBase);
 }

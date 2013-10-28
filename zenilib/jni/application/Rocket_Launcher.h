@@ -11,7 +11,7 @@ class Tower_Section;
 class Rocket_Launcher : public Tower_Weapon
 {
 public:
-	Rocket_Launcher(std::weak_ptr<Tower_Section> owner_, float cooldown_);
+	Rocket_Launcher(std::weak_ptr<Tower_Section> owner_, float cooldown_ = 2.5f);
 
 	virtual void on_logic( float time_step );
 

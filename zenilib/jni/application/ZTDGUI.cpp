@@ -2,6 +2,7 @@
 
 #include "Game_Object.h"
 #include "Game_Level.h"
+#include "Play_State.h"
 #include "Utility.h"
 
 using namespace Zeni;
@@ -17,8 +18,40 @@ void ZTDGUI::on_mouse_button( const SDL_MouseButtonEvent &event )
 	switch(event.button)
 	{
 		case 1:
+		{
+			auto prevSelect = selectedObj;
 			selectedObj = findMousedTarget();
+
+			auto prevSelectObj = prevSelect.lock();
+			auto selectObj = selectedObj.lock();
+
+			if(prevSelectObj)
+			{
+				//If there was an object selected before click, and still is one now
+				if(selectObj)
+				{
+					//If different, deselect old, select new
+					if(!(prevSelectObj == selectObj))
+					{
+						prevSelectObj->onDeselection(this);
+						selectObj->onSelection(this);
+					}
+				}
+				//Otherwise, we know there was previous, and is not now
+				else
+				{
+					prevSelectObj->onDeselection(this);
+				}
+			}
+			else {
+				if(selectObj)
+				{
+					selectObj->onSelection(this);
+				}
+			}
+
 			break;
+		}
 		default:
 			break;
 	}
@@ -96,6 +129,16 @@ void ZTDGUI::on_logic(const Projector3D& projector_)
 {
 	proj = projector_;
 	highlightObj = findMousedTarget();
+}
+
+void ZTDGUI::lendWidget(Zeni::Widget &widget_)
+{
+	playState->lendWidget(widget_);
+}
+
+void ZTDGUI::unlendWidget(Zeni::Widget &widget_)
+{
+	playState->unlendWidget(widget_);
 }
 
 weak_ptr<Game_Object> ZTDGUI::findMousedTarget()

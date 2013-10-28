@@ -27,6 +27,9 @@ class Play_State : public Zeni::Widget_Gamestate {
     void on_mouse_motion(const SDL_MouseMotionEvent &event);
 		void on_mouse_wheel(const SDL_MouseWheelEvent &event);
 
+		void lendWidget(Zeni::Widget &widget_) {m_widgets.lend_Widget(widget_);};
+		void unlendWidget(Zeni::Widget &widget_) {m_widgets.unlend_Widget(widget_);};
+
 		int getGold() const {return gold;}
 		int incrementGold(int delta) {gold += delta;}
 		int setGold(int amount) {gold = amount;}

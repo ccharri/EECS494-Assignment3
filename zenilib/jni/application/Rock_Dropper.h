@@ -8,7 +8,7 @@
 
 class Rock_Dropper : public Tower_Weapon{
 public:
-	Rock_Dropper(std::weak_ptr<Tower_Section> owner_, float cooldown_);
+	Rock_Dropper(std::weak_ptr<Tower_Section> owner_, float cooldown_ = 2.f);
 
 	~Rock_Dropper();
 

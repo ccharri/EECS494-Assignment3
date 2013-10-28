@@ -11,7 +11,7 @@
 class Tower_Section : public Game_Object
 {
 public:
-	Tower_Section(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_ = Zeni::Quaternion(), std::shared_ptr<Tower_Weapon> weapon_ = nullptr);
+	Tower_Section(const Zeni::Point3f& position_ = Zeni::Point3f(), const Zeni::Vector3f& size_ = Zeni::Vector3f(1,1,1), const Zeni::Quaternion& facing_ = Zeni::Quaternion(), std::shared_ptr<Tower_Weapon> weapon_ = nullptr);
 
 	virtual ~Tower_Section();
 

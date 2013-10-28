@@ -13,12 +13,7 @@ class Tower_Section;
 
 class Tower_Base : public Game_Object{
 public:
-	Tower_Base(const Zeni::Point3f &position_) : Game_Object(position_, Zeni::Vector3f(20,20,1), Zeni::Quaternion(), Zeni::Vector3f(1,1,1))
-	{
-        Zeni::Vector3f size = getSize();
-		collider = Zeni::Collision::Parallelepiped(position_ - Zeni::Vector3f(size.x, size.y, 0)/2., Zeni::Vector3f(size.x, 0, 0), Zeni::Vector3f(0, size.y, 0), Zeni::Vector3f(0, 0, size.z));
-        setName("Tower Base");
-	}
+	Tower_Base(const Zeni::Point3f &position_);
 
 	void on_logic(float time_step) override;
 	void render() override;
@@ -43,6 +38,9 @@ public:
 
 	const std::vector<std::shared_ptr<Tower_Section> >& getSegments() const {return segments;};
     
+	virtual void onSelection(ZTDGUI* gui_) override;
+	virtual void onDeselection(ZTDGUI* gui_) override;
+
     virtual float getPrimaryAttributeMax() const {return segments.capacity();};
 	virtual float getPrimaryAttributeCurrent() const {return segments.size();};
 	virtual Zeni::Color getPrimaryColor() const {return Zeni::Color(1.f, .5, .5, .5);};

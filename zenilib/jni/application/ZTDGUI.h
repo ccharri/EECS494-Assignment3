@@ -4,12 +4,13 @@
 #include <zenilib.h>
 #include <memory>
 
+class Play_State;
 class Game_Object;
 
 class ZTDGUI
 {
 public:
-	ZTDGUI() {};
+	ZTDGUI(Play_State* state_) {playState = state_;};
 
 	~ZTDGUI() {};
 
@@ -19,10 +20,16 @@ public:
 	void render();
 	void on_logic(const Zeni::Projector3D& projector_);
 
+	void lendWidget(Zeni::Widget &widget_);
+	void unlendWidget(Zeni::Widget &widget_);
+
+	const Play_State* const getState() const {return playState;};
+
 	const Zeni::Point2f& getMousePos() const {return mousePos;};
 
 private:
 	Zeni::Projector3D proj;
+	Play_State* playState;
 
 	std::weak_ptr<Game_Object> highlightObj;
 	std::weak_ptr<Game_Object> selectedObj;

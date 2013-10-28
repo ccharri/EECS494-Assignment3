@@ -4,6 +4,8 @@
 #include <zenilib.h>
 #include <memory>
 
+class ZTDGUI;
+
 class Game_Object : public std::enable_shared_from_this<Game_Object>
 {
 public:
@@ -36,6 +38,9 @@ public:
 	virtual void setSize(Zeni::Vector3f size_) {size = size_;};
 	virtual void setFacing(Zeni::Quaternion facing_) {facing = facing_;};
 	virtual void lookAt(Zeni::Point3f pos_);
+
+	virtual void onSelection(ZTDGUI* gui_) {};
+	virtual void onDeselection(ZTDGUI* gui_) {};
 
 	virtual float getPrimaryAttributeMax() const {return 0;};
 	virtual float getPrimaryAttributeCurrent() const {return 0;};
