@@ -19,7 +19,7 @@
 using namespace Zeni;
 using namespace std;
 
-Play_State::Play_State() /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
+Play_State::Play_State() : Widget_Gamestate(make_pair(Point2f(get_Video().get_viewport().first), Point2f(get_Video().get_viewport().second))) /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = true;
 	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.f);
@@ -94,18 +94,19 @@ void Play_State::on_key(const SDL_KeyboardEvent &event) {
       break;
 
     default:
-      Gamestate_Base::on_key(event);
+		Widget_Gamestate::on_key(event);
       break;
   }
 }
 
 void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event) {
 	god_view.position += god_view.get_forward().normalized() * event.y;
+	Widget_Gamestate::on_mouse_wheel(event);
 }
 
 void Play_State::on_mouse_motion(const SDL_MouseMotionEvent &event) {
 	gui.on_mouse_motion(event);
-	Gamestate_Base::on_mouse_motion(event);
+	Widget_Gamestate::on_mouse_motion(event);
 }
 
 
@@ -142,6 +143,8 @@ void Play_State::perform_logic() {
 
 	Game_Level::getCurrentLevel()->on_logic(time_step);
   }
+
+  Widget_Gamestate::perform_logic();
 }
 
 void Play_State::performMovement(float time_step)

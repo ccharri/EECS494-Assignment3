@@ -8,7 +8,7 @@
 
 class Game_Object;
 
-class Play_State : public Zeni::Gamestate_Base {
+class Play_State : public Zeni::Widget_Gamestate {
     struct Controls {
       Controls() : forward(false), left(false), back(false), right(false) {}
 
@@ -27,10 +27,10 @@ class Play_State : public Zeni::Gamestate_Base {
     void on_mouse_motion(const SDL_MouseMotionEvent &event);
 		void on_mouse_wheel(const SDL_MouseWheelEvent &event);
 
-		int getGold() {return gold;}
+		int getGold() const {return gold;}
 		int incrementGold(int delta) {gold += delta;}
 		int setGold(int amount) {gold = amount;}
-		int getLives() {return lives;}
+		int getLives() const {return lives;}
 		int decrementLives(int delta) {lives -= delta;}
 		int setLives(int amount) {lives = amount;}
 

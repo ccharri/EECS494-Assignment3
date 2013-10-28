@@ -59,6 +59,8 @@ private:
 	static Model_Wrapper model;
     
     Zeni::Collision::Parallelepiped collider;
+
+	std::vector<Zeni::Text_Button> towerSegmentButtons;
 };
 
 #endif
