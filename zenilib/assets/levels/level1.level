@@ -54,11 +54,11 @@
 		<total>			2
 		<duration>		10
 		<time_start>	0
-		<health>		700
+		<health>		400
 		<speed>			15
 		<size>			1, 1, 1
 		<model>			Crate.3ds
-		<height>		0
+		<height>		30
 		<scaling>		1.00
 		<type>			basic
 		<bounty>		10
@@ -98,138 +98,138 @@
 	<round num>		5
 	<round bonus>	50
 	<wave>
-		<name>			Boss Crate
+		<name>			God
 		<total>			1
 		<duration>		1
 		<time_start>	0
-		<health>		500
-		<speed>			15
+		<health>		1500
+		<speed>			10
 		<size>			10, 10, 10
 		<model>			Hand_and_Wrench.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		50
+		<life cost>		10
 <round>
 	<round num>		6
 	<round bonus>	60
 	<wave>
-		<name>			Boss Crate
-		<total>			1
-		<duration>		1
+		<name>			Box Full of Zerglings
+		<total>			30
+		<duration>		10
 		<time_start>	0
-		<health>		500
-		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
+		<health>		9
+		<speed>			25
+		<size>			1, 1, 1
+		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		1
+		<life cost>		1
 <round>
 	<round num>		7
 	<round bonus>	70
 	<wave>
-		<name>			Boss Crate
-		<total>			1
-		<duration>		1
+		<name>			Box with Anodized Nails
+		<total>			5
+		<duration>		10
 		<time_start>	0
-		<health>		500
-		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
+		<health>		1000
+		<speed>			5
+		<size>			1, 1, 1
+		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		15
+		<life cost>		3
 <round>
 	<round num>		8
 	<round bonus>	80
 	<wave>
-		<name>			Boss Crate
-		<total>			1
-		<duration>		1
+		<name>			Boss of Anodized Nails
+		<total>			5
+		<duration>		10
 		<time_start>	0
-		<health>		500
+		<health>		400
 		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
-		<height>		0
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		20
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		8
+		<life cost>		2
 <round>
 	<round num>		9
 	<round bonus>	90
 	<wave>
-		<name>			Boss Crate
-		<total>			1
-		<duration>		1
+		<name>			Frosthelm Speciality Shipping
+		<total>			20
+		<duration>		20
 		<time_start>	0
-		<health>		500
-		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
+		<health>		300
+		<speed>			25
+		<size>			1, 1, 1
+		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		5
+		<life cost>		5
 <round>
 	<round num>		10
 	<round bonus>	100
 	<wave>
-		<name>			Boss Crate
+		<name>			Boxed Typhoon
 		<total>			1
 		<duration>		1
 		<time_start>	0
-		<health>		500
-		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
-		<height>		0
+		<health>		2000
+		<speed>			25
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		30
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		50
+		<life cost>		20
 <round>
 	<round num>		11
 	<round bonus>	110
 	<wave>
-		<name>			Boss Crate
-		<total>			1
-		<duration>		1
+		<name>			Human After All
+		<total>			3
+		<duration>		3
 		<time_start>	0
-		<health>		500
+		<health>		1500
 		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
+		<size>			1, 1, 1
+		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		15
+		<life cost>		10
 <round>
 	<round num>		12
 	<round bonus>	120
 	<wave>
-		<name>			Boss Crate
-		<total>			1
-		<duration>		1
+		<name>			Stalingrad Special
+		<total>			50
+		<duration>		10
 		<time_start>	0
 		<health>		500
-		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
+		<speed>			10
+		<size>			1, 1, 1
+		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		1
+		<life cost>		1
 <round>
 	<round num>		13
 	<round bonus>	130
