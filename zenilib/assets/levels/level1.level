@@ -12,6 +12,9 @@
 	<node> -45, -45, 1
 <tower_bases>
 	<base> -35, 35, 0
+	<base> 35, 35, 0
+	<base> -35, -35, 0
+	<base> 35, -35, 0
 <round>
 	<round num>		1
 	<round bonus>	10
