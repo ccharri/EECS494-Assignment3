@@ -10,7 +10,7 @@ class Game_Object;
 class ZTDGUI
 {
 public:
-	ZTDGUI(Play_State* state_) {playState = state_;};
+	ZTDGUI(Play_State* state_) : playState(state_), ignoreNextClick(false) {};
 
 	~ZTDGUI() {};
 
@@ -26,6 +26,8 @@ public:
 	const Play_State* const getState() const {return playState;};
 
 	const Zeni::Point2f& getMousePos() const {return mousePos;};
+    
+    void markIgnoreNextClick() {ignoreNextClick = true;};
 
 private:
 	Zeni::Projector3D proj;
@@ -37,6 +39,8 @@ private:
 	std::weak_ptr<Game_Object> findMousedTarget();
 
 	Zeni::Point2f mousePos;
+    
+    bool ignoreNextClick;
 
 	void renderPlayerAttributes(Zeni::Point2f upperLeft);
 };

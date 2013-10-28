@@ -12,9 +12,8 @@ using namespace std;
 
 Game_Level* Game_Level::currentLevel = nullptr;
 
-Game_Level::Game_Level()
+Game_Level::Game_Level(Play_State* state_)  : playState(state_), gold(0)
 {
-	gold = 0;
 }
 
 Game_Level::~Game_Level() {

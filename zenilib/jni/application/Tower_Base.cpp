@@ -1,6 +1,9 @@
 #include "Tower_Base.h"
 
 #include <algorithm>
+
+#include "Game_Level.h"
+#include "Play_State.h"
 #include "Tower_Section.h"
 #include "Rock_Dropper.h"
 #include "Constants.h"
@@ -15,20 +18,32 @@ Model_Wrapper Tower_Base::model = Model_Wrapper("models/Tower_Base.3ds");
 class Dropper_Button : public Text_Button
 {
 public:
-	Dropper_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) : Text_Button(upperLeft_, lowerRight_, "system_36_800x600", "Rock Dropper"), owner(owner_)
+	Dropper_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) : Text_Button(upperLeft_, lowerRight_, "system_36_800x600", String("Rock Dropper\n") + itoa(Rock_Dropper::getCost())), owner(owner_)
 	{
+        
 	}
 
 	void on_accept() override
 	{
+        auto level = Game_Level::getCurrentLevel();
+        level->getState()->getGUI().markIgnoreNextClick();
+        
+        if(level->getGold() < Rock_Dropper::getCost()) return;
+        
 		shared_ptr<Tower_Section> dropperSection(new Tower_Section());
 		shared_ptr<Tower_Weapon> dropperWeapon(new Rock_Dropper(dropperSection));
 		dropperSection->setWeapon(dropperWeapon);
 		owner->pushSection(dropperSection);
+        
+        level->removeGold(Rock_Dropper::getCost());
 
 		Text_Button::on_accept();
 	}
-
+    
+    void on_hover() override
+    {
+        
+    }
 
 private:
 	Tower_Base* owner;
@@ -40,7 +55,7 @@ Tower_Base::Tower_Base(const Point3f &position_) : Game_Object(position_, Vector
 	collider = Collision::Parallelepiped(position_ - Vector3f(size.x, size.y, 0)/2., Vector3f(size.x, 0, 0), Vector3f(0, size.y, 0), Vector3f(0, 0, size.z));
     setName("Tower Base");
 
-	Dropper_Button* dropperButton = new Dropper_Button(this, Point2f(25, Window::get_height() - 100), Point2f(225, Window::get_height() - 50));
+	Dropper_Button* dropperButton = new Dropper_Button(this, Point2f(25, Window::get_height() - 125), Point2f(225, Window::get_height() - 25));
 
 	towerSegmentButtons.push_back(dropperButton);
 }

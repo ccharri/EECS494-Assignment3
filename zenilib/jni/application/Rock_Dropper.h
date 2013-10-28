@@ -18,6 +18,8 @@ public:
 	bool canFire(std::shared_ptr<Game_Object> object) override;
 	void fire() override;
 	void on_logic(float time_step) override;
+    
+    static int getCost() {return 50;};
 
 private:
 	

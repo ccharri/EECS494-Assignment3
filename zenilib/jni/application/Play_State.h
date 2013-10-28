@@ -31,11 +31,14 @@ class Play_State : public Zeni::Widget_Gamestate {
 		void unlendWidget(Zeni::Widget &widget_) {m_widgets.unlend_Widget(widget_);};
 
 		int getGold() const {return gold;}
-		int incrementGold(int delta) {gold += delta;}
-		int setGold(int amount) {gold = amount;}
+		void incrementGold(int delta) {gold += delta;}
+    void decrementGold(int delta) {gold -= delta;};
+		void setGold(int amount) {gold = amount;}
 		int getLives() const {return lives;}
-		int decrementLives(int delta) {lives -= delta;}
-		int setLives(int amount) {lives = amount;}
+		void decrementLives(int delta) {lives -= delta;}
+		void setLives(int amount) {lives = amount;}
+    
+    ZTDGUI& getGUI() {return gui;};
 
     void perform_logic() override;
 

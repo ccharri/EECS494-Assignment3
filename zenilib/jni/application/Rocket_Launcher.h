@@ -16,6 +16,9 @@ public:
 	virtual void on_logic( float time_step );
 
 	virtual void fire();
+    
+    
+    static int getCost() {return 100;};
 
 private:
 

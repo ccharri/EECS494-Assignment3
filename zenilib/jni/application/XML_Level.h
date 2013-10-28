@@ -47,7 +47,7 @@ class XML_Level : public Game_Level
 	};
 
 public:
-	XML_Level(std::string xml);
+	XML_Level(std::string xml, Play_State* state_);
 	
   std::shared_ptr<Zeni::Model> getModel() const override {return levelModel.getModel();};
 	

@@ -72,16 +72,16 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 		if(time < 0)
 			return -1;
 		Point3f newPos = targetPos + targetVel * time;
+        
         //Don't sqr root
 		error = pow(iterativePos.x - newPos.x, 2) + pow(iterativePos.y - newPos.y, 2) + pow(iterativePos.z - newPos.z, 2); 
-		iterativePos = newPos;
-        //Because we compare against .05 (our error value) squared
-        //Nice!
-		i++;
+		iterativePos = .5 * (iterativePos + newPos);
+
+
 		if(i > 50)
 			exit(45);
 		cout << newPos.x << " , " << newPos.y << " , " << angle << " , " << time << " , " << i << ", " << error << endl;
-	}while(error > 0.5 && i < 2);
+	}while(error > 0.5 && i++ < 5);
     return time;
 }
 

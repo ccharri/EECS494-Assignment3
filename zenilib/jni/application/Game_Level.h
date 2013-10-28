@@ -7,10 +7,11 @@
 class Game_Object;
 class Player;
 class Tower_Base;
+class Play_State;
 
 class Game_Level {
 public:
-	Game_Level();
+	Game_Level(Play_State* state_);
 	virtual ~Game_Level() = 0;
 
 	virtual void render();
@@ -50,17 +51,22 @@ public:
 
 	int getGold() const {return gold;};
 	void addGold(int amount) {gold += amount;};
+    void removeGold(int amount) {gold -= amount;};
 
 	int getCurrentRound() {return currentRound;}
 	void setCurrentRound(int i) {currentRound = i;}
 
 	std::string getLevelName() {return name;}
 	void setLevelName(std::string s) {name = s;}
+    
+    Play_State* getState() {return playState;};
 
 private:
 	static Game_Level* currentLevel;
 	Player* player;
 
+    Play_State* playState;
+    
 	int livesMax;
 	int livesRemaining;
 	int gold;

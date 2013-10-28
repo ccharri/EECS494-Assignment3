@@ -13,7 +13,7 @@ using namespace Zeni;
 
 Model_Wrapper XML_Level::levelModel("models/Crate.3ds");
 
-XML_Level::XML_Level(string xml)
+XML_Level::XML_Level(string xml, Play_State* state_) : Game_Level(state_)
 {
 	string line;
 	ifstream in;

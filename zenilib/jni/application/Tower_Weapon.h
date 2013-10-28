@@ -37,7 +37,7 @@ public:
 
 	virtual void on_logic(float time_step) /*override*/;
 	virtual void render() /*override*/;
-
+    
 	virtual void fire();
 
 private:

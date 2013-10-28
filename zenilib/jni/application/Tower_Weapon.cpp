@@ -49,7 +49,7 @@ void Tower_Weapon::on_logic(float time_step)
 		{
 			object_->on_logic(time_step);
 
-			if(Vector3f(object_->getPosition()).magnitude() > Game_Level::getCurrentLevel()->getMaxDistance())
+			if(object_->getPosition().z <= -Game_Level::getCurrentLevel()->getMaxDistance())
 			{
 				removeProjectile(object_);
 			}

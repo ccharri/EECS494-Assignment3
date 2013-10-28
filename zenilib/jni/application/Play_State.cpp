@@ -41,7 +41,7 @@ Play_State::Play_State() : Widget_Gamestate(make_pair(Point2f(get_Video().get_vi
 	time_since_last_spawn = 0;
 
 	//Game_Level::setCurrentLevel(new Level_One());
-	Game_Level::setCurrentLevel(new XML_Level("levels/level1.level"));
+	Game_Level::setCurrentLevel(new XML_Level("levels/level1.level", this));
 
 	Game_Level::getCurrentLevel()->pushEnemy(shared_ptr<Game_Object>(new Arrow(Point3f(-50., -50., 0.))));
 	//Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));

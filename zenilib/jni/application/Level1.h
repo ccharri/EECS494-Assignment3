@@ -10,7 +10,7 @@
 class Level_One : public Game_Level
 {
 public:
-	Level_One() : Game_Level() {
+	Level_One(Play_State* state_) : Game_Level(state_) {
 		std::vector<Zeni::Point3f>& path = getPath();
 		path.push_back(Zeni::Point3f(-50, 50,0));
 		path.push_back(Zeni::Point3f( 50, 50,0));
