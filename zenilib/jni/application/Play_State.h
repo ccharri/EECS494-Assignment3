@@ -10,8 +10,10 @@ class Game_Object;
 
 class Play_State : public Zeni::Widget_Gamestate {
     struct Controls {
-      Controls() : forward(false), left(false), back(false), right(false) {}
+      Controls() : forward(false), left(false), back(false), right(false), rotateLeft(false), rotateRight(false) {}
 
+	  bool rotateLeft;
+	  bool rotateRight;
       bool forward;
       bool left;
       bool back;

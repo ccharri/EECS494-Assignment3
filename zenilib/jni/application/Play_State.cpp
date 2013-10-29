@@ -23,7 +23,7 @@ Play_State::Play_State() : Widget_Gamestate(make_pair(Point2f(get_Video().get_vi
 {
 	god_view_on = true;
 	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.f);
-
+	
 	worldLight = Light();
 	worldLight.set_light_type(Zeni::LIGHT_DIRECTIONAL);
 	worldLight.spot_direction = Vector3f(1, 1, -1);
@@ -40,32 +40,11 @@ Play_State::Play_State() : Widget_Gamestate(make_pair(Point2f(get_Video().get_vi
 
 	time_since_last_spawn = 0;
 
-	//Game_Level::setCurrentLevel(new Level_One());
 	Game_Level::setCurrentLevel(new XML_Level("levels/level1.level", this));
-
 	Game_Level::getCurrentLevel()->pushEnemy(shared_ptr<Game_Object>(new Arrow(Point3f(-50., -50., 0.))));
-	//Game_Level::getCurrentLevel()->getEnemies().push_back(shared_ptr<Game_Object>(new Enemy_Box(Point3f(-50, -50, 0), 10., 100.)));
-
-//	shared_ptr<Tower_Base> centerBase = shared_ptr<Tower_Base>(new Tower_Base(Point3f(0,0,0)));
-//
-//	for(int i = 0; i < 3; i++)
-//	{
-//		shared_ptr<Tower_Section> rocketSection = shared_ptr<Tower_Section>(new Tower_Section());
-//		shared_ptr<Tower_Weapon> rocketLauncher = shared_ptr<Tower_Weapon>(new Rocket_Launcher(rocketSection, 2.5));
-//		rocketSection->setWeapon(rocketLauncher);
-//		centerBase->pushSection(rocketSection);
-//	}
-//
-//	shared_ptr<Tower_Section> newSection = shared_ptr<Tower_Section>(new Tower_Section());
-//	shared_ptr<Tower_Weapon> dropper = shared_ptr<Tower_Weapon>(new Rock_Dropper(newSection, 2.));
-//	newSection->setWeapon(dropper);
-//	centerBase->pushSection(newSection);
-//
-//	Game_Level::getCurrentLevel()->pushBase(centerBase);
 }
 
 void Play_State::on_push() {
-    //Zeni::get_Window().set_mouse_state(Zeni::Window::MOUSE_RELATIVE);
 	Zeni::get_Window().set_mouse_state(Zeni::Window::MOUSE_GRABBED);
 }
 
@@ -77,6 +56,10 @@ void Play_State::on_key(const SDL_KeyboardEvent &event) {
 	gui.on_key(event);
 
   switch(event.keysym.sym) {
+	case SDLK_e:
+		movement_controls.rotateRight = event.type == SDL_KEYDOWN; break;
+	case SDLK_q:
+		movement_controls.rotateLeft = event.type == SDL_KEYDOWN; break;
     case SDLK_w:
       movement_controls.forward = event.type == SDL_KEYDOWN; break;
     case SDLK_a:
@@ -149,43 +132,47 @@ void Play_State::performMovement(float time_step)
 {
 	float speed = 20.f;
 	float distance = speed * time_step;
+	float angularSpeed = 0.01;
 
 	float mouseWindowPanBufferDistance = 40.f;
 
 	Point2f mousePos = gui.getMousePos();
 
-	if(mousePos.y <= mouseWindowPanBufferDistance)
-	{
+	if(mousePos.y <= mouseWindowPanBufferDistance){
 		god_view.move_forward_xy((mouseWindowPanBufferDistance - mousePos.y) * time_step);
 	}
 	else if(movement_controls.forward) {
 		god_view.move_forward_xy(distance);
 	}
 
-	if(mousePos.y >= (Window::get_height() - mouseWindowPanBufferDistance))
-	{
+	if(mousePos.y >= (Window::get_height() - mouseWindowPanBufferDistance)){
 		god_view.move_forward_xy(((Window::get_height() - mouseWindowPanBufferDistance) - mousePos.y) * time_step);
 	}
-	else if(movement_controls.back) {
+	else if(movement_controls.back){
 		god_view.move_forward_xy(-distance);
 	}
 
-	if(mousePos.x <= mouseWindowPanBufferDistance)
-	{
+	if(mousePos.x <= mouseWindowPanBufferDistance){
 		god_view.move_left_xy((mouseWindowPanBufferDistance - mousePos.x) * time_step);
-	}
-	else if(movement_controls.left)
-	{
+	}else if(movement_controls.left){
 		god_view.move_left_xy(distance);
 	}
 
-	if(mousePos.x >= (Window::get_width() - mouseWindowPanBufferDistance))
-	{
+	if(mousePos.x >= (Window::get_width() - mouseWindowPanBufferDistance)){
 		god_view.move_left_xy(((Window::get_width() - mouseWindowPanBufferDistance)- mousePos.x) * time_step);
 	}
-	else if(movement_controls.right)
-	{
+	else if(movement_controls.right){
 		god_view.move_left_xy(-distance);
+	}
+
+	if(movement_controls.rotateLeft || movement_controls.rotateRight){
+		Vector3f d = (god_view.position.z / god_view.get_forward().z) * god_view.get_forward();
+		float r = hypot(d.x, d.y);
+		Point3f o(god_view.position.x - d.x, god_view.position.y - d.y, 0);
+		float a = atan2(-god_view.get_forward().y, -god_view.get_forward().x) + 
+					angularSpeed * (movement_controls.rotateRight - movement_controls.rotateLeft);
+		god_view.position = Point3f(o.x + r*cos(a), o.y + r*sin(a), god_view.position.z);
+		god_view.look_at(o);
 	}
 }
 
@@ -196,12 +183,8 @@ void Play_State::render() {
 	vr.set_ambient_lighting(Color(1.f,0.f,0.f,0.f));
 
 	//set up camera
-
 	if(god_view_on)
 		vr.set_3d(god_view);
-
-	//else
-	//	vr.set_3d(player.get_camera());
 
   //render call for level
 	Game_Level::getCurrentLevel()->render();
