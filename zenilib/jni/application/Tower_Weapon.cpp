@@ -104,5 +104,5 @@ void Tower_Weapon::fire()
 
 bool Tower_Weapon::canFire(shared_ptr<Game_Object> object)
 {
-	return object->isTargetable();
+	return object->isAttackable();
 }

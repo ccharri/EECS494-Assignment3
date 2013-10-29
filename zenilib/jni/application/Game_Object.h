@@ -58,6 +58,7 @@ public:
 	void setKeyframe(float keyframe_) {keyframe = keyframe_;};
 	
 	virtual bool isTargetable() const {return false;};
+	virtual bool isAttackable() const {return false;};
 
 	virtual void onDamage(float damage) {};
 

@@ -52,6 +52,7 @@ public:
 	virtual void onDamage(float damage) override;
 
 	virtual bool isTargetable() const override {return isAlive();};
+	virtual bool isAttackable() const {return isAlive();};
 
 private:
 	Zeni::Collision::Capsule collision_capsule;

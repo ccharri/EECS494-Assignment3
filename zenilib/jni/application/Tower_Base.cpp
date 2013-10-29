@@ -104,7 +104,12 @@ Tower_Base::~Tower_Base()
 
 float Tower_Base::getNextSectionZ() const
 {
-	return segments.size()*HEIGHT_INCREMENT + HEIGHT_INCREMENT*0.5;
+	return getHeightForIndex(segments.size());
+}
+
+float Tower_Base::getHeightForIndex(int i_) const
+{
+	return i_*HEIGHT_INCREMENT + HEIGHT_INCREMENT*0.5;
 }
 
 void Tower_Base::pushSection(shared_ptr<Tower_Section> section_)
@@ -112,6 +117,20 @@ void Tower_Base::pushSection(shared_ptr<Tower_Section> section_)
 	Point3f newPos(getPosition().x, getPosition().y, getNextSectionZ());
 	section_->setPosition(newPos);
 	segments.push_back(section_);
+}
+
+void Tower_Base::removeSection(std::shared_ptr<Tower_Section> section_)
+{
+	auto it = find(segments.begin(), segments.end(), section_);
+	if(it == segments.end()) return;
+
+	segments.erase(it);
+	
+	int i = 0;
+	for_each(segments.begin(), segments.end(), [&](shared_ptr<Tower_Section> section_) {
+		auto pos = section_->getPosition();
+		section_->setPosition(Point3f(pos.x, pos.y, getHeightForIndex(i++)));
+	});
 }
 
 void Tower_Base::on_logic(float time_step)

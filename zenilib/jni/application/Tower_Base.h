@@ -35,6 +35,7 @@ public:
 	
 	void pushSection(std::shared_ptr<Tower_Section> section_);
 	// DOES: Takes the segment and changes its position to the top of the Tower_Base.
+	void removeSection(std::shared_ptr<Tower_Section> section_);
 
 	const std::vector<std::shared_ptr<Tower_Section> >& getSegments() const {return segments;};
     
@@ -59,6 +60,8 @@ private:
     Zeni::Collision::Parallelepiped collider;
 
 	std::vector<Zeni::Text_Button*> towerSegmentButtons;
+
+	float getHeightForIndex(int i_) const;
 };
 
 #endif

@@ -34,6 +34,10 @@ public:
         float cd = (last_fired_time + cooldown) - fireTimer.seconds();
         return cd < 0 ? cooldown : cd;
     };
+	virtual void setCooldown(float cooldown_) {cooldown = cooldown_;};
+
+	virtual float getValue() const {return value;};
+	virtual void setValue(float value_) {value = value_;};
 
 	virtual void on_logic(float time_step) /*override*/;
 	virtual void render() /*override*/;
@@ -49,6 +53,8 @@ private:
 	Zeni::Chronometer<Zeni::Time> fireTimer;
 	float cooldown;
 	float last_fired_time;
+
+	float value;
 };
 
 #endif

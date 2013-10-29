@@ -31,6 +31,10 @@ public:
 
 	virtual std::shared_ptr<Zeni::Model> getModel() const override {return model.getModel();};
 
+	std::shared_ptr<Tower_Section> getSectionSharedFromThis() {return std::static_pointer_cast<Tower_Section>(shared_from_this());};
+
+	Tower_Base* getBase() const {return base;};
+
 	std::shared_ptr<Tower_Weapon> getWeapon() {return weapon;};
 	void setWeapon(std::shared_ptr<Tower_Weapon> weapon_) {weapon = weapon_;};
 
@@ -53,6 +57,8 @@ private:
     Zeni::Collision::Parallelepiped collider;
 
 	std::shared_ptr<Tower_Weapon> weapon;
+
+	std::vector<Zeni::Text_Button*> towerActionButtons;
 };
 
 #endif

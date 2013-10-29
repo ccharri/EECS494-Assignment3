@@ -17,8 +17,8 @@ Rock_Dropper::Rock_Dropper(weak_ptr<Tower_Section> owner_, float cooldown_) : To
 	GRAVITY = 19.6;
   
   auto owner = owner_.lock();
-  if(owner) 
-		owner->setName("Rock Dropper");
+  if(owner) owner->setName("Rock Dropper");
+  setValue(Rock_Dropper::getCost());
 }
 
 Rock_Dropper::~Rock_Dropper() 

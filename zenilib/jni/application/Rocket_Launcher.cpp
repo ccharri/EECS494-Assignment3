@@ -10,6 +10,7 @@ Rocket_Launcher::Rocket_Launcher( std::weak_ptr<Tower_Section> owner_, float coo
 {
     auto owner = owner_.lock();
     if(owner) owner->setName("Rocket Launcher");
+	setValue(Rocket_Launcher::getCost());
 }
 
 
