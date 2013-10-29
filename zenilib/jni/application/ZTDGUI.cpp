@@ -58,7 +58,7 @@ void ZTDGUI::on_mouse_button( const SDL_MouseButtonEvent &event )
 
 			break;
 		}
-		case 2:
+		case 3:
 		{
 			auto selectObj = selectedObj.lock();
 
