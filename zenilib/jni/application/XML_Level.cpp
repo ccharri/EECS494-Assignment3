@@ -98,12 +98,16 @@ bool XML_Level::Wave::canSpawn(float time_passed)
 shared_ptr<Enemy> XML_Level::Wave::spawnEnemy()
 {
 	shared_ptr<Enemy> e;
+	Point3f loc = Game_Level::getCurrentLevel()->getPath().front();
+	loc.z += height;
 	if(type == BASIC)
-		e = shared_ptr<Enemy>(new Basic_Enemy(Game_Level::getCurrentLevel()->getPath().front(), speed, health, model));
+		e = shared_ptr<Enemy>(new Basic_Enemy(loc, speed, health, model));
+	//other types
 	e->setSize(size);
 	e->setName(name);
 	e->setBounty(bounty);
 	e->setLeakAmount(lifeCost);
+	e->setHeight(height);
 	Game_Level::getCurrentLevel()->pushEnemy(e);
 	spawned++;
 	return e;
