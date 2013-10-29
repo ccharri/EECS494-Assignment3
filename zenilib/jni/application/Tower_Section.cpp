@@ -1,6 +1,7 @@
 #include "Tower_Section.h"
 
 #include "Tower_Weapon.h"
+#include "Tower_Base.h"
 #include <algorithm>
 
 using namespace Zeni;
@@ -8,7 +9,7 @@ using namespace std;
 
 Model_Wrapper Tower_Section::model = Model_Wrapper("models/Tower_Section.3ds");
 
-Tower_Section::Tower_Section(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_, shared_ptr<Tower_Weapon> weapon_) : Game_Object(position_, size_, facing_),  weapon(weapon_) 
+Tower_Section::Tower_Section(Tower_Base* base_, const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_, shared_ptr<Tower_Weapon> weapon_) : Game_Object(position_, size_, facing_), base(base_), weapon(weapon_) 
 {
     updateCollider();
 }
@@ -26,6 +27,16 @@ void Tower_Section::render() {
 void Tower_Section::on_logic(float time_step)
 {
 	weapon->on_logic(time_step);
+}
+
+void Tower_Section::onSelection(ZTDGUI* gui_)
+{
+	base->onSelection(gui_);
+}
+
+void Tower_Section::onDeselection(ZTDGUI* gui_)
+{
+	base->onDeselection(gui_);
 }
 
 bool Tower_Section::collide(const Collision::Capsule& collider_) const

@@ -3,6 +3,8 @@
 #include "Game_Object.h"
 #include "Game_Level.h"
 #include "Play_State.h"
+#include "Tower_Section.h"
+#include "Tower_Weapon.h"
 #include "Utility.h"
 
 using namespace Zeni;
@@ -55,6 +57,27 @@ void ZTDGUI::on_mouse_button( const SDL_MouseButtonEvent &event )
 			}
 
 			break;
+		}
+		case 2:
+		{
+			auto selectObj = selectedObj.lock();
+
+			if(!selectObj) return;
+
+			auto attackTargetWeak = findMousedTarget();
+			auto attackTarget = attackTargetWeak.lock();
+
+			if(!attackTarget) return;
+
+			auto towerSegment = dynamic_pointer_cast<Tower_Section>(selectObj);
+
+			if(!towerSegment) return;
+
+			auto towerWeapon = towerSegment->getWeapon();
+			if(towerWeapon->canFire(attackTarget))
+			{
+				towerWeapon->setTarget(attackTarget);
+			}
 		}
 		default:
 			break;

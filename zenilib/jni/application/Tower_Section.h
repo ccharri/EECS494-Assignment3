@@ -8,10 +8,12 @@
 #include "Game_Object.h"
 #include "Tower_Weapon.h"
 
+class Tower_Base;
+
 class Tower_Section : public Game_Object
 {
 public:
-	Tower_Section(const Zeni::Point3f& position_ = Zeni::Point3f(), const Zeni::Vector3f& size_ = Zeni::Vector3f(7,7,10), const Zeni::Quaternion& facing_ = Zeni::Quaternion(), std::shared_ptr<Tower_Weapon> weapon_ = nullptr);
+	Tower_Section(Tower_Base* base_, const Zeni::Point3f& position_ = Zeni::Point3f(), const Zeni::Vector3f& size_ = Zeni::Vector3f(7,7,10), const Zeni::Quaternion& facing_ = Zeni::Quaternion(), std::shared_ptr<Tower_Weapon> weapon_ = nullptr);
 
 	virtual ~Tower_Section();
 
@@ -38,10 +40,15 @@ public:
     
     virtual bool isTargetable() const override {return true;};
 
+	virtual void onSelection(ZTDGUI* gui_);
+	virtual void onDeselection(ZTDGUI* gui_);
+
 	void updateCollider() override;
 
 private:
 	static Model_Wrapper model;
+
+	Tower_Base* base;
     
     Zeni::Collision::Parallelepiped collider;
 

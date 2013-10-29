@@ -31,7 +31,7 @@ public:
         
         if(level->getGold() < Rock_Dropper::getCost()) return;
         
-		shared_ptr<Tower_Section> dropperSection(new Tower_Section());
+		shared_ptr<Tower_Section> dropperSection(new Tower_Section(owner));
 		shared_ptr<Tower_Weapon> dropperWeapon(new Rock_Dropper(dropperSection));
 		dropperSection->setWeapon(dropperWeapon);
 		owner->pushSection(dropperSection);
@@ -65,7 +65,7 @@ public:
         
         if(level->getGold() < Rocket_Launcher::getCost()) return;
         
-		shared_ptr<Tower_Section> rocketSection(new Tower_Section());
+		shared_ptr<Tower_Section> rocketSection(new Tower_Section(owner));
 		shared_ptr<Tower_Weapon> rocketWeapon(new Rocket_Launcher(rocketSection));
 		rocketSection->setWeapon(rocketWeapon);
 		owner->pushSection(rocketSection);
