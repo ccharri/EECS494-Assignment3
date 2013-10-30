@@ -5,6 +5,7 @@
 #include "Game_Level.h"
 #include "Play_State.h"
 #include "Tower_Section.h"
+#include "Buzzsaw.h"
 #include "Rock_Dropper.h"
 #include "Rocket_Launcher.h"
 #include "Constants.h"
@@ -15,6 +16,41 @@ using namespace std;
 
 
 Model_Wrapper Tower_Base::model = Model_Wrapper("models/Tower_Base.3ds");
+
+class Buzzsaw_Button : public Text_Button
+{
+public:
+	Buzzsaw_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) 
+		: Text_Button(upperLeft_, lowerRight_, "system_36_800x600", String("Buzzsaw\n") + itoa(Buzzsaw::getCost())), owner(owner_)
+	{
+        
+	}
+
+	void on_accept() override
+	{
+        auto level = Game_Level::getCurrentLevel();
+        level->getState()->getGUI().markIgnoreNextClick();
+        
+        if(level->getGold() < Buzzsaw::getCost()) return;
+        
+		shared_ptr<Tower_Section> dropperSection(new Tower_Section(owner));
+		shared_ptr<Tower_Weapon> dropperWeapon(new Buzzsaw(dropperSection));
+		dropperSection->setWeapon(dropperWeapon);
+		owner->pushSection(dropperSection);
+        
+        level->removeGold(Buzzsaw::getCost());
+
+		Text_Button::on_accept();
+	}
+    
+    void on_hover() override
+    {
+        
+    }
+
+private:
+	Tower_Base* owner;
+};
 
 class Dropper_Button : public Text_Button
 {
@@ -89,10 +125,12 @@ Tower_Base::Tower_Base(const Point3f &position_) : Game_Object(position_, Vector
     Vector3f size = getSize();
 	collider = Collision::Parallelepiped(position_ - Vector3f(size.x, size.y, 0)/2., Vector3f(size.x, 0, 0), Vector3f(0, size.y, 0), Vector3f(0, 0, size.z));
     setName("Tower Base");
-
+	
 	Dropper_Button* dropperButton = new Dropper_Button(this, Point2f(25, Window::get_height() - 125), Point2f(225, Window::get_height() - 25));
     Rocket_Button* rocketButton = new Rocket_Button(this, Point2f(250, Window::get_height()-125), Point2f(450, Window::get_height() - 25));
+	Buzzsaw_Button * buzzsawButton = new Buzzsaw_Button(this, Point2f(475, Window::get_height()-125), Point2f(675, Window::get_height() - 25));
 
+	towerSegmentButtons.push_back(buzzsawButton);
 	towerSegmentButtons.push_back(dropperButton);
     towerSegmentButtons.push_back(rocketButton);
 }
