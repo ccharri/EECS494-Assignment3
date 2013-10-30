@@ -32,6 +32,8 @@ void Game_Object::on_logic(float time_step)
 
 void Game_Object::lookAt(Zeni::Point3f pos_)
 {
-	setFacing(Quaternion::Forward_Up(Vector3f(pos_-getPosition()).normalized(), Vector3f(0,0,1)));
+	auto forwardVector = Vector3f(pos_-getPosition()).normalized();
+	auto posXVector = Vector3f(1,0,0);
+	setFacing(Quaternion::Forward_Up(forwardVector, forwardVector%posXVector));
 	updateCollider();
 }

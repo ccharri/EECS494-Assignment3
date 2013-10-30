@@ -16,6 +16,7 @@ public:
 	~Arrow() {};
 
 	virtual bool isTargetable() const override {return false;};
+	virtual bool isAttackable() const override {return false;};
 
 	virtual void on_logic(float time_step) override
 	{

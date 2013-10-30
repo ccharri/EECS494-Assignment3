@@ -52,7 +52,7 @@ void Rock_Dropper::fire()
 	Vector3f projectileVel(cos(hAngle)*cos(vAngle) * LAUNCH_VEL, sin(hAngle)*cos(vAngle) * LAUNCH_VEL, sin(vAngle)*LAUNCH_VEL);
 
 	shared_ptr<Game_Object> r = shared_ptr<Game_Object>(new Rock(getSection()->getPosition(), projectileVel, GRAVITY));
-	getSection()->lookAt(Point3f(targetPos.x, targetPos.y, 0));
+	getSection()->lookAt(Point3f(targetPos.x, targetPos.y, launchPos.z));
 	r->lookAt(getTarget()->getPosition());
 	addProjectile(r);
 	
