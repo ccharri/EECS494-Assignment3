@@ -5,8 +5,8 @@
 using namespace Zeni;
 using namespace std;
 
-Physics_Object::Physics_Object(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_)
-	: Game_Object(position_, size_, facing_)
+Physics_Object::Physics_Object(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_, Vector3f scale_)
+	: Game_Object(position_, size_, facing_, scale_)
 {
 
 }

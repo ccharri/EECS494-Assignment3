@@ -7,7 +7,8 @@
 class Physics_Object : public Game_Object
 {
 public:
-	Physics_Object(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_ = Zeni::Quaternion());
+	Physics_Object(const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_ = Zeni::Quaternion(), 
+		Zeni::Vector3f scale_ = Zeni::Vector3f(1,1,1));
 
 	void setVelocity(Zeni::Vector3f vel_) {vel = vel_;}
 	void setAcceleration(Zeni::Vector3f acc_) {acc = acc_;}

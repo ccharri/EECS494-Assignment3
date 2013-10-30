@@ -151,7 +151,6 @@ void XML_Level::on_logic(float time_step)
 
 	if(isRoundOver())
 	{
-		cout << "round ended: " << getCurrentRound() << endl; 
 		endRound();
 		setCurrentRound(getCurrentRound()+1);
 		if(getCurrentRound() >= rounds.size())
@@ -206,6 +205,5 @@ Vector3f XML_Level::getVectorFromValue(const string &value)
 	float x = float(atof(value.substr(0, firstComma).c_str()));
 	float y = float(atof(value.substr(firstComma+1, secondComma-firstComma).c_str()));
 	float z = float(atof(value.substr(secondComma+1).c_str()));
-	cout << value << endl;
 	return Vector3f(x, y, z);
 }
