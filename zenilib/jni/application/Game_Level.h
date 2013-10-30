@@ -21,12 +21,12 @@ public:
 	void enemyLeaked(std::shared_ptr<Game_Object> enemy);
 
 	const std::vector<std::shared_ptr<Game_Object> >& getEnemies() const {return enemies;};
-  void pushEnemy(std::shared_ptr<Game_Object> enemy_) {enemies.push_back(enemy_);};
+	void pushEnemy(std::shared_ptr<Game_Object> enemy_) {enemies.push_back(enemy_);};
 	void removeEnemy(std::shared_ptr<Game_Object> enemy);
 
 	const std::vector<std::shared_ptr<Tower_Base> >& getBases() const {return towerBases;};
-  void pushBase(std::shared_ptr<Tower_Base> base_) {towerBases.push_back(base_);};
-  std::vector<std::shared_ptr<Game_Object> > getTowerParts() const;
+	void pushBase(std::shared_ptr<Tower_Base> base_) {towerBases.push_back(base_);};
+	std::vector<std::shared_ptr<Game_Object> > getTowerParts() const;
 
 	std::vector<Zeni::Point3f>& getPath() {return enemy_path;};
 
