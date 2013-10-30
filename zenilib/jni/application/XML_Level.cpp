@@ -111,7 +111,6 @@ shared_ptr<Enemy> XML_Level::Wave::spawnEnemy()
 	Game_Level::getCurrentLevel()->pushEnemy(e);
 	spawned++;
 	return e;
-	
 }
 
 void XML_Level::startRound()
