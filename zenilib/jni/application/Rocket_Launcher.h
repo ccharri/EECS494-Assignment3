@@ -17,6 +17,8 @@ public:
 
 	virtual void fire();
     
+	virtual bool canFire(std::shared_ptr<Game_Object> object) override;
+    
     Zeni::String getDescription() const override {return description;};
     static Zeni::String getGenericDescription() {return description;};
     

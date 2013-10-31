@@ -18,7 +18,7 @@ public:
 	void setPath(std::vector<Zeni::Point3f>* path_) {path = path_;};
 
 	Zeni::Vector3f getVel() const;
-	float getHeight() {return height;}
+	float getHeight() const override {return height;}
 	void setHeight(float f){height = f;}
 	
 	float getSpeed() const {return speed;}

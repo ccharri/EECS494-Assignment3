@@ -21,6 +21,12 @@ void Rocket_Launcher::on_logic( float time_step )
 	Tower_Weapon::on_logic(time_step);
 }
 
+bool Rocket_Launcher::canFire(std::shared_ptr<Game_Object> object)
+{
+    if(!object->getHeight()) return false;
+    
+    return Tower_Weapon::canFire(object);
+}
 
 void Rocket_Launcher::fire()
 {
