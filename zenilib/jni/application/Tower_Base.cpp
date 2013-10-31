@@ -215,7 +215,7 @@ float Tower_Base::getNextSectionZ() const
 
 float Tower_Base::getHeightForIndex(int i_) const
 {
-	return i_*HEIGHT_INCREMENT + HEIGHT_INCREMENT*0.5;
+	return i_*HEIGHT_INCREMENT + HEIGHT_INCREMENT*0.5 + getPosition().z;
 }
 
 void Tower_Base::pushSection(shared_ptr<Tower_Section> section_)

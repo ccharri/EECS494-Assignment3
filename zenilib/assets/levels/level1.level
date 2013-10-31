@@ -1,6 +1,6 @@
 <level name> 		Thunderplains
 <level model>		Level1.3ds
-<level model scale>	3, 3, 1
+<level model scale>	2, 2, 1
 <level num> 		1
 <level lives>		50
 <initial gold>		100
