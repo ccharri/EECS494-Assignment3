@@ -15,34 +15,6 @@ using namespace std;
 
 Model_Wrapper Tower_Section::model = Model_Wrapper("models/Tower_Section.3ds");
 
-class Sell_Button : public Text_Button
-{
-public:
-	Sell_Button(Tower_Section* owner_ = nullptr, const Point2f& upperLeft_ = Point2f() , const Point2f& lowerRight_ = Point2f()) : Text_Button(upperLeft_, lowerRight_, "system_36_800x600", String("Sell")), owner(owner_)
-	{
-
-	}
-
-	void on_accept() override
-	{
-		owner->onDeselection(&Game_Level::getCurrentLevel()->getState()->getGUI());
-		Game_Level::getCurrentLevel()->addGold(SELL_PERCENTAGE * owner->getWeapon()->getValue());
-		owner->getBase()->removeSection(owner->getSectionSharedFromThis());
-	}
-
-	void on_hover() override
-	{
-
-	}
-
-	void setOwner(Tower_Section* owner_){owner = owner_;};
-
-private:
-	Tower_Section* owner;
-};
-
-Sell_Button* sell_button = nullptr;
-
 Tower_Section::Tower_Section(Tower_Base* base_, const Zeni::Point3f& position_, const Zeni::Vector3f& size_, const Zeni::Quaternion& facing_, shared_ptr<Tower_Weapon> weapon_) : Game_Object(position_, size_, facing_), base(base_), weapon(weapon_) 
 {
     updateCollider();
@@ -65,18 +37,23 @@ void Tower_Section::on_logic(float time_step)
 
 void Tower_Section::onSelection(ZTDGUI* gui_)
 {
-	if(sell_button) delete sell_button;
-	sell_button = new Sell_Button(this, Point2f(25, Window::get_height()/2. - 50), Point2f(175, Window::get_height()/2. + 50));
-	//gui_->lendWidget(*sell_button);
+	gui_->showSellButton(this);
 
 	base->onSelection(gui_);
 }
 
 void Tower_Section::onDeselection(ZTDGUI* gui_)
 {
-	gui_->unlendWidget(*sell_button);
+	gui_->hideSellButton();
 
 	base->onDeselection(gui_);
+}
+
+void Tower_Section::onSell()
+{
+	onDeselection(&Game_Level::getCurrentLevel()->getState()->getGUI());
+	Game_Level::getCurrentLevel()->addGold(SELL_PERCENTAGE * getWeapon()->getValue());
+	getBase()->removeSection(getSectionSharedFromThis());
 }
 
 bool Tower_Section::collide(const Collision::Capsule& collider_) const

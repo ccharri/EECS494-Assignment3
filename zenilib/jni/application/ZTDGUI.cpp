@@ -10,6 +10,16 @@
 using namespace Zeni;
 using namespace std;
 
+ZTDGUI::ZTDGUI(Play_State* state_) : playState(state_), ignoreNextClick(false) 
+{
+	sellButton = new Sell_Button(this, nullptr, Point2f(25, Window::get_height()/2. - 50), Point2f(175, Window::get_height()/2. + 50));
+}
+
+ZTDGUI::~ZTDGUI()
+{
+	delete sellButton;
+}
+
 void ZTDGUI::on_key(const SDL_KeyboardEvent &event)
 {
 
@@ -17,8 +27,13 @@ void ZTDGUI::on_key(const SDL_KeyboardEvent &event)
 
 void ZTDGUI::on_mouse_button( const SDL_MouseButtonEvent &event )
 {
-	if(event.state == SDL_PRESSED) return;
-    if(ignoreNextClick){ ignoreNextClick=false;return;}
+	if(event.state == SDL_PRESSED)return;
+    if(ignoreNextClick)
+	{ 
+		ignoreNextClick=false;
+		playState->unlendWidget(*sellButton);
+		return;
+	}
     
     
 	switch(event.button)
@@ -156,17 +171,39 @@ void ZTDGUI::on_logic(const Projector3D& projector_)
 {
 	proj = projector_;
 	highlightObj = findMousedTarget();
+
+	if(!selectedObj.lock())
+	{
+		playState->unlendWidget(*sellButton);
+	}
 }
 
-void ZTDGUI::lendWidget(Zeni::Widget &widget_)
+void ZTDGUI::lendWidget(Zeni::Widget *widget_)
 {
-	playState->lendWidget(widget_);
+	playState->lendWidget(*widget_);
 }
 
-void ZTDGUI::unlendWidget(Zeni::Widget &widget_)
+void ZTDGUI::unlendWidget(Zeni::Widget *widget_)
 {
-	playState->unlendWidget(widget_);
+	playState->unlendWidget(*widget_);
 }
+
+void ZTDGUI::showSellButton(Tower_Section* section_)
+{
+	playState->lendWidget(*sellButton);
+	sellButton->setOwner(section_);
+}
+
+void ZTDGUI::hideSellButton()
+{
+}
+
+void ZTDGUI::sellButtonPressed(Tower_Section* section_)
+{
+	hideSellButton();
+	section_->onSell();
+}
+
 
 weak_ptr<Game_Object> ZTDGUI::findMousedTarget()
 {

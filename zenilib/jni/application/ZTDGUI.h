@@ -6,13 +6,15 @@
 
 class Play_State;
 class Game_Object;
+class Sell_Button;
+class Tower_Section;
 
 class ZTDGUI
 {
 public:
-	ZTDGUI(Play_State* state_) : playState(state_), ignoreNextClick(false) {};
+	ZTDGUI(Play_State* state_);
 
-	~ZTDGUI() {};
+	~ZTDGUI();
 
 	void on_key(const SDL_KeyboardEvent &event);
 	void on_mouse_button( const SDL_MouseButtonEvent &event);
@@ -20,8 +22,11 @@ public:
 	void render();
 	void on_logic(const Zeni::Projector3D& projector_);
 
-	void lendWidget(Zeni::Widget &widget_);
-	void unlendWidget(Zeni::Widget &widget_);
+	void lendWidget(Zeni::Widget *widget_);
+	void unlendWidget(Zeni::Widget *widget_);
+	void showSellButton(Tower_Section* section_);
+	void hideSellButton();
+	void sellButtonPressed(Tower_Section* section_);
 
 	const Play_State* const getState() const {return playState;};
 
@@ -40,9 +45,39 @@ private:
 
 	Zeni::Point2f mousePos;
     
+	Sell_Button* sellButton;
+
     bool ignoreNextClick;
 
 	void renderPlayerAttributes(Zeni::Point2f upperLeft);
 };
+
+
+class Sell_Button : public Zeni::Text_Button
+{
+public:
+	Sell_Button(ZTDGUI* gui_, Tower_Section* owner_ = nullptr, const Zeni::Point2f& upperLeft_ = Zeni::Point2f() , const Zeni::Point2f& lowerRight_ = Zeni::Point2f()) : Zeni::Text_Button(upperLeft_, lowerRight_, "system_36_800x600", Zeni::String("Sell")), gui(gui_), owner(owner_)
+	{
+
+	}
+
+	void on_accept() override
+	{
+		gui->sellButtonPressed(owner);
+	}
+
+	void on_hover() override
+	{
+
+	}
+
+	void setOwner(Tower_Section* owner_) {owner = owner_;};
+
+private:
+	ZTDGUI* gui;
+	Tower_Section* owner;
+};
+
+
 
 #endif

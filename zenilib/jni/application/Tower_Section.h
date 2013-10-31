@@ -47,6 +47,8 @@ public:
 	virtual void onSelection(ZTDGUI* gui_);
 	virtual void onDeselection(ZTDGUI* gui_);
 
+	virtual void onSell();
+
 	void updateCollider() override;
 
 private:
@@ -59,6 +61,8 @@ private:
 	std::shared_ptr<Tower_Weapon> weapon;
 
 	std::vector<Zeni::Text_Button*> towerActionButtons;
+
+	Zeni::Text_Button* sell_button;
 };
 
 #endif

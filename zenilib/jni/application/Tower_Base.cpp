@@ -156,7 +156,7 @@ private:
 	Tower_Base* owner;
 };
 
-Tower_Base::Tower_Base(const Point3f &position_) : Game_Object(position_, Vector3f(20,20,1), Quaternion(), Vector3f(1,1,1))
+Tower_Base::Tower_Base(const Point3f &position_) : Game_Object(position_, Vector3f(15,15,1), Quaternion(), Vector3f(1,1,1))
 {
     Vector3f size = getSize();
 	collider = Collision::Parallelepiped(position_ - Vector3f(size.x, size.y, 0)/2., Vector3f(size.x, 0, 0), Vector3f(0, size.y, 0), Vector3f(0, 0, size.z));
@@ -230,14 +230,14 @@ void Tower_Base::render()
 void Tower_Base::onSelection(ZTDGUI* gui_)
 {
 	for_each(towerSegmentButtons.begin(), towerSegmentButtons.end(), [&](Text_Button* button_) {
-		gui_->lendWidget(*button_);
+		gui_->lendWidget(button_);
 	});
 }
 
 void Tower_Base::onDeselection(ZTDGUI* gui_)
 {
 	for_each(towerSegmentButtons.begin(), towerSegmentButtons.end(), [&](Text_Button* button_) {
-		gui_->unlendWidget(*button_);
+		gui_->unlendWidget(button_);
 	});
 }
 
