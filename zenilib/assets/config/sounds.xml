@@ -34,4 +34,7 @@ HOWTO:  To convert between types, or to downmix to mono,
   <laser>
     <filepath>sfx/151022__bubaproducer__laser-shot-silenced</filepath>
   </laser>
+  <saw>
+    <filepath>sfx/198988__kolczok__circ-saw-05</filepath>
+  </saw>
 </Sounds>
