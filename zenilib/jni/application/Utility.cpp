@@ -60,7 +60,7 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 //NOTE: Returns a time, or -1 if there's no trajectory.
 {
 	Point3f iterativePos = targetPos;
-	float error, angle, time = 0, deltaTime = 0;
+	float error = 0, angle = 0, time = 0, deltaTime = 0;
 	int i = 0;
 	do
 	{
