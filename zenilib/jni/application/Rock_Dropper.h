@@ -20,10 +20,13 @@ public:
 	void fire() override;
 	void on_logic(float time_step) override;
     
+    Zeni::String getDescription() const override {return description;};
+    static Zeni::String getGenericDescription() {return description;};
+    
     static int getCost() {return 50;};
 
 private:
-	
+	static Zeni::String description;
 };
 
 #endif

@@ -12,6 +12,9 @@ public:
 	Beam_Tower(std::weak_ptr<Tower_Section> owner_);
 
 	~Beam_Tower();
+    
+    Zeni::String getDescription() const override {return description;};
+    static Zeni::String getGenericDescription() {return description;};
 
 	void on_logic(float time_step) override;
 
@@ -22,7 +25,7 @@ public:
 	static int getCost() {return 125;};
 
 private:
-    
+    static Zeni::String description;
 };
 
 #endif

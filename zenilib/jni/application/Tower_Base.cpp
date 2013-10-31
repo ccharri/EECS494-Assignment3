@@ -44,7 +44,12 @@ public:
 	}
     
     void on_hover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().markRenderTowerInfo(Buzzsaw_Tower::getGenericDescription());
 	}
+    
+    void on_unhover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().stopRenderTowerInfo();
+    }
 
 private:
 	Tower_Base* owner;
@@ -76,7 +81,12 @@ public:
 	}
     
     void on_hover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().markRenderTowerInfo(Beam_Tower::getGenericDescription());
 	}
+    
+    void on_unhover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().stopRenderTowerInfo();
+    }
 
 private:
 	Tower_Base* owner;
@@ -107,7 +117,12 @@ public:
 		Text_Button::on_accept();
 	}
     
-    void on_hover() override{
+    void on_hover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().markRenderTowerInfo(Laser_Turret::getGenericDescription());
+	}
+    
+    void on_unhover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().stopRenderTowerInfo();
     }
 
 private:
@@ -139,7 +154,12 @@ public:
 		Text_Button::on_accept();
 	}
     
-    void on_hover() override{ 
+    void on_hover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().markRenderTowerInfo(Rock_Dropper::getGenericDescription());
+	}
+    
+    void on_unhover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().stopRenderTowerInfo();
     }
 
 private:
@@ -172,7 +192,12 @@ public:
 		Text_Button::on_accept();
 	}
     
-    void on_hover() override{    
+    void on_hover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().markRenderTowerInfo(Rocket_Launcher::getGenericDescription());
+	}
+    
+    void on_unhover() override {
+        Game_Level::getCurrentLevel()->getState()->getGUI().stopRenderTowerInfo();
     }
     
 private:

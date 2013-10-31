@@ -6,6 +6,8 @@
 using namespace Zeni;
 using namespace std;
 
+Zeni::String Beam_Tower::description = "Damage: 4 * 1.05 per second since activation.\nCooldown: Continuous\nRange: Can only shoot within a 45 degree cone towards the ground.";
+
 Beam_Tower::Beam_Tower(weak_ptr<Tower_Section> owner_) : Tower_Weapon(owner_, 0.0)
 {
 	auto owner = owner_.lock();
@@ -42,6 +44,6 @@ void Beam_Tower::fire()
 	auto pos = getSection()->getPosition();
 	auto tpos = getTarget()->getPosition();
 	float dist = Vector3f(Point3f(pos.x, pos.y, tpos.z) - tpos).magnitude();
-	shared_ptr<Game_Object> beam = shared_ptr<Game_Object>(new Beam(shared_from_this(), getTarget(), 2., dist));
+	shared_ptr<Game_Object> beam = shared_ptr<Game_Object>(new Beam(shared_from_this(), getTarget(), 4., dist));
 	addProjectile(beam);
 }

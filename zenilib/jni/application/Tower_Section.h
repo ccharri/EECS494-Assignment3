@@ -20,6 +20,8 @@ public:
 	virtual void on_logic(float time_step) override;
 	virtual void render() override;
     
+    Zeni::String getDescription() const override {return weapon->getDescription();};
+    
     bool collide(const Zeni::Collision::Capsule& collider_) const override;
 	bool collide(const Zeni::Collision::Infinite_Cylinder& collider_) const override;
 	bool collide(const Zeni::Collision::Line& collider_) const override;

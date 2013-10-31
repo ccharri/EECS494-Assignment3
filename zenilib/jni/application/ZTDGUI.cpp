@@ -11,7 +11,7 @@ using namespace Zeni;
 using namespace std;
 
 
-ZTDGUI::ZTDGUI(Play_State* state_) : playState(state_), ignoreNextClick(false) 
+ZTDGUI::ZTDGUI(Play_State* state_) : playState(state_), ignoreNextClick(false), renderTowerInfo(false)
 {
 	sellButton = new Sell_Button(this, nullptr, Point2f(25, Window::get_height()/2. - 50), Point2f(125, Window::get_height()/2. + 50));
 }
@@ -133,6 +133,11 @@ void ZTDGUI::render()
 	{
 		renderObjectAttributes(Point2f(500, 500), textObj);
 	}
+    
+    if(renderTowerInfo)
+    {
+        renderTowerInformation(Point2f(10, Window::get_height()*.7));
+    }
 }
 
 void ZTDGUI::on_logic(const Projector3D& projector_)
@@ -261,4 +266,11 @@ void ZTDGUI::renderPlayerAttributes(Point2f upperLeft)
 		upperLeft + Point2f(20, 90),
 		get_Colors()["title_text"],
 		ZENI_LEFT);
+}
+
+void ZTDGUI::renderTowerInformation(Zeni::Point2f upperLeft)
+{
+    Zeni::Font &sub = get_Fonts()["system_24_800x600"];
+    
+    sub.render_text(towerDescription, upperLeft, get_Colors()["title_text"], ZENI_LEFT);
 }

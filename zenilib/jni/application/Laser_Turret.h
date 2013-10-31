@@ -18,12 +18,17 @@ public:
 	void fire() override;
 
 	bool canFire(std::shared_ptr<Game_Object> object) override;
+    
+    Zeni::String getDescription() const override {return description;};
+    static Zeni::String getGenericDescription() {return description;};
 
 	static int getCost() {return 25;};
 
 private:
 	float damage;
 	float range;
+    
+    static Zeni::String description;
 };
 
 #endif

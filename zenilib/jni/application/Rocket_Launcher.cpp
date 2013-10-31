@@ -6,6 +6,8 @@
 using namespace Zeni;
 using namespace std;
 
+Zeni::String Rocket_Launcher::description = "Damage: 50.\nCooldown: 2.5s.\nRange: Can fire at any flying object.\nMisc: Rocket Velocity = 60.";
+
 Rocket_Launcher::Rocket_Launcher( std::weak_ptr<Tower_Section> owner_, float cooldown_ ) : Tower_Weapon(owner_, cooldown_)
 {
     auto owner = owner_.lock();

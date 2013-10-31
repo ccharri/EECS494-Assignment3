@@ -36,6 +36,17 @@ public:
 	const Zeni::Point2f& getMousePos() const {return mousePos;};
     
     void markIgnoreNextClick() {ignoreNextClick = true;};
+    
+    void markRenderTowerInfo(Zeni::String description)
+    {
+        renderTowerInfo = true;
+        towerDescription = description;
+    };
+    
+    void stopRenderTowerInfo()
+    {
+        renderTowerInfo = false;
+    };
 
 private:
 	Zeni::Projector3D proj;
@@ -51,9 +62,13 @@ private:
 	Sell_Button* sellButton;
 
     bool ignoreNextClick;
+    
+    bool renderTowerInfo;
+    Zeni::String towerDescription;
 
 	void renderObjectAttributes(Zeni::Point2f upperLeft, std::shared_ptr<Game_Object> textObj);
 	void renderPlayerAttributes(Zeni::Point2f upperLeft);
+    void renderTowerInformation(Zeni::Point2f upperLeft);
 };
 
 

@@ -15,6 +15,9 @@ public:
 	float DAMAGE_PER_Z_VEL;
 	float LAUNCH_VEL;
 	float GRAVITY;
+    
+    Zeni::String getDescription() const override {return description;};
+    static Zeni::String getGenericDescription() {return description;};
 
 	bool canFire(std::shared_ptr<Game_Object> object) override;
 	void fire() override;
@@ -29,6 +32,8 @@ private:
 	float timeSpinning;
 	float timeCooling;
 	bool spinning;
+    
+    static Zeni::String description;
 };
 
 #endif

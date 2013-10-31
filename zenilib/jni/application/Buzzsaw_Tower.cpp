@@ -11,6 +11,8 @@
 using namespace std;
 using namespace Zeni;
 
+Zeni::String Buzzsaw_Tower::description = "Damage: 15 damage per second over 2 seconds.\nCooldown: 4s.\nRange: Sphere with radius 20.";
+
 Buzzsaw_Tower::Buzzsaw_Tower(weak_ptr<Tower_Section> owner_, float cooldown_) : Tower_Weapon(owner_, cooldown_), spinning(false), timeSpinning(0), timeCooling(FLT_MAX)
 {
 	DAMAGE = 15;

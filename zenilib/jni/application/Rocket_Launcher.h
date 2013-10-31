@@ -17,10 +17,13 @@ public:
 
 	virtual void fire();
     
+    Zeni::String getDescription() const override {return description;};
+    static Zeni::String getGenericDescription() {return description;};
+    
     static int getCost() {return 100;};
 
 private:
-
+    static Zeni::String description;
 };
 
 #endif

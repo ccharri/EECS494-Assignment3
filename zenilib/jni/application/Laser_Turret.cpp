@@ -6,6 +6,8 @@
 using namespace Zeni;
 using namespace std;
 
+Zeni::String Laser_Turret::description = "Damage: 12.\nCooldown: 1.25s.\nRange: Sphere with radius 30.";
+
 Laser_Turret::Laser_Turret(std::weak_ptr<Tower_Section> owner_, float cooldown_, float damage_, float range_) : Tower_Weapon(owner_, cooldown_), damage(damage_), range(range_)
 {
 	auto owner = owner_.lock();
