@@ -53,7 +53,6 @@ float getAngleParabolic(const Point3f targetPos, const Point3f launchPos, const 
 		return 2*acos(1);
 	float a1 = atan2(v*v + sqrt(det), g*d);
 	float a2 = atan2(v*v - sqrt(det), g*d);
-	cout << "@@@@: " << min(a2, a1) << endl;
 	return min(a2, a1);
 }
 
@@ -61,22 +60,23 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 //NOTE: Returns a time, or -1 if there's no trajectory.
 {
 	Point3f iterativePos = targetPos;
-	float error, angle, time;
+	float error, angle, time = 0, deltaTime = 0;
 	int i = 0;
 	do
 	{
+		//this assumes that the correct direction is to increase the time it'll take.
+		//maybe it should account for the possibility that a decrease will happen instead.
         angle = getAngleParabolic(iterativePos, launchPos, launchVel, g);
 		if(angle == 2*acos(1))
 			return -1;
-        time = getTimeParabolic(sin(angle)*launchVel, iterativePos.z - launchPos.z, g);
+        deltaTime = getTimeParabolic(sin(angle)*launchVel, iterativePos.z - launchPos.z, g) - time;
 		if(time < 0)
 			return -1;
-		Point3f newPos = targetPos + targetVel * time;
-//        error = Vector3f(iterativePos - newPos).magnitude2(); //Worth a shot to try
+		Point3f newPos = iterativePos + targetVel * deltaTime;
+		time += deltaTime;
 		error = pow(iterativePos.x - newPos.x, 2) + pow(iterativePos.y - newPos.y, 2) + pow(iterativePos.z - newPos.z, 2);
-//		iterativePos = .5 * (iterativePos + newPos);
         iterativePos = newPos;
-	}while(error > 0.5 && i++ < 3);
+	}while(error > 0.5 && i++ < 10);
     
     return time;
 }
