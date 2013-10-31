@@ -15,6 +15,8 @@ public:
 	Tower_Weapon(std::weak_ptr<Tower_Section> owner_, float cooldown_);
 
 	~Tower_Weapon();
+    
+    virtual Zeni::String getDescription() const {return "";};
 
 	std::shared_ptr<Tower_Section> getSection() const {return owner.lock();};
 	void setSection(std::shared_ptr<Tower_Section> section_) {owner = section_;};
