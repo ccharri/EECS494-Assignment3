@@ -36,6 +36,8 @@ public:
 	Zeni::Vector3f getSize() const {return size;};
 	Zeni::Quaternion getFacing() const {return facing;};
 	Zeni::Vector3f getScale() const {return scale;};
+    
+    virtual float getHeight() const {return 0;};
 
 	virtual void setPosition(Zeni::Point3f position_) {position = position_; updateCollider();};
 	virtual void setSize(Zeni::Vector3f size_) {size = size_;};
