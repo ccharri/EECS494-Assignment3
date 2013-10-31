@@ -26,8 +26,6 @@ bool Beam_Tower::canFire(std::shared_ptr<Game_Object> object)
 {
 	if(!Tower_Weapon::canFire(object)) return false;
 
-	if(getProjectiles().size()) return false;
-
 	auto pos = getSection()->getPosition();
 	auto tpos = object->getPosition();
 	float deltaz = abs(pos.z - tpos.z);
@@ -39,9 +37,10 @@ bool Beam_Tower::canFire(std::shared_ptr<Game_Object> object)
 
 void Beam_Tower::fire()
 {
+    if(getProjectiles().size()) return;
+    
 	auto pos = getSection()->getPosition();
 	auto tpos = getTarget()->getPosition();
-	float deltaz = abs(pos.z - tpos.z);
 	float dist = Vector3f(Point3f(pos.x, pos.y, tpos.z) - tpos).magnitude();
 	shared_ptr<Game_Object> beam = shared_ptr<Game_Object>(new Beam(shared_from_this(), getTarget(), 2., dist));
 	addProjectile(beam);

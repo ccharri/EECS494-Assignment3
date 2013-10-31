@@ -19,7 +19,7 @@ public:
 
 	void fire() override;
 
-	static int getCost() {return 100;};
+	static int getCost() {return 125;};
 
 private:
 
