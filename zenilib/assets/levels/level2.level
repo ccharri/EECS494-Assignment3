@@ -1,6 +1,6 @@
 <level name> 		Razorback Hill
 <level model>		Level2.3ds
-<level model scale>	1, 1, 1
+<level model scale>	1.20, 1.20, 0.96
 <level num> 		1
 <level lives>		50
 <initial gold>		100
