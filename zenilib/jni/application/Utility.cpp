@@ -76,7 +76,7 @@ float getTimeIterativeParabolic(const Point3f targetPos, const Vector3f targetVe
 		time += deltaTime;
 		error = pow(iterativePos.x - newPos.x, 2) + pow(iterativePos.y - newPos.y, 2) + pow(iterativePos.z - newPos.z, 2);
         iterativePos = newPos;
-	}while(error > 0.5 && i++ < 10);
+	}while(error > 0.5 && i++ < 4);
     
     return time;
 }
