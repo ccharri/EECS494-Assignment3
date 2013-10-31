@@ -1,0 +1,293 @@
+<level name> 		Razorback Hill
+<level model>		Level2.3ds
+<level model scale>	1, 1, 1
+<level num> 		1
+<level lives>		50
+<initial gold>		100
+<round gap time> 	10
+<path>
+	<node> -90, -90, 5.73
+	<node> -45, 90, 31.54
+	<node> 0, -90, 57.36
+	<node> 45, 90, 83.16
+	<node> 90, -90, 108.98
+<tower_bases>
+	<base> -90, -50, 5.73
+	<base> -90, -10, 5.73
+	<base> -45, 50, 31.54
+	<base> -45, 10, 31.54
+	<base> 0, -50, 57.36
+	<base> 0, -10, 57.36
+	<base> 45, 50, 83.16
+	<base> 45, 10, 83.16
+	<base> 90, -50, 108.98
+	<base> 90, -10, 108.98
+<round>
+	<round num>		1
+	<round bonus>	50
+	<wave>
+		<name>			Smallpox Box
+		<total>			9
+		<duration>		10
+		<time_start>	0
+		<health>		75
+		<speed>			10
+		<size>			1.5, 1.5, 1.5
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.50
+		<type>			basic
+		<bounty>		2
+		<life cost>		1
+<round>
+	<round num>		2
+	<round bonus>	55
+	<wave>
+		<name>			Furious Luggage
+		<total>			22
+		<duration>		10
+		<time_start>	0
+		<health>		25
+		<speed>			10
+		<size>			1.5, 1.5, 1.5
+		<model>			Red_Car.3ds
+		<height>		0
+		<scaling>		1.50
+		<type>			basic
+		<bounty>		1
+		<life cost>		1
+<round>
+	<round num>		3
+	<round bonus>	60
+	<wave>
+		<name>			Box of Purity and Light
+		<total>			2
+		<duration>		10
+		<time_start>	0
+		<health>		300
+		<speed>			15
+		<size>			1, 1, 1
+		<model>			Hot_Air_Balloon.3ds
+		<height>		20
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		10
+		<life cost>		5
+<round>
+	<round num>		4
+	<round bonus>	65
+	<wave>
+		<name>			Assassin Box
+		<total>			2
+		<duration>		2
+		<time_start>	5
+		<health>		125
+		<speed>			20
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		20
+		<life cost>		10
+	<wave>
+		<name>			Decoy Box
+		<total>			12
+		<duration>		12
+		<time_start>	0
+		<health>		75
+		<speed>			10
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		0
+		<life cost>		0
+<round>
+	<round num>		5
+	<round bonus>	70
+	<wave>
+		<name>			God
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		1500
+		<speed>			10
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		50
+		<life cost>		10
+<round>
+	<round num>		6
+	<round bonus>	75
+	<wave>
+		<name>			Box Full of Zerglings
+		<total>			30
+		<duration>		10
+		<time_start>	0
+		<health>		9
+		<speed>			25
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		1
+		<life cost>		1
+<round>
+	<round num>		7
+	<round bonus>	80
+	<wave>
+		<name>			Box with Anodized Nails
+		<total>			5
+		<duration>		10
+		<time_start>	0
+		<health>		1000
+		<speed>			5
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		15
+		<life cost>		3
+<round>
+	<round num>		8
+	<round bonus>	85f
+	<wave>
+		<name>			Boss of Anodized Nails
+		<total>			5
+		<duration>		10
+		<time_start>	0
+		<health>		400
+		<speed>			15
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		20
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		8
+		<life cost>		2
+<round>
+	<round num>		9
+	<round bonus>	90
+	<wave>
+		<name>			Frosthelm Speciality Shipping
+		<total>			20
+		<duration>		20
+		<time_start>	0
+		<health>		300
+		<speed>			25
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		5
+		<life cost>		5
+<round>
+	<round num>		10
+	<round bonus>	100
+	<wave>
+		<name>			Boxed Typhoon
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		2000
+		<speed>			25
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		30
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		50
+		<life cost>		20
+<round>
+	<round num>		11
+	<round bonus>	110
+	<wave>
+		<name>			Human After All
+		<total>			3
+		<duration>		3
+		<time_start>	0
+		<health>		1500
+		<speed>			15
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		15
+		<life cost>		10
+<round>
+	<round num>		12
+	<round bonus>	120
+	<wave>
+		<name>			Stalingrad Special
+		<total>			50
+		<duration>		10
+		<time_start>	0
+		<health>		500
+		<speed>			10
+		<size>			1, 1, 1
+		<model>			Crate.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		1
+		<life cost>		1
+<round>
+	<round num>		13
+	<round bonus>	130
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100
+<round>
+	<round num>		14
+	<round bonus>	140
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100	
+<round>		
+	<round num>		15
+	<round bonus>	150
+	<wave>
+		<name>			Boss Crate
+		<total>			1
+		<duration>		1
+		<time_start>	0
+		<health>		500
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Hand_and_Wrench.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		3
+		<life cost>		100	
