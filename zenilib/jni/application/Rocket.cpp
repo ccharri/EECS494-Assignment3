@@ -62,6 +62,6 @@ void Rocket::explode()
 		ownerptr->removeProjectile(shared_from_this());
 	}
 
-	//Play sound effects, yada yada
+	play_sound("explosion");
 }
 

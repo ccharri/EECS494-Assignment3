@@ -74,6 +74,7 @@ void Rock_Dropper::on_logic(float time_step)
 
 		if(collidingEnemies.size())
 		{
+			play_sound("rock");
 			removeProjectile(rock);
 		}
 	});

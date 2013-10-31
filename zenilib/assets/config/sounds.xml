@@ -37,4 +37,10 @@ HOWTO:  To convert between types, or to downmix to mono,
   <saw>
     <filepath>sfx/198988__kolczok__circ-saw-05</filepath>
   </saw>
+  <explosion>
+    <filepath>sfx/131555__shaynecantly__miners-explosion</filepath>
+  </explosion>
+  <rock>
+    <filepath>sfx/halleck__dropping-big-heavy-rocks-modified</filepath>
+  </rock>
 </Sounds>
