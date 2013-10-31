@@ -26,8 +26,8 @@
 	<round num>		1
 	<round bonus>	50
 	<wave>
-		<name>			Smallpox Box
-		<total>			9
+		<name>			Michael's Crate Example
+		<total>			5
 		<duration>		10
 		<time_start>	0
 		<health>		75
@@ -43,32 +43,32 @@
 	<round num>		2
 	<round bonus>	55
 	<wave>
-		<name>			Furious Luggage
-		<total>			22
+		<name>			Twenty Vertex Car
+		<total>			17
 		<duration>		10
 		<time_start>	0
-		<health>		25
+		<health>		35
 		<speed>			10
 		<size>			1.5, 1.5, 1.5
 		<model>			Red_Car.3ds
 		<height>		0
 		<scaling>		1.50
 		<type>			basic
-		<bounty>		1
+		<bounty>		2
 		<life cost>		1
 <round>
 	<round num>		3
 	<round bonus>	60
 	<wave>
-		<name>			Box of Purity and Light
+		<name>			Low Flying Hot Air Balloon
 		<total>			2
 		<duration>		10
 		<time_start>	0
-		<health>		300
-		<speed>			15
-		<size>			1, 1, 1
+		<health>		500
+		<speed>			5
+		<size>			2, 2, 2
 		<model>			Hot_Air_Balloon.3ds
-		<height>		20
+		<height>		1
 		<scaling>		1.00
 		<type>			basic
 		<bounty>		10
@@ -201,7 +201,7 @@
 		<speed>			25
 		<size>			1, 1, 1
 		<model>			Crate.3ds
-		<height>		30
+		<height>		3
 		<scaling>		1.00
 		<type>			basic
 		<bounty>		50

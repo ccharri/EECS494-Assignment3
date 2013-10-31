@@ -13,7 +13,7 @@ public:
 	Sign(Zeni::Point3f location_, Zeni::Vector3f size_ = Zeni::Vector3f(), Zeni::Quaternion facing_ = Zeni::Quaternion()) 
 		: Game_Object(location_, size_, facing_)
 	{
-		
+		setScale(Zeni::Vector3f(1.8, 1.8, 1.8));
 	}
 	~Sign(){};
 

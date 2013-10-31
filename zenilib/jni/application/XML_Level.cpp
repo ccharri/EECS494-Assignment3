@@ -4,10 +4,10 @@
 #include "Tower_Base.h"
 #include "Basic_Enemy.h"
 #include "Play_State.h"
+#include "Constants.h"
 #include <fstream>
 #include <sstream>
 #include <memory>
-
 
 using namespace std;
 using namespace Zeni;
@@ -74,7 +74,7 @@ XML_Level::XML_Level(string xml, Play_State* state_) : Game_Level(state_)
 		else if(comment == "size")
 			rounds.back().waves.back().size = getVectorFromValue(value);
 		else if(comment == "height")
-			rounds.back().waves.back().height = atoi(value.c_str());
+			rounds.back().waves.back().height = atof(value.c_str())*HEIGHT_INCREMENT;
 		else if(comment == "model")
 			rounds.back().waves.back().model = shared_ptr<Zeni::Model>(new Model(Zeni::String("models/" + value)));
 		else if(comment == "scaling")
