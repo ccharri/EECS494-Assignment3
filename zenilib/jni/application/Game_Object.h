@@ -29,6 +29,8 @@ public:
 
 	Zeni::String getName() const {return name;};
 	void setName(const Zeni::String& name_) {name = name_;};
+    
+    virtual Zeni::String getDescription() const {return "";};
 
 	Zeni::Point3f getPosition() const {return position;};
 	Zeni::Vector3f getSize() const {return size;};

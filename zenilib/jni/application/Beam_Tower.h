@@ -22,7 +22,7 @@ public:
 	static int getCost() {return 125;};
 
 private:
-
+    
 };
 
 #endif
