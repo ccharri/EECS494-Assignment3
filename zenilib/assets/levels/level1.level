@@ -1,5 +1,6 @@
 <level name> 		Thunderplains
 <level model>		Level1.3ds
+<level model scale>	3, 3, 1
 <level num> 		1
 <level lives>		50
 <initial gold>		100
@@ -23,13 +24,13 @@
 		<name>			Smallpox Box
 		<total>			9
 		<duration>		10
-		<time_start>	15
+		<time_start>	0
 		<health>		75
 		<speed>			10
-		<size>			1, 1, 1
+		<size>			1.5, 1.5, 1.5
 		<model>			Crate.3ds
 		<height>		0
-		<scaling>		1.00
+		<scaling>		1.50
 		<type>			basic
 		<bounty>		2
 		<life cost>		1
@@ -43,10 +44,10 @@
 		<time_start>	0
 		<health>		25
 		<speed>			10
-		<size>			1, 1, 1
+		<size>			1.5, 1.5, 1.5
 		<model>			Red_Car.3ds
 		<height>		0
-		<scaling>		1.00
+		<scaling>		1.50
 		<type>			basic
 		<bounty>		1
 		<life cost>		1

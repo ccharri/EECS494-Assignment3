@@ -52,6 +52,7 @@ private:
 
     bool ignoreNextClick;
 
+	void renderObjectAttributes(Zeni::Point2f upperLeft, std::shared_ptr<Game_Object> textObj);
 	void renderPlayerAttributes(Zeni::Point2f upperLeft);
 };
 

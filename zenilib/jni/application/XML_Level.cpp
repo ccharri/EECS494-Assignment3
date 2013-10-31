@@ -36,6 +36,8 @@ XML_Level::XML_Level(string xml, Play_State* state_) : Game_Level(state_)
 			setLevelName(value);
 		else if(comment  == "level model")
 			levelModel = shared_ptr<Model>(new Model(Zeni::String("models/" + value)));
+		else if("level model scale" == comment)
+			levelModel.getModel()->set_scale(getVectorFromValue(value));
 		else if("level lives" == comment)
 		{
 			setLivesMax(atoi(value.c_str()));
@@ -88,8 +90,11 @@ XML_Level::XML_Level(string xml, Play_State* state_) : Game_Level(state_)
 				rounds.back().waves.back().lifeCost = atoi(value.c_str());
 	}
 	in.close();
+
+	waiting = true;
+	nextRoundStartTime = nextRoundTimer.seconds() + 45;
+	getState()->lendWidget(*readyButton);
 	setCurrentRound(0);
-	startRound();
 }
 
 XML_Level::~XML_Level()
@@ -108,9 +113,9 @@ shared_ptr<Enemy> XML_Level::Wave::spawnEnemy()
 	Point3f loc = Game_Level::getCurrentLevel()->getPath().front();
 	loc.z += height;
 	if(type == BASIC)
-		e = shared_ptr<Enemy>(new Basic_Enemy(loc, speed, health, model));
+		e = shared_ptr<Enemy>(new Basic_Enemy(loc, speed, health, model, size));
 	//other types
-	e->setSize(size);
+	e->setScale(Vector3f(scaling, scaling, scaling));
 	e->setName(name);
 	e->setBounty(bounty);
 	e->setLeakAmount(lifeCost);

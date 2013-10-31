@@ -13,7 +13,7 @@ using namespace std;
 
 ZTDGUI::ZTDGUI(Play_State* state_) : playState(state_), ignoreNextClick(false) 
 {
-	sellButton = new Sell_Button(this, nullptr, Point2f(25, Window::get_height()/2. - 50), Point2f(175, Window::get_height()/2. + 50));
+	sellButton = new Sell_Button(this, nullptr, Point2f(25, Window::get_height()/2. - 50), Point2f(125, Window::get_height()/2. + 50));
 }
 
 ZTDGUI::~ZTDGUI()
@@ -35,7 +35,6 @@ void ZTDGUI::on_mouse_button( const SDL_MouseButtonEvent &event )
 		playState->unlendWidget(*sellButton);
 		return;
 	}
-    
     
 	switch(event.button)
 	{
@@ -110,7 +109,6 @@ void ZTDGUI::render()
 	
 	shared_ptr<Game_Object> highObj = highlightObj.lock();
 	shared_ptr<Game_Object> targetObj = selectedObj.lock();
-
 	shared_ptr<Game_Object> textObj = targetObj ? targetObj : highObj;
 
 	renderPlayerAttributes(Point2f(10, 10));
@@ -133,38 +131,7 @@ void ZTDGUI::render()
 
 	if(textObj)
 	{
-		Zeni::Font &fr = get_Fonts()["title"];
-		Zeni::Font &detailfont = get_Fonts()["system_36_800x600"];
-
-		fr.render_text(
-			textObj->getName(),
-			Point2f(Window::get_width()/2., 0),
-			get_Colors()["title_text"],
-			ZENI_CENTER);
-		
-		Color primColor = textObj->getPrimaryColor();
-		float primMax = textObj->getPrimaryAttributeMax();
-		float primCur = textObj->getPrimaryAttributeCurrent();
-		float primWidth = 300;
-		float primHeight = 50;
-		Point2f ulp((Window::get_width() - primWidth)/2. ,fr.get_text_height());
-		Point2f lrp((Window::get_width() - primWidth)/2. + (300 * primCur / primMax), fr.get_text_height() + primHeight);
-
-		Vertex2f_Color ul, ll, lr, ur;
-		ul = Vertex2f_Color(ulp, primColor);
-		ll = Vertex2f_Color(ulp + Vector2f(0, primHeight), primColor);
-		lr = Vertex2f_Color(lrp, primColor);
-		ur = Vertex2f_Color(lrp - Vector2f(0, primHeight), primColor);
-		Quadrilateral<Vertex2f_Color> primQuad(ul, ll, lr, ur);
-		
-		get_Video().render(primQuad);
-
-		detailfont.render_text(
-			ftoa(primCur, 3) + "/" + ftoa(primMax, 3),
-			Point2f(Window::get_width()/2., (ulp.y + lrp.y)/2.),
-			get_Colors()["title_text"],
-			ZENI_CENTER
-			);
+		renderObjectAttributes(Point2f(500, 500), textObj);
 	}
 }
 
@@ -221,6 +188,42 @@ weak_ptr<Game_Object> ZTDGUI::findMousedTarget()
     }
     
 	return collidedObject;
+}
+
+void ZTDGUI::renderObjectAttributes(Point2f upperLeft, shared_ptr<Game_Object> textObj)
+{
+	Zeni::Font &fr = get_Fonts()["system_36_800x600"];
+	Zeni::Font &detailfont = get_Fonts()["system_24_800x600"];
+
+	fr.render_text(
+		textObj->getName(),
+		Point2f(Window::get_width()/2., 0),
+		get_Colors()["title_text"],
+		ZENI_CENTER);
+		
+	Color primColor = textObj->getPrimaryColor();
+	float primMax = textObj->getPrimaryAttributeMax();
+	float primCur = textObj->getPrimaryAttributeCurrent();
+	float primWidth = 240;
+	float primHeight = 40;
+	Point2f ulp((Window::get_width() - primWidth)/2. ,fr.get_text_height());
+	Point2f lrp((Window::get_width() - primWidth)/2. + (300 * primCur / primMax), fr.get_text_height() + primHeight);
+	
+	Vertex2f_Color ul, ll, lr, ur;
+	ul = Vertex2f_Color(ulp, primColor);
+	ll = Vertex2f_Color(ulp + Vector2f(0, primHeight), primColor);
+	lr = Vertex2f_Color(lrp, primColor);
+	ur = Vertex2f_Color(lrp - Vector2f(0, primHeight), primColor);
+	Quadrilateral<Vertex2f_Color> primQuad(ul, ll, lr, ur);
+		
+	get_Video().render(primQuad);
+
+	detailfont.render_text(
+		ftoa(primCur, 3) + "/" + ftoa(primMax, 3),
+		Point2f(Window::get_width()/2., (ulp.y + lrp.y)/2.),
+		get_Colors()["title_text"],
+		ZENI_CENTER
+		);
 }
 
 void ZTDGUI::renderPlayerAttributes(Point2f upperLeft)
