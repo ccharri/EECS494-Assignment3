@@ -47,6 +47,7 @@ public:
 	virtual Zeni::Color getPrimaryColor() const {return Zeni::Color(1.f, .5, .5, .5);};
     
     virtual bool isTargetable() const override {return true;};
+	virtual bool isAttackable() const override {return false;};
     
 	virtual ~Tower_Base();
 

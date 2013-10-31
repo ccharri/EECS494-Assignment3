@@ -9,6 +9,7 @@
 #include "Rock_Dropper.h"
 #include "Rocket_Launcher.h"
 #include "Laser_Turret.h"
+#include "Beam_Tower.h"
 #include "Constants.h"
 #include "ZTDGUI.h"
 
@@ -22,7 +23,8 @@ class Buzzsaw_Button : public Text_Button
 {
 public:
 	Buzzsaw_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) 
-		: Text_Button(upperLeft_, lowerRight_, "system_24_800x600", String("Buzzsaw\n") + itoa(Buzzsaw_Tower::getCost())), owner(owner_){
+		: Text_Button(upperLeft_, lowerRight_, "system_24_800x600", String("Buzzsaw\n") + itoa(Buzzsaw_Tower::getCost())), owner(owner_)
+	{
 	}
 
 	void on_accept() override{
@@ -48,11 +50,44 @@ private:
 	Tower_Base* owner;
 };
 
+class Beam_Button : public Text_Button
+{
+public:
+	Beam_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) 
+		: Text_Button(upperLeft_, lowerRight_, "system_24_800x600", String("Beam Tower\n") + itoa(Beam_Tower::getCost())), owner(owner_)
+	{
+	}
+
+	void on_accept() override
+	{
+        auto level = Game_Level::getCurrentLevel();
+        level->getState()->getGUI().markIgnoreNextClick();
+        
+        if(level->getGold() < Beam_Tower::getCost()) return;
+        
+		shared_ptr<Tower_Section> dropperSection(new Tower_Section(owner));
+		shared_ptr<Tower_Weapon> dropperWeapon(new Beam_Tower(dropperSection));
+		dropperSection->setWeapon(dropperWeapon);
+		owner->pushSection(dropperSection);
+       
+        level->removeGold(Beam_Tower::getCost());
+
+		Text_Button::on_accept();
+	}
+    
+    void on_hover() override {
+	}
+
+private:
+	Tower_Base* owner;
+};
+
 class Laser_Button : public Text_Button
 {
 public:
 	Laser_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) 
-		: Text_Button(upperLeft_, lowerRight_, "system_24_800x600", String("Laser Turret\n") + itoa(Laser_Turret::getCost())), owner(owner_){
+		: Text_Button(upperLeft_, lowerRight_, "system_24_800x600", String("Laser Turret\n") + itoa(Laser_Turret::getCost())), owner(owner_)
+	{
 	}
 
 	void on_accept() override
@@ -83,7 +118,8 @@ class Dropper_Button : public Text_Button
 {
 public:
 	Dropper_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) 
-		: Text_Button(upperLeft_, lowerRight_, "system_24_800x600", String("Rock Dropper\n") + itoa(Rock_Dropper::getCost())), owner(owner_){    
+		: Text_Button(upperLeft_, lowerRight_, "system_24_800x600", String("Rock Dropper\n") + itoa(Rock_Dropper::getCost())), owner(owner_)
+	{    
 	}
 
 	void on_accept() override
@@ -158,11 +194,13 @@ Tower_Base::Tower_Base(const Point3f &position_) : Game_Object(position_, Vector
     Buzzsaw_Button *rocketButton = new Buzzsaw_Button(this, Point2f(buttonGap*2 + buttonWidth, Window::get_height() - buttonHeightOffset - buttonHeight), Point2f(buttonGap*2 + buttonWidth*2, Window::get_height() - buttonHeightOffset));
 	Rocket_Button *buzzsawButton = new Rocket_Button(this, Point2f(buttonGap*3+buttonWidth*2, Window::get_height() - buttonHeightOffset - buttonHeight), Point2f(buttonGap*3+buttonWidth*3, Window::get_height() - buttonHeightOffset));
 	Dropper_Button *laserButton = new Dropper_Button(this, Point2f(buttonGap*4+buttonWidth*3, Window::get_height() - buttonHeightOffset - buttonHeight), Point2f(buttonGap*4+buttonWidth*4, Window::get_height() - buttonHeightOffset));
+	Beam_Button *beamButton = new Beam_Button(this, Point2f(buttonGap*5 + buttonWidth*4, Window::get_height() - buttonHeightOffset - buttonHeight), Point2f(buttonGap*5 + buttonWidth*5, Window::get_height() - buttonHeightOffset));
 
 	towerSegmentButtons.push_back(buzzsawButton);
 	towerSegmentButtons.push_back(dropperButton);
     towerSegmentButtons.push_back(rocketButton);
 	towerSegmentButtons.push_back(laserButton);
+	towerSegmentButtons.push_back(beamButton);
 }
 
 Tower_Base::~Tower_Base() 

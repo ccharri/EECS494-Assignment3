@@ -43,4 +43,7 @@ HOWTO:  To convert between types, or to downmix to mono,
   <rock>
     <filepath>sfx/halleck__dropping-big-heavy-rocks-modified</filepath>
   </rock>
+  <beam>
+    <filepath>sfx/179376__stonedb__huge-laser</filepath>
+  </beam>
 </Sounds>

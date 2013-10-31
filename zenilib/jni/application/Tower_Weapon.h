@@ -3,6 +3,7 @@
 
 #include <zenilib.h>
 #include <memory>
+#include <vector>
 
 #include "Game_Object.h"
 
