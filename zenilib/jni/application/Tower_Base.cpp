@@ -8,6 +8,7 @@
 #include "Buzzsaw.h"
 #include "Rock_Dropper.h"
 #include "Rocket_Launcher.h"
+#include "Laser_Turret.h"
 #include "Constants.h"
 #include "ZTDGUI.h"
 
@@ -39,6 +40,41 @@ public:
 		owner->pushSection(dropperSection);
         
         level->removeGold(Buzzsaw::getCost());
+
+		Text_Button::on_accept();
+	}
+    
+    void on_hover() override
+    {
+        
+    }
+
+private:
+	Tower_Base* owner;
+};
+
+class Laser_Button : public Text_Button
+{
+public:
+	Laser_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) 
+		: Text_Button(upperLeft_, lowerRight_, "system_36_800x600", String("Laser Turret\n") + itoa(Laser_Turret::getCost())), owner(owner_)
+	{
+        
+	}
+
+	void on_accept() override
+	{
+        auto level = Game_Level::getCurrentLevel();
+        level->getState()->getGUI().markIgnoreNextClick();
+        
+        if(level->getGold() < Laser_Turret::getCost()) return;
+        
+		shared_ptr<Tower_Section> dropperSection(new Tower_Section(owner));
+		shared_ptr<Tower_Weapon> dropperWeapon(new Laser_Turret(dropperSection));
+		dropperSection->setWeapon(dropperWeapon);
+		owner->pushSection(dropperSection);
+        
+        level->removeGold(Laser_Turret::getCost());
 
 		Text_Button::on_accept();
 	}
@@ -129,10 +165,12 @@ Tower_Base::Tower_Base(const Point3f &position_) : Game_Object(position_, Vector
 	Dropper_Button* dropperButton = new Dropper_Button(this, Point2f(25, Window::get_height() - 125), Point2f(225, Window::get_height() - 25));
     Rocket_Button* rocketButton = new Rocket_Button(this, Point2f(250, Window::get_height()-125), Point2f(450, Window::get_height() - 25));
 	Buzzsaw_Button * buzzsawButton = new Buzzsaw_Button(this, Point2f(475, Window::get_height()-125), Point2f(675, Window::get_height() - 25));
+	Laser_Button * laserButton = new Laser_Button(this, Point2f(700, Window::get_height() - 125), Point2f(900, Window::get_height() - 25));
 
 	towerSegmentButtons.push_back(buzzsawButton);
 	towerSegmentButtons.push_back(dropperButton);
     towerSegmentButtons.push_back(rocketButton);
+	towerSegmentButtons.push_back(laserButton);
 }
 
 Tower_Base::~Tower_Base() 

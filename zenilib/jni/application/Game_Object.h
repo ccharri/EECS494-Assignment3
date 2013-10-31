@@ -33,10 +33,12 @@ public:
 	Zeni::Point3f getPosition() const {return position;};
 	Zeni::Vector3f getSize() const {return size;};
 	Zeni::Quaternion getFacing() const {return facing;};
+	Zeni::Vector3f getScale() const {return scale;};
 
 	virtual void setPosition(Zeni::Point3f position_) {position = position_; updateCollider();};
 	virtual void setSize(Zeni::Vector3f size_) {size = size_;};
 	virtual void setFacing(Zeni::Quaternion facing_) {facing = facing_;};
+	virtual void setScale(Zeni::Vector3f scale_) {scale = scale_;};
 	virtual void lookAt(Zeni::Point3f pos_);
 
 	virtual void onSelection(ZTDGUI* gui_) {};

@@ -31,4 +31,7 @@ HOWTO:  To convert between types, or to downmix to mono,
   <enemy_leaked>
     <filepath>sfx/26375__dj-chronos__created-siren</filepath>
   </enemy_leaked>
+  <laser>
+    <filepath>sfx/151022__bubaproducer__laser-shot-silenced</filepath>
+  </laser>
 </Sounds>

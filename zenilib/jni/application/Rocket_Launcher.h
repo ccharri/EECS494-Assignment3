@@ -17,7 +17,6 @@ public:
 
 	virtual void fire();
     
-    
     static int getCost() {return 100;};
 
 private:

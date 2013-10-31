@@ -19,7 +19,7 @@ public:
 	const Zeni::Collision::Sphere& getCollider() const {return collider;}; 
 	
 private:
-	Zeni::Vector3f size;
+	//Zeni::Vector3f size;
 	static Model_Wrapper model;
 	Zeni::Collision::Sphere collider;
 
