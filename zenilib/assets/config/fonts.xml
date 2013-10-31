@@ -41,6 +41,30 @@ Only TrueType fonts are supported.
       <height>600</height>
     </virtual_screen>
   </system_36_800x600>
+  <system_24_800x600>
+    <filepath>fonts/FORGOTTE.TTF</filepath>
+    <height>24</height>
+    <virtual_screen>
+      <width>800</width>
+      <height>600</height>
+    </virtual_screen>
+  </system_24_800x600>
+  <system_18_800x600>
+    <filepath>fonts/FORGOTTE.TTF</filepath>
+    <height>18</height>
+    <virtual_screen>
+      <width>800</width>
+      <height>600</height>
+    </virtual_screen>
+  </system_18_800x600>
+  <system_12_800x600>
+    <filepath>fonts/FORGOTTE.TTF</filepath>
+    <height>12</height>
+    <virtual_screen>
+      <width>800</width>
+      <height>600</height>
+    </virtual_screen>
+  </system_12_800x600>
   <title>
     <filepath>fonts/FORGOTTE.TTF</filepath>
     <height>92</height>
