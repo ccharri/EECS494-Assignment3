@@ -4,10 +4,13 @@
 #include <zenilib.h>
 #include <memory>
 
+#include "Game_Level.h"
+
 class Play_State;
 class Game_Object;
 class Sell_Button;
 class Tower_Section;
+class Ready_Button;
 
 class ZTDGUI
 {
@@ -77,7 +80,5 @@ private:
 	ZTDGUI* gui;
 	Tower_Section* owner;
 };
-
-
 
 #endif

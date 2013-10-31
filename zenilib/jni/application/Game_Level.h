@@ -8,6 +8,7 @@ class Game_Object;
 class Player;
 class Tower_Base;
 class Play_State;
+class Sign;
 
 class Game_Level {
 public:
@@ -29,6 +30,7 @@ public:
 	std::vector<std::shared_ptr<Game_Object> > getTowerParts() const;
 
 	std::vector<Zeni::Point3f>& getPath() {return enemy_path;};
+	void addSign(std::shared_ptr<Sign> s) {signs.push_back(s);}
 
 	virtual std::shared_ptr<Zeni::Model> getModel() const = 0;
 
@@ -36,6 +38,7 @@ public:
 
 	// getters and setters
 	virtual float getTimeUntilNextRound() const = 0;
+	virtual void setTimeUntilNextRound(float f) = 0;
 
 	Player* getPlayer() const {return player;};
 	void setPlayer(Player* player_) {player = player_;};
@@ -72,11 +75,11 @@ private:
 	int gold;
 
 	std::vector<Zeni::Point3f> enemy_path;
+	std::vector<std::shared_ptr<Sign> > signs;
 
 	std::vector<std::shared_ptr<Game_Object> > enemies;
 
 	std::vector<std::shared_ptr<Tower_Base> > towerBases;
-
 	
 	int currentRound;
 	std::string name;

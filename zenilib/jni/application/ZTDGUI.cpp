@@ -10,6 +10,7 @@
 using namespace Zeni;
 using namespace std;
 
+
 ZTDGUI::ZTDGUI(Play_State* state_) : playState(state_), ignoreNextClick(false) 
 {
 	sellButton = new Sell_Button(this, nullptr, Point2f(25, Window::get_height()/2. - 50), Point2f(175, Window::get_height()/2. + 50));
@@ -229,7 +230,7 @@ void ZTDGUI::renderPlayerAttributes(Point2f upperLeft)
     
 	//renders gold, lives, level, and level name
 	// render gold & lives
-	Vector2f size(180, 5 * sub.get_text_height());
+	Vector2f size(160, 5 * sub.get_text_height());
 	render_image("selection", upperLeft, upperLeft+size);
 
 	sub.render_text(

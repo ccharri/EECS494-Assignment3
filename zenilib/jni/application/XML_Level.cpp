@@ -3,6 +3,7 @@
 
 #include "Tower_Base.h"
 #include "Basic_Enemy.h"
+#include "Play_State.h"
 #include <fstream>
 #include <sstream>
 #include <memory>
@@ -19,6 +20,8 @@ XML_Level::XML_Level(string xml, Play_State* state_) : Game_Level(state_)
 	ifstream in;
 	in.open(xml);
 	
+	readyButton = new Ready_Button(Point2f(20, 5 * 30), Point2f(160, 5 * 30 + 50));
+
 	roundGapTime = 3;
 	nextRoundTimer.start();
 	
@@ -89,6 +92,10 @@ XML_Level::XML_Level(string xml, Play_State* state_) : Game_Level(state_)
 	startRound();
 }
 
+XML_Level::~XML_Level()
+{
+	delete readyButton;
+}
 
 bool XML_Level::Wave::canSpawn(float time_passed)
 {
@@ -117,6 +124,7 @@ void XML_Level::startRound()
 {
 	roundTime = 0;
 	waiting  = false;
+	getState()->unlendWidget(*readyButton);
 }
 
 bool XML_Level::isRoundOver()
@@ -136,11 +144,17 @@ float XML_Level::getTimeUntilNextRound() const
 	return nextRoundStartTime - nextRoundTimer.seconds();
 }
 
+void XML_Level::setTimeUntilNextRound(float f)
+{
+	nextRoundStartTime = nextRoundTimer.seconds() + f;
+}
+
 void XML_Level::endRound()
 {
 	//award bonus gold
 	Game_Level::getCurrentLevel()->addGold(rounds[getCurrentRound()].goldBonus);
 	waiting = true;
+	getState()->lendWidget(*readyButton);
 	nextRoundStartTime = roundGapTime + nextRoundTimer.seconds();
 }
 

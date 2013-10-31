@@ -7,6 +7,7 @@
 #include "Game_Level.h"
 
 class Enemy;
+class Ready_Button;
 
 class XML_Level : public Game_Level
 {
@@ -48,10 +49,12 @@ class XML_Level : public Game_Level
 
 public:
 	XML_Level(std::string xml, Play_State* state_);
-	
-  std::shared_ptr<Zeni::Model> getModel() const override {return levelModel.getModel();};
+	~XML_Level();
+
+	std::shared_ptr<Zeni::Model> getModel() const override {return levelModel.getModel();};
 	
 	float getTimeUntilNextRound() const;
+	void setTimeUntilNextRound(float f);
 	void on_logic(float time_step) override;
 	bool isRoundOver();
 
@@ -63,6 +66,8 @@ private:
 	std::vector<Round> rounds;
 	float roundTime;
 	
+	Ready_Button *readyButton;
+
 	Zeni::Chronometer<Zeni::Time> nextRoundTimer;
 	bool waiting;
 	float nextRoundStartTime;
@@ -75,6 +80,23 @@ private:
 	std::string grabValue(const std::string &line);
 	Zeni::Point3f getPointFromValue(const std::string &value);
 	Zeni::Vector3f getVectorFromValue(const std::string &value);
+};
+
+class Ready_Button : public Zeni::Text_Button
+{
+public:
+	Ready_Button(const Zeni::Point2f& upperLeft_, const Zeni::Point2f& lowerRight_) 
+		: Zeni::Text_Button(upperLeft_, lowerRight_, "system_24_800x600", "Ready")
+	{}
+    
+	void on_accept() override
+	{
+		Game_Level::getCurrentLevel()->setTimeUntilNextRound(0.5);
+		Zeni::Text_Button::on_accept();
+	}
+    
+    void on_hover() override{    
+    }
 };
 
 #endif

@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Tower_Base.h"
 #include "Tower_Section.h"
+#include "Sign.h"
 
 using namespace Zeni;
 using namespace std;
@@ -31,6 +32,7 @@ void Game_Level::render()
 	//player->render();
 	for_each(enemies.begin(), enemies.end(), [](shared_ptr<Game_Object> object_) {if(object_) object_->render();});
 	for_each(towerBases.begin(), towerBases.end(), [](shared_ptr<Tower_Base> base_) {if(base_) base_->render();});
+	for_each(signs.begin(), signs.end(), [](shared_ptr<Sign> sign_) {if(sign_) sign_->render();});
 }
 
 void Game_Level::on_logic(float time_step)
