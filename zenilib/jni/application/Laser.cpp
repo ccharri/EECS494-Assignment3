@@ -10,7 +10,7 @@ Model_Wrapper Laser::model("models/laser.3ds");
 
 Laser::Laser(std::weak_ptr<Tower_Weapon> owner_, std::weak_ptr<Game_Object> target_, float damage_, float duration_) : Game_Object(owner_.lock()->getSection()->getPosition()), timePassed(0), duration(duration_), owner(owner_), target(target_)
 {
-	play_sound("laser");
+	play_sound("laser", 1.f, 1.f, owner_.lock()->getSection()->getPosition());
 
 	auto target = target_.lock();
 	if(target)

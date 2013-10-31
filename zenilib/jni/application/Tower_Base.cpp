@@ -5,7 +5,7 @@
 #include "Game_Level.h"
 #include "Play_State.h"
 #include "Tower_Section.h"
-#include "Buzzsaw.h"
+#include "Buzzsaw_Tower.h"
 #include "Rock_Dropper.h"
 #include "Rocket_Launcher.h"
 #include "Laser_Turret.h"
@@ -22,7 +22,7 @@ class Buzzsaw_Button : public Text_Button
 {
 public:
 	Buzzsaw_Button(Tower_Base* owner_, const Point2f& upperLeft_, const Point2f& lowerRight_) 
-		: Text_Button(upperLeft_, lowerRight_, "system_36_800x600", String("Buzzsaw\n") + itoa(Buzzsaw::getCost())), owner(owner_)
+		: Text_Button(upperLeft_, lowerRight_, "system_36_800x600", String("Buzzsaw\n") + itoa(Buzzsaw_Tower::getCost())), owner(owner_)
 	{
         
 	}
@@ -32,14 +32,14 @@ public:
         auto level = Game_Level::getCurrentLevel();
         level->getState()->getGUI().markIgnoreNextClick();
         
-        if(level->getGold() < Buzzsaw::getCost()) return;
+        if(level->getGold() < Buzzsaw_Tower::getCost()) return;
         
 		shared_ptr<Tower_Section> dropperSection(new Tower_Section(owner));
-		shared_ptr<Tower_Weapon> dropperWeapon(new Buzzsaw(dropperSection));
+		shared_ptr<Tower_Weapon> dropperWeapon(new Buzzsaw_Tower(dropperSection));
 		dropperSection->setWeapon(dropperWeapon);
 		owner->pushSection(dropperSection);
         
-        level->removeGold(Buzzsaw::getCost());
+        level->removeGold(Buzzsaw_Tower::getCost());
 
 		Text_Button::on_accept();
 	}
