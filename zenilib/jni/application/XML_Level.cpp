@@ -5,6 +5,7 @@
 #include "Basic_Enemy.h"
 #include "Play_State.h"
 #include "Constants.h"
+#include "Win_Screen.h"
 #include <fstream>
 #include <sstream>
 #include <memory>
@@ -176,7 +177,8 @@ void XML_Level::on_logic(float time_step)
 		{
 			//look, this line is totally stupid
 			setCurrentRound(getCurrentRound()-1);
-			//TODO: VICTORY CONDITION HERE
+            get_Game().pop_state();
+            get_Game().push_state(Gamestate(new Win_Screen()));
 		}
 	}
 	if(waiting)
