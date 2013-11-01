@@ -44,6 +44,6 @@ void Beam_Tower::fire()
 	auto pos = getSection()->getPosition();
 	auto tpos = getTarget()->getPosition();
 	float dist = Vector3f(Point3f(pos.x, pos.y, tpos.z) - tpos).magnitude();
-	shared_ptr<Game_Object> beam = shared_ptr<Game_Object>(new Beam(shared_from_this(), getTarget(), 4., dist));
+	shared_ptr<Game_Object> beam = shared_ptr<Game_Object>(new Beam(shared_from_this(), getTarget(), 10., dist));
 	addProjectile(beam);
 }
