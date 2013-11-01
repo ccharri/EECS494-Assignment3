@@ -26,7 +26,7 @@
 	<round num>		1
 	<round bonus>	50
 	<wave>
-		<name>			Michael's Crate Example
+		<name>			Mitchell's Crate Example
 		<total>			5
 		<duration>		10
 		<time_start>	0
@@ -65,7 +65,7 @@
 		<duration>		10
 		<time_start>	0
 		<health>		500
-		<speed>			5
+		<speed>			10
 		<size>			2, 2, 2
 		<model>			Hot_Air_Balloon.3ds
 		<height>		1
@@ -112,8 +112,8 @@
 		<total>			1
 		<duration>		1
 		<time_start>	0
-		<health>		1500
-		<speed>			10
+		<health>		1200
+		<speed>			13
 		<size>			5, 5, 5
 		<model>			Red_Car.3ds
 		<height>		0.5
@@ -131,7 +131,7 @@
 		<time_start>	0
 		<health>		50
 		<speed>			25
-		<size>			1.5, 1.5, 1.5
+		<size>			5, 5, 5
 		<model>			Boulder.3ds
 		<height>		0
 		<scaling>		1.00
@@ -147,7 +147,7 @@
 		<duration>		10
 		<time_start>	0
 		<health>		800
-		<speed>			5
+		<speed>			9
 		<size>			1.5, 1.5, 1.5
 		<model>			Crate.3ds
 		<height>		0
@@ -164,10 +164,10 @@
 		<duration>		10
 		<time_start>	0
 		<health>		500
-		<speed>			10
+		<speed>			14
 		<size>			2, 2, 2
 		<model>			Hot_Air_Balloon.3ds
-		<height>		2
+		<height>		3
 		<scaling>		1.00
 		<type>			basic
 		<bounty>		6
@@ -180,7 +180,7 @@
 		<total>			10
 		<duration>		10
 		<time_start>	0
-		<health>		500
+		<health>		700
 		<speed>			10
 		<size>			2, 2, 2
 		<model>			Red_Car.3ds
@@ -198,7 +198,7 @@
 		<duration>		10
 		<time_start>	0
 		<health>		400
-		<speed>			10
+		<speed>			12
 		<size>			2, 2, 2
 		<model>			Hot_Air_Balloon.3ds
 		<height>		2
@@ -212,7 +212,7 @@
 		<duration>		10
 		<time_start>	0
 		<health>		400
-		<speed>			10
+		<speed>			12
 		<size>			2, 2, 2
 		<model>			Red_Car.3ds
 		<height>		0
