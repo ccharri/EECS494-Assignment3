@@ -66,7 +66,7 @@ private:
     Zeni::Font &fr = get_Fonts()["system_24_800x600"];
 
     fr.render_text(
-		Zeni::String("Your objective is to defend the homeland against waves of invading enemies\nwith the powers of physics!\n1. Build towers to attack enemies!\n2. Build towers on top of other towers to unleash their effects!\n3. Enemies will walk along the ground or sky in the sky: be prepared!\n\n-Alt+F4 to Quit\n-ESC to bring up menu\n-Click on a Tower Base to add Towers to it\n-Click on anything to view it's attributes\n-Towers cost gold; survive to get more!"),
+		Zeni::String("Your objective is to defend the homeland against waves of invading enemies\nwith the powers of physics!\n1. Build towers to attack enemies!\n2. Build towers on top of other towers to unleash their effects!\n3. Enemies will walk along the ground or sky in the sky: be prepared!\n\n-Alt+F4 to Quit\n-ESC to bring up menu\n-Click on a Tower Base to add Towers to it\n-Right click an enemy while having a tower selected to order it to attack that enemy!\n-Click on anything to view its attributes\n-Towers cost gold; survive to get more!"),
 		Point2f(50.0f, 200.0f - 0.5f * fr.get_text_height()),
         get_Colors()["title_text"],
         ZENI_LEFT);
