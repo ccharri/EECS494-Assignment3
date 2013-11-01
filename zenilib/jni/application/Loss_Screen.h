@@ -26,6 +26,17 @@ public:
         m_widgets.unlend_Widget(quitButton);
     };
     
+    void render() override
+    {
+        Zeni::Font &fr = Zeni::get_Fonts()["title"];
+        fr.render_text("You Lose",
+                       Zeni::Point2f(Zeni::Window::get_width()/2., (Zeni::Window::get_height() - fr.get_text_height())/2.),
+                       Zeni::get_Colors()["title_text"],
+                       Zeni::ZENI_CENTER);
+    
+        Zeni::Widget_Gamestate::render();
+    }
+
 private:
     
     class Continue_Button : public Zeni::Text_Button

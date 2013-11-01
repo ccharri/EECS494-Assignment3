@@ -49,11 +49,13 @@ void Game_Level::enemyLeaked( std::shared_ptr<Game_Object> enemy )
 	if(enemy->leakAmount())
 		play_sound("enemy_leaked");
 
+    int livesBeforeLeak = livesRemaining;
+    
 	livesRemaining -= enemy->leakAmount();
 
 	removeEnemy(enemy);
     
-    if(livesRemaining <= 0)
+    if((livesRemaining <= 0) && (livesBeforeLeak > 0))
     {
         get_Game().push_state(Gamestate(new Loss_Screen()));
     }
