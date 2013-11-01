@@ -71,7 +71,7 @@
 		<height>		1
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		10
+		<bounty>		20
 		<life cost>		5
 <round>
 	<round num>		4
@@ -108,16 +108,16 @@
 	<round num>		5
 	<round bonus>	70
 	<wave>
-		<name>			God
+		<name>			God Himself
 		<total>			1
 		<duration>		1
 		<time_start>	0
 		<health>		1500
 		<speed>			10
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
-		<height>		0
-		<scaling>		1.00
+		<size>			5, 5, 5
+		<model>			Red_Car.3ds
+		<height>		0.5
+		<scaling>		3.00
 		<type>			basic
 		<bounty>		50
 		<life cost>		10
@@ -125,87 +125,101 @@
 	<round num>		6
 	<round bonus>	75
 	<wave>
-		<name>			Box Full of Zerglings
-		<total>			30
+		<name>			Rolling Stones
+		<total>			20
 		<duration>		10
 		<time_start>	0
-		<health>		9
+		<health>		50
 		<speed>			25
-		<size>			1, 1, 1
-		<model>			Crate.3ds
+		<size>			1.5, 1.5, 1.5
+		<model>			Boulder.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		1
+		<bounty>		2
 		<life cost>		1
 <round>
 	<round num>		7
 	<round bonus>	80
 	<wave>
-		<name>			Box with Anodized Nails
+		<name>			Box Full of Anodized Nails
 		<total>			5
 		<duration>		10
 		<time_start>	0
-		<health>		1000
+		<health>		800
 		<speed>			5
-		<size>			1, 1, 1
+		<size>			1.5, 1.5, 1.5
 		<model>			Crate.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		15
+		<bounty>		10
 		<life cost>		3
 <round>
 	<round num>		8
-	<round bonus>	85f
+	<round bonus>	85
 	<wave>
-		<name>			Boss of Anodized Nails
-		<total>			5
+		<name>			By Air
+		<total>			10
 		<duration>		10
 		<time_start>	0
-		<health>		400
-		<speed>			15
-		<size>			1, 1, 1
-		<model>			Crate.3ds
-		<height>		20
+		<health>		500
+		<speed>			10
+		<size>			2, 2, 2
+		<model>			Hot_Air_Balloon.3ds
+		<height>		2
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		8
-		<life cost>		2
+		<bounty>		6
+		<life cost>		3
 <round>
 	<round num>		9
 	<round bonus>	90
 	<wave>
-		<name>			Frosthelm Speciality Shipping
-		<total>			20
-		<duration>		20
+		<name>			By Land
+		<total>			10
+		<duration>		10
 		<time_start>	0
-		<health>		300
-		<speed>			25
-		<size>			1, 1, 1
-		<model>			Crate.3ds
+		<health>		500
+		<speed>			10
+		<size>			2, 2, 2
+		<model>			Red_Car.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		5
-		<life cost>		5
+		<bounty>		6
+		<life cost>		3
 <round>
 	<round num>		10
 	<round bonus>	100
 	<wave>
-		<name>			Boxed Typhoon
-		<total>			1
-		<duration>		1
+		<name>			By Air
+		<total>			10
+		<duration>		10
 		<time_start>	0
-		<health>		2000
-		<speed>			25
-		<size>			1, 1, 1
-		<model>			Crate.3ds
-		<height>		3
+		<health>		400
+		<speed>			10
+		<size>			2, 2, 2
+		<model>			Hot_Air_Balloon.3ds
+		<height>		2
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		50
-		<life cost>		20
+		<bounty>		4
+		<life cost>		1
+	<wave>
+		<name>			By Land
+		<total>			10
+		<duration>		10
+		<time_start>	0
+		<health>		400
+		<speed>			10
+		<size>			2, 2, 2
+		<model>			Red_Car.3ds
+		<height>		0
+		<scaling>		1.00
+		<type>			basic
+		<bounty>		4
+		<life cost>		3
 <round>
 	<round num>		11
 	<round bonus>	110
