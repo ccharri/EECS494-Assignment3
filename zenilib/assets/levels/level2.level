@@ -224,53 +224,53 @@
 	<round num>		11
 	<round bonus>	110
 	<wave>
-		<name>			Human After All
-		<total>			3
-		<duration>		3
+		<name>			
+		<total>			1
+		<duration>		1
 		<time_start>	0
 		<health>		1500
 		<speed>			15
-		<size>			1, 1, 1
-		<model>			Crate.3ds
-		<height>		0
+		<size>			2, 2, 2
+		<model>			Hot_Air_Balloon.3ds
+		<height>		5
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		15
+		<bounty>		60
 		<life cost>		10
 <round>
 	<round num>		12
 	<round bonus>	120
 	<wave>
 		<name>			Stalingrad Special
-		<total>			50
+		<total>			40
 		<duration>		10
 		<time_start>	0
 		<health>		500
 		<speed>			10
-		<size>			1, 1, 1
-		<model>			Crate.3ds
+		<size>			3, 3, 3
+		<model>			spike_ball.3ds
 		<height>		0
 		<scaling>		1.00
 		<type>			basic
-		<bounty>		1
+		<bounty>		2
 		<life cost>		1
 <round>
 	<round num>		13
 	<round bonus>	130
 	<wave>
-		<name>			Boss Crate
-		<total>			1
-		<duration>		1
+		<name>			Tricker Treaters
+		<total>			13
+		<duration>		5
 		<time_start>	0
 		<health>		500
-		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
+		<speed>			20
+		<size>			3, 3, 3
+		<model>			crate.3ds
 		<height>		0
-		<scaling>		1.00
+		<scaling>		2.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100
+		<bounty>		7
+		<life cost>		5
 <round>
 	<round num>		14
 	<round bonus>	140
@@ -292,16 +292,30 @@
 	<round num>		15
 	<round bonus>	150
 	<wave>
-		<name>			Boss Crate
+		<name>			Onyx's Head
 		<total>			1
 		<duration>		1
 		<time_start>	0
-		<health>		500
+		<health>		1000
 		<speed>			15
 		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
+		<model>			Boulder.3ds
 		<height>		0
-		<scaling>		1.00
+		<scaling>		10.00
 		<type>			basic
-		<bounty>		3
-		<life cost>		100	
+		<bounty>		70
+		<life cost>		10
+	<wave>
+		<name>			Onyx
+		<total>			50
+		<duration>		5
+		<time_start>	0
+		<health>		600
+		<speed>			15
+		<size>			10, 10, 10
+		<model>			Boulder.3ds
+		<height>		0
+		<scaling>		5.00
+		<type>			basic
+		<bounty>		2
+		<life cost>		2	
