@@ -8,7 +8,7 @@ using namespace std;
 Model_Wrapper Rock::model = Model_Wrapper("models/Boulder.3ds");
 
 Rock::Rock(const Point3f& position_, const Vector3f &vel_, const float gravity, const Quaternion& facing_)	
-		 : Physics_Object(position_, Vector3f(9,9,9), facing_, Vector3f(3.5, 3.5, 3.5))
+		 : Physics_Object(position_, Vector3f(11,11,11), facing_, Vector3f(3.5, 3.5, 3.5))
 {
 	setVelocity(vel_);
 	setAcceleration(Vector3f(0, 0, -gravity));

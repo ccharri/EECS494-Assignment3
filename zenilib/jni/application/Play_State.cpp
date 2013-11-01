@@ -22,7 +22,7 @@ using namespace std;
 Play_State::Play_State() : Widget_Gamestate(make_pair(Point2f(get_Video().get_viewport().first), Point2f(get_Video().get_viewport().second))), gui(this) /*: player(Player(Point3f(), Vector3f(), Quaternion()))*/ 
 {
 	god_view_on = true;
-	god_view = Camera(Point3f(-60, 0, 40), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.f);
+	god_view = Camera(Point3f(-100, 0, 90), Quaternion(0, (Global::pi_over_two/2.), 0), 1.0f, 1000.0f, Global::pi_over_two, 1.f);
 	
 	worldLight = Light();
 	worldLight.set_light_type(Zeni::LIGHT_DIRECTIONAL);
@@ -82,7 +82,7 @@ void Play_State::on_key(const SDL_KeyboardEvent &event) {
 
 void Play_State::on_mouse_wheel(const SDL_MouseWheelEvent &event) {
 	Widget_Gamestate::on_mouse_wheel(event);
-	god_view.position += god_view.get_forward().normalized() * event.y;
+	god_view.position += god_view.get_forward().normalized() * event.y*1.4;
 }
 
 void Play_State::on_mouse_motion(const SDL_MouseMotionEvent &event) {
@@ -130,9 +130,9 @@ void Play_State::perform_logic() {
 
 void Play_State::performMovement(float time_step)
 {
-	float speed = 20.f;
+	float speed = 30.f;
 	float distance = speed * time_step;
-	float angularSpeed = 0.01;
+	float angularSpeed = 0.02;
 
 	float mouseWindowPanBufferDistance = 40.f;
 
@@ -174,6 +174,15 @@ void Play_State::performMovement(float time_step)
 		god_view.position = Point3f(o.x + r*cos(a), o.y + r*sin(a), god_view.position.z);
 		god_view.look_at(o);
 	}
+
+	if(god_view.position.x > 300)
+		god_view.position.x = 300;
+	if(god_view.position.x < -300)
+		god_view.position.x = -300;
+	if(god_view.position.y > 300)
+		god_view.position.y = 300;
+	if(god_view.position.y < -300)
+		god_view.position.y = -300;
 }
 
 void Play_State::render() {
