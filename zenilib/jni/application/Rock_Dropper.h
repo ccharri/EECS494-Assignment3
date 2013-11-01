@@ -23,7 +23,7 @@ public:
     Zeni::String getDescription() const override {return description;};
     static Zeni::String getGenericDescription() {return description;};
     
-    static int getCost() {return 50;};
+    static int getCost() {return 75;};
 
 private:
 	static Zeni::String description;

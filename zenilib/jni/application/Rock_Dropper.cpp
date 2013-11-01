@@ -10,11 +10,11 @@
 using namespace std;
 using namespace Zeni;
 
-Zeni::String Rock_Dropper::description = "Damage: 3 * Z Velocity.\nCooldown: 2s.\nRange: Projectile Parabola.  The higher it is, the further it can fire, in a decreasing amount per height.\nMisc: Launch Velocity = 20, Gravity = 19.6.";
+Zeni::String Rock_Dropper::description = "Damage: 2.8 * Z Velocity.\nCooldown: 2s.\nRange: Projectile Parabola.  The higher it is, the further it can fire, in a decreasing amount per height.\nMisc: Launch Velocity = 20, Gravity = 19.6.";
 
 Rock_Dropper::Rock_Dropper(weak_ptr<Tower_Section> owner_, float cooldown_) : Tower_Weapon(owner_, cooldown_)
 {
-	DAMAGE_PER_Z_VEL = 3;
+	DAMAGE_PER_Z_VEL = 2.8;
 	LAUNCH_VEL = 20;
 	GRAVITY = 19.6;
   

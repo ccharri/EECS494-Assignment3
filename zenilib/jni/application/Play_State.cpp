@@ -130,9 +130,9 @@ void Play_State::perform_logic() {
 
 void Play_State::performMovement(float time_step)
 {
-	float speed = 30.f;
+	float speed = 40.f;
 	float distance = speed * time_step;
-	float angularSpeed = 0.02;
+	float angularSpeed = 0.015;
 
 	float mouseWindowPanBufferDistance = 40.f;
 
