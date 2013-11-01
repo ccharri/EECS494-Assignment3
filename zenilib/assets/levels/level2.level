@@ -134,7 +134,7 @@
 		<size>			5, 5, 5
 		<model>			Boulder.3ds
 		<height>		0
-		<scaling>		1.00
+		<scaling>		7.00
 		<type>			basic
 		<bounty>		2
 		<life cost>		1
@@ -197,7 +197,7 @@
 		<total>			10
 		<duration>		10
 		<time_start>	0
-		<health>		400
+		<health>		450
 		<speed>			12
 		<size>			2, 2, 2
 		<model>			Hot_Air_Balloon.3ds
@@ -228,9 +228,9 @@
 		<total>			1
 		<duration>		1
 		<time_start>	0
-		<health>		1500
+		<health>		2000
 		<speed>			15
-		<size>			2, 2, 2
+		<size>			3, 3, 5
 		<model>			Hot_Air_Balloon.3ds
 		<height>		5
 		<scaling>		8.00
@@ -243,9 +243,9 @@
 	<wave>
 		<name>			Stalingrad Special
 		<total>			40
-		<duration>		10
+		<duration>		17
 		<time_start>	0
-		<health>		500
+		<health>		450
 		<speed>			10
 		<size>			3, 3, 3
 		<model>			spike_ball.3ds
@@ -275,16 +275,16 @@
 	<round num>		14
 	<round bonus>	140
 	<wave>
-		<name>			Boss Crate
-		<total>			1
-		<duration>		1
+		<name>			All Saints
+		<total>			17
+		<duration>		17
 		<time_start>	0
-		<health>		500
+		<health>		600
 		<speed>			15
-		<size>			10, 10, 10
-		<model>			Hand_and_Wrench.3ds
+		<size>			3, 3, 3
+		<model>			crate.3ds
 		<height>		0
-		<scaling>		1.00
+		<scaling>		3.00
 		<type>			basic
 		<bounty>		3
 		<life cost>		100	
