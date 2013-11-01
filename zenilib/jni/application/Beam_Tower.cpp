@@ -6,7 +6,7 @@
 using namespace Zeni;
 using namespace std;
 
-Zeni::String Beam_Tower::description = "Damage: 4 * 1.05 per second since activation.\nCooldown: Continuous\nRange: Can only shoot within a 45 degree cone towards the ground.";
+Zeni::String Beam_Tower::description = "Damage: 10 * 1.05 per second since activation.  Caps at 50 damage per second.\nCooldown: Continuous\nRange: Can only shoot within a 45 degree cone towards the ground.";
 
 Beam_Tower::Beam_Tower(weak_ptr<Tower_Section> owner_) : Tower_Weapon(owner_, 0.0)
 {

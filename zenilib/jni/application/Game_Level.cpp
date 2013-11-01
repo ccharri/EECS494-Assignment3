@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Tower_Base.h"
 #include "Tower_Section.h"
+#include "Loss_Screen.h"
 #include "Sign.h"
 
 using namespace Zeni;
@@ -51,6 +52,11 @@ void Game_Level::enemyLeaked( std::shared_ptr<Game_Object> enemy )
 	livesRemaining -= enemy->leakAmount();
 
 	removeEnemy(enemy);
+    
+    if(livesRemaining <= 0)
+    {
+        get_Game().push_state(Gamestate(new Loss_Screen()));
+    }
 }
 
 vector<shared_ptr<Game_Object> > Game_Level::getTowerParts() const
